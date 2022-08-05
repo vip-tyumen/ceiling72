@@ -1,0 +1,21 @@
+{
+	"folders":
+	[
+		{
+			"name": "VIP потолок г. Тюмень",
+			"path": ".",
+			"folder_exclude_patterns": [
+				"node_modules",
+				"test",
+				"tests"
+			],
+			"file_exclude_patterns": [
+				"*.sublime-workspace",
+				"*-lock.json"
+			]
+		}
+	],
+	"settings": {
+		"tab_size": 4
+	},
+}
