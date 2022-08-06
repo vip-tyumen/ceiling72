@@ -14,12 +14,40 @@ const gulp = require('gulp'),
 	eot = require('gulp-ttf2eot'),
 	woff = require('gulp-ttf2woff'),
 	woff2 = require('gulp-ttf2woff2'),
-	webfont = require('gulp-webfont');
+	webfont = require('gulp-webfont'),
+	iconfont = require('gulp-iconfont'),
 
-const out = `assets/templates/projectsoft/`,
+	out = `assets/templates/projectsoft/`,
 	uniqid = function () {
 		var md5 = require('md5');
 		return md5((new Date()).getTime()).toString();
+	};
+
+console.log(__dirname);
+
+var webfont_config = {
+		types:'woff2,woff,ttf',
+		ligatures: true,
+		dest: __dirname + '\\src\\less\\ceiling72.less',
+		destLess: __dirname + '\\src\\less\\ceiling72.less',
+		template: __dirname + '\\src\\fonts\\tpl\\webfont.css',
+		hashes: true,
+		relativeFontPath: '@{fontpath}',
+		font: 'Ceiling72Icon',
+		fontFamilyName: 'Ceiling72Icon',
+		stylesheets: ['css', 'less'],
+		//syntax: 'bootstrap',
+		execMaxBuffer: 1024 * 200,
+		htmlDemo: false,
+		version: '1.0.0',
+		normalize: true,
+		startCodepoint: 0xE900,
+		iconsStyles: false,
+		templateOptions: {
+			baseClass: '',
+			classPrefix: 'icon-'
+		},
+		embed: false,
 	};
 /**
  * CSS
@@ -85,52 +113,105 @@ gulp.task('jsApp', function(){
 **/
 gulp.task('html', function(){
 	return gulp.src([
-		'src/pug/*.pug'
-	])
-	.pipe(
-		pug({
-			client: false,
-			pretty: '\t',
-			separator:  '\n',
-			data: {
-				"base": "[(site_url)]",
-				"tem_path" : "/assets/templates/projectsoft",
-				"img_path" : "assets/templates/projectsoft/images/",
-				"site_name": "[(site_name)]",
-				"tpl": out + `html/tpl/`,
-				"hash": uniqid()
-			}
-		})
-	)
-	.pipe(gulp.dest(out + `html`));
+			'src/pug/*.pug'
+		])
+		.pipe(debug())
+		.pipe(
+			pug({
+				client: false,
+				pretty: '\t',
+				separator:  '\n',
+				data: {
+					"base": "[(site_url)]",
+					"tem_path" : "/assets/templates/projectsoft",
+					"img_path" : "assets/templates/projectsoft/images/",
+					"site_name": "[(site_name)]",
+					"tpl": out + `html/tpl/`,
+					"hash": uniqid()
+				}
+			})
+		)
+		.pipe(gulp.dest(out + `html`));
 });
 
 gulp.task('htmlTpl', function(){
 	return gulp.src([
-		'src/pug/tpl/*.pug'
-	])
-	.pipe(
-		pug({
-			client: false,
-			pretty: '\t',
-			separator:  '\n',
-			data: {
-				"base": "[(site_url)]",
-				"tem_path" : "/assets/templates/projectsoft",
-				"img_path" : "assets/templates/projectsoft/images/",
-				"site_name": "[(site_name)]",
-				"tpl": out + `html/tpl/`,
-				"hash": uniqid()
-			}
-		})
-	)
-	.pipe(gulp.dest(out + `html/tpl`));
+			'src/pug/tpl/*.pug'
+		])
+		.pipe(debug())
+		.pipe(
+			pug({
+				client: false,
+				pretty: '\t',
+				separator:  '\n',
+				data: {
+					"base": "[(site_url)]",
+					"tem_path" : "/assets/templates/projectsoft",
+					"img_path" : "assets/templates/projectsoft/images/",
+					"site_name": "[(site_name)]",
+					"tpl": out + `html/tpl/`,
+					"hash": uniqid()
+				}
+			})
+		)
+		.pipe(gulp.dest(out + `html/tpl`));
 });
 /**
  * HTML
  * == END ==
 **/
 
+/**
+ * FONTS
+ * == START ==
+**/
+gulp.task('iconfont', function(){
+	let runTimestamp = Math.round(Date.now()/1000);
+	return gulp.src([
+	  		'src/glyph/*.svg'
+		])
+		.pipe(iconfont({
+			fontName: 'myfont', // required
+			prependUnicode: true, // recommended option
+			formats: ['ttf', 'eot', 'woff', 'woff2'],
+			timestamp: runTimestamp,
+		}))
+		.on('glyphs', function(glyphs, options) {
+			// CSS templating, e.g.
+			console.log(glyphs, options);
+		})
+		.pipe(gulp.dest(out + `fonts`));
+});
 
+gulp.task('webfont', function () {
+	return gulp.src([
+			'src/glyph/*.svg'
+		])
+		.pipe(debug())
+		.pipe(webfont(webfont_config))
+		.pipe(gulp.dest(out + `fonts`));
+});
 
-gulp.task('default', gulp.parallel('less', 'jsMain', 'jsApp', 'html', 'htmlTpl'));
+gulp.task('woff', function(){
+	return gulp.src([
+			'src/fonts/*.ttf'
+		])
+		.pipe(debug())
+		.pipe(woff())
+		.pipe(gulp.dest(out + `fonts`));
+});
+
+gulp.task('woff2', function(){
+	return gulp.src([
+			'fonts/*.ttf'
+		])
+		.pipe(debug())
+		.pipe(woff2())
+		.pipe(gulp.dest(out + `fonts`));
+});
+/**
+ * FONTS
+ * == END ==
+**/
+
+gulp.task('default', gulp.parallel(gulp.series('webfont', 'less'), 'jsMain', 'jsApp', 'html', 'htmlTpl'));

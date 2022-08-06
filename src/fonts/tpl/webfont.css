@@ -1,0 +1,6 @@
+:root {
+	--font-family-1: "<%= fontFamilyName %>";
+	--font-family-2: "<%= fontBaseName %>";
+	--font-src-1:  "<%= fontSrc1 %>";
+	--font-src-2:  "<%= fontSrc2 %>";
+}
