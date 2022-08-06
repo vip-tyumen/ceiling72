@@ -14,8 +14,8 @@ const gulp = require('gulp'),
 	eot = require('gulp-ttf2eot'),
 	woff = require('gulp-ttf2woff'),
 	woff2 = require('gulp-ttf2woff2'),
-	webfont = require('gulp-webfont'),
 	iconfont = require('gulp-iconfont'),
+	iconfontCss = require('gulp-iconfont-css'),
 
 	out = `assets/templates/projectsoft/`,
 	uniqid = function () {
@@ -23,32 +23,6 @@ const gulp = require('gulp'),
 		return md5((new Date()).getTime()).toString();
 	};
 
-console.log(__dirname);
-
-var webfont_config = {
-		types:'woff2,woff,ttf',
-		ligatures: true,
-		dest: __dirname + '\\src\\less\\ceiling72.less',
-		destLess: __dirname + '\\src\\less\\ceiling72.less',
-		template: __dirname + '\\src\\fonts\\tpl\\webfont.css',
-		hashes: true,
-		relativeFontPath: '@{fontpath}',
-		font: 'Ceiling72Icon',
-		fontFamilyName: 'Ceiling72Icon',
-		stylesheets: ['css', 'less'],
-		//syntax: 'bootstrap',
-		execMaxBuffer: 1024 * 200,
-		htmlDemo: false,
-		version: '1.0.0',
-		normalize: true,
-		startCodepoint: 0xE900,
-		iconsStyles: false,
-		templateOptions: {
-			baseClass: '',
-			classPrefix: 'icon-'
-		},
-		embed: false,
-	};
 /**
  * CSS
  * == START ==
@@ -166,29 +140,25 @@ gulp.task('htmlTpl', function(){
  * == START ==
 **/
 gulp.task('iconfont', function(){
-	let runTimestamp = Math.round(Date.now()/1000);
-	return gulp.src([
-	  		'src/glyph/*.svg'
-		])
-		.pipe(iconfont({
-			fontName: 'myfont', // required
-			prependUnicode: true, // recommended option
-			formats: ['ttf', 'eot', 'woff', 'woff2'],
-			timestamp: runTimestamp,
-		}))
-		.on('glyphs', function(glyphs, options) {
-			// CSS templating, e.g.
-			console.log(glyphs, options);
-		})
-		.pipe(gulp.dest(out + `fonts`));
-});
+	let runTimestamp = Math.round(Date.now()/1000),
+		fontName = 'Ceiling72';
 
-gulp.task('webfont', function () {
 	return gulp.src([
 			'src/glyph/*.svg'
 		])
 		.pipe(debug())
-		.pipe(webfont(webfont_config))
+		.pipe(iconfontCss({
+			fontName: fontName,
+			path: __dirname + '/src/fonts/tpl/_icons.less',
+			targetPath: __dirname + '/src/less/_icons.less',
+			fontPath: out + `fonts`
+		}))
+		.pipe(iconfont({
+			fontName: fontName, // required
+			prependUnicode: true, // recommended option
+			formats: ['ttf', 'woff', 'woff2'],
+			timestamp: runTimestamp,
+		}))
 		.pipe(gulp.dest(out + `fonts`));
 });
 
@@ -214,4 +184,4 @@ gulp.task('woff2', function(){
  * == END ==
 **/
 
-gulp.task('default', gulp.parallel(gulp.series('webfont', 'less'), 'jsMain', 'jsApp', 'html', 'htmlTpl'));
+gulp.task('default', gulp.parallel(gulp.series('iconfont', 'less'), 'jsMain', 'jsApp', 'html', 'htmlTpl'));
