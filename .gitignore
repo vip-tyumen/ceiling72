@@ -18,6 +18,7 @@ assets/plugins
 assets/site
 assets/snippets
 assets/templates/*.*
+assets/templates/projectsoft
 assets/tvs/*.*
 assets/vendor
 manager/*
