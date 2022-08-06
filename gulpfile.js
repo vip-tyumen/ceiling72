@@ -27,8 +27,6 @@ const out = `assets/templates/projectsoft/`,
 **/
 gulp.task('less', function () {
 	return gulp.src([
-			'node_modules/normalize.css/normalize.css',
-			'node_modules/fancybox/dist/css/jquery.fancybox.css',
 			'src/less/main.less'
 		])
 		.pipe(debug())
