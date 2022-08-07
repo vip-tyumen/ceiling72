@@ -6,7 +6,6 @@ const gulp = require('gulp'),
 	copy = require('gulp-copy'),
 	debug = require('gulp-debug'),
 	mediaQuery = require('gulp-group-css-media-queries'),
-	//imagemin = require('gulp-imagemin'),
 	less = require('gulp-less'),
 	uglify = require('gulp-uglify'),
 	pug = require('gulp-pug'),
@@ -15,9 +14,9 @@ const gulp = require('gulp'),
 	woff = require('gulp-ttf2woff'),
 	woff2 = require('gulp-ttf2woff2'),
 	iconfont = require('gulp-iconfont'),
-	iconfontCss = require('gulp-iconfont-css'),
+	iconfontCss = require('gulp-iconfont-css');
 
-	out = `assets/templates/projectsoft/`,
+const out = `assets/templates/projectsoft/`,
 	uniqid = function () {
 		var md5 = require('md5');
 		return md5((new Date()).getTime()).toString();
@@ -28,14 +27,15 @@ const gulp = require('gulp'),
  * == START ==
 **/
 gulp.task('less', function () {
+	let md = uniqid();
 	return gulp.src([
 			'src/less/main.less'
 		])
 		.pipe(debug())
 		.pipe(concat('main.less'))
-		.pipe(less())
+		.pipe(less({modifyVars:{'@hash': uniqid()}}))
 		.pipe(autoprefixer({
-			overrideBrowserslist: ['last 8 versions']
+			overrideBrowserslist: ['last 20 versions']
 		}))
 		.pipe(mediaQuery())
 		.pipe(gulp.dest(out + `css`))
@@ -184,4 +184,21 @@ gulp.task('woff2', function(){
  * == END ==
 **/
 
-gulp.task('default', gulp.parallel(gulp.series('iconfont', 'less'), 'jsMain', 'jsApp', 'html', 'htmlTpl'));
+/**
+ * COPY IMAGES
+ * == START ==
+**/
+gulp.task('copy', function(){
+	return gulp.src([
+			'src/images/*.{gif,jpeg,jpg,png}',
+			'src/images/**/*.{gif,jpeg,jpg,png}'
+		])
+		.pipe(debug())
+		.pipe(copy(out + 'images', { prefix: 2 }));
+})
+/**
+ * COPY IMAGES
+ * == END ==
+**/
+
+gulp.task('default', gulp.parallel('copy', gulp.series('iconfont', 'less'), 'jsMain', 'jsApp', 'html', 'htmlTpl'));

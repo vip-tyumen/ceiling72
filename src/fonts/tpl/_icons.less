@@ -1,8 +1,8 @@
 @font-face {
 	font-family: "<%= fontName %>";
-	src: url('<%= fontPath %><%= fontName %>.woff2<%= cacheBusterQueryString %>') format('woff2'),
-		url('<%= fontPath %><%= fontName %>.woff<%= cacheBusterQueryString %>') format('woff'),
-		url('<%= fontPath %><%= fontName %>.ttf<%= cacheBusterQueryString %>') format('truetype');
+	src: url('<%= fontPath %><%= fontName %>.woff2?@{hash}') format('woff2'),
+		url('<%= fontPath %><%= fontName %>.woff?@{hash}') format('woff'),
+		url('<%= fontPath %><%= fontName %>.ttf?@{hash}') format('truetype');
 }
 
 .<%= cssClass%>-base-pseudo {
