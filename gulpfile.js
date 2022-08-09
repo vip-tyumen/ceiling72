@@ -12,27 +12,32 @@ const gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	woff = require('gulp-ttf2woff'),
 	woff2 = require('gulp-ttf2woff2'),
-	iconfont = require('gulp-iconfont'),
-	iconfontCss = require('gulp-iconfont-css');
+	imagemin = require('gulp-imagemin'),
+	exec = require('child_process').exec;
 
 const out = `assets/templates/projectsoft/`,
 	uniqid = function () {
 		var md5 = require('md5');
-		return md5((new Date()).getTime()).toString();
-	};
+		return md5((new Date()).getTime()).toString().replace(/\s/g, '');
+	},
+	webfont_config = {
+		types:'woff2,woff,ttf,svg',
+		ligatures: true,
+		font: 'Ceiling72'
+	},
+	md = uniqid().replace(/\s/g, '');
 
 /**
  * CSS
  * == START ==
 **/
 gulp.task('less', function () {
-	let md = uniqid();
 	return gulp.src([
 			'src/less/main.less'
 		])
 		.pipe(debug())
 		.pipe(concat('main.less'))
-		.pipe(less({modifyVars:{'@hash': uniqid()}}))
+		.pipe(less({modifyVars:{'@hash': md}}))
 		.pipe(autoprefixer({
 			overrideBrowserslist: ['last 20 versions']
 		}))
@@ -100,7 +105,7 @@ gulp.task('html', function(){
 					"img_path" : "assets/templates/projectsoft/images/",
 					"site_name": "[(site_name)]",
 					"tpl": out + `html/tpl/`,
-					"hash": uniqid()
+					"hash": md
 				}
 			})
 		)
@@ -123,7 +128,7 @@ gulp.task('htmlTpl', function(){
 					"img_path" : "assets/templates/projectsoft/images/",
 					"site_name": "[(site_name)]",
 					"tpl": out + `html/tpl/`,
-					"hash": uniqid()
+					"hash": md
 				}
 			})
 		)
@@ -138,6 +143,7 @@ gulp.task('htmlTpl', function(){
  * FONTS
  * == START ==
 **/
+/**
 gulp.task('iconfont', function(){
 	let runTimestamp = Math.round(Date.now()/1000),
 		fontName = 'Ceiling72';
@@ -153,13 +159,14 @@ gulp.task('iconfont', function(){
 			fontPath: out + `fonts`
 		}))
 		.pipe(iconfont({
-			fontName: fontName, // required
-			prependUnicode: true, // recommended option
+			fontName: fontName,
+			prependUnicode: true,
 			formats: ['ttf', 'woff', 'woff2'],
 			timestamp: runTimestamp,
 		}))
 		.pipe(gulp.dest(out + `fonts`));
 });
+**/
 
 gulp.task('woff', function(){
 	return gulp.src([
@@ -178,6 +185,18 @@ gulp.task('woff2', function(){
 		.pipe(woff2())
 		.pipe(gulp.dest(out + `fonts`));
 });
+
+gulp.task('webfont', function (cb) {
+		exec(
+			'grunt webfont',
+			function (err, stdout, stderr) {
+				console.log(stdout);
+				console.log(stderr);
+				cb(err);
+			}
+		);
+	}
+);
 /**
  * FONTS
  * == END ==
@@ -194,10 +213,34 @@ gulp.task('copy', function(){
 		])
 		.pipe(debug())
 		.pipe(copy(out + 'images', { prefix: 2 }));
-})
+});
+
+gulp.task('imgmin', function(){
+	return gulp.src([
+			'src/images/*.{gif,jpeg,jpg,png}',
+			'src/images/**/*.{gif,jpeg,jpg,png}'
+		])
+		.pipe(debug())
+		.pipe(imagemin())
+		.pipe(gulp.dest(out + 'images'))
+});
+
 /**
  * COPY IMAGES
  * == END ==
 **/
 
-gulp.task('default', gulp.parallel('copy', gulp.series('iconfont', 'less'), 'jsMain', 'jsApp', 'html', 'htmlTpl'));
+gulp.task(
+	'default',
+	gulp.parallel(
+		'imgmin',
+		gulp.series(
+			'webfont',
+			'less'
+		),
+		'jsMain',
+		'jsApp',
+		'html',
+		'htmlTpl'
+	)
+);
