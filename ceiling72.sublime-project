@@ -5,6 +5,7 @@
 			"path": ".",
 			"name": "Ваш идеальный потолок",
 			"folder_exclude_patterns": [
+				".github",
 				"node_modules",
 				"manager",
 				"assets/.thumbs",
@@ -31,9 +32,19 @@
 				"README.md",
 				"index.php",
 				"robots.txt",
-				"LICENSE",
-				"*.sublime-worcspace"
-			]
+				"LICENSE*",
+				"*.sublime-worcspace",
+				"android*.png",
+				"apple*.png",
+				"favicon-*.png",
+				"safari*.svg",
+				"*.ico",
+				"mstile*.png",
+				"browser*.xml",
+				"site.webmanifest",
+				"*.lock"
+			],
+			"default_line_ending": "LF"
 		}
 	]
 }
