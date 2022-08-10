@@ -2,6 +2,14 @@
 /index.php
 *-lock.json
 *.*-workspace
+/*.txt
+/*.lock
+/*.png
+/*.ico
+/*.svg
+/*.webmanifest
+/*.xml
+/.github
 assets/*.*
 assets/.thumbs
 assets/backup

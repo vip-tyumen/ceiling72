@@ -2,4 +2,9 @@ doctype html
 html(lang="ru")
 	|{{@FILE assets/templates/projectsoft/html/tpl/head.html}}
 	body
-		|[*content*]
+		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
+		main.container-full
+			.row
+				.container
+					|[*content*]
+		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}

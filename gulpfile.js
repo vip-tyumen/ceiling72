@@ -24,19 +24,19 @@ const out = `assets/templates/projectsoft/`,
 		types:'woff2,woff,ttf,svg',
 		ligatures: true,
 		font: 'Ceiling72'
-	},
-	md = uniqid().replace(/\s/g, '');
+	};
 
 /**
  * CSS
  * == START ==
 **/
 gulp.task('less', function () {
+	let md = uniqid().replace(/\s/g, '');
 	return gulp.src([
-			'src/less/main.less'
+			'src/less/main.less',
+			'src/less/editor.less'
 		])
 		.pipe(debug())
-		.pipe(concat('main.less'))
 		.pipe(less({modifyVars:{'@hash': md}}))
 		.pipe(autoprefixer({
 			overrideBrowserslist: ['last 20 versions']
@@ -90,6 +90,7 @@ gulp.task('jsApp', function(){
  * == START ==
 **/
 gulp.task('html', function(){
+	let md = uniqid().replace(/\s/g, '');
 	return gulp.src([
 			'src/pug/*.pug'
 		])
@@ -97,6 +98,7 @@ gulp.task('html', function(){
 		.pipe(
 			pug({
 				client: false,
+				doctype: 'html',
 				pretty: '\t',
 				separator:  '\n',
 				data: {
@@ -113,6 +115,7 @@ gulp.task('html', function(){
 });
 
 gulp.task('htmlTpl', function(){
+	let md = uniqid().replace(/\s/g, '');
 	return gulp.src([
 			'src/pug/tpl/*.pug'
 		])
@@ -120,6 +123,7 @@ gulp.task('htmlTpl', function(){
 		.pipe(
 			pug({
 				client: false,
+				doctype: 'html',
 				pretty: '\t',
 				separator:  '\n',
 				data: {
@@ -143,31 +147,6 @@ gulp.task('htmlTpl', function(){
  * FONTS
  * == START ==
 **/
-/**
-gulp.task('iconfont', function(){
-	let runTimestamp = Math.round(Date.now()/1000),
-		fontName = 'Ceiling72';
-
-	return gulp.src([
-			'src/glyph/*.svg'
-		])
-		.pipe(debug())
-		.pipe(iconfontCss({
-			fontName: fontName,
-			path: __dirname + '/src/fonts/tpl/_icons.less',
-			targetPath: __dirname + '/src/less/_icons.less',
-			fontPath: out + `fonts`
-		}))
-		.pipe(iconfont({
-			fontName: fontName,
-			prependUnicode: true,
-			formats: ['ttf', 'woff', 'woff2'],
-			timestamp: runTimestamp,
-		}))
-		.pipe(gulp.dest(out + `fonts`));
-});
-**/
-
 gulp.task('woff', function(){
 	return gulp.src([
 			'src/fonts/*.ttf'
@@ -179,7 +158,7 @@ gulp.task('woff', function(){
 
 gulp.task('woff2', function(){
 	return gulp.src([
-			'fonts/*.ttf'
+			'src/fonts/*.ttf'
 		])
 		.pipe(debug())
 		.pipe(woff2())
@@ -188,7 +167,7 @@ gulp.task('woff2', function(){
 
 gulp.task('webfont', function (cb) {
 		exec(
-			'grunt webfont',
+			'grunt webfont -v',
 			function (err, stdout, stderr) {
 				console.log(stdout);
 				console.log(stderr);
@@ -197,24 +176,24 @@ gulp.task('webfont', function (cb) {
 		);
 	}
 );
+
+gulp.task('copyttf', function(){
+	return gulp.src([
+			'src/fonts/*.ttf'
+		])
+		.pipe(debug())
+		.pipe(copy(out + 'fonts', { prefix: 2 }));
+});
 /**
  * FONTS
  * == END ==
 **/
 
 /**
- * COPY IMAGES
+ * MINIFY IMAGES
+ * COPY FAVICONS
  * == START ==
 **/
-gulp.task('copy', function(){
-	return gulp.src([
-			'src/images/*.{gif,jpeg,jpg,png}',
-			'src/images/**/*.{gif,jpeg,jpg,png}'
-		])
-		.pipe(debug())
-		.pipe(copy(out + 'images', { prefix: 2 }));
-});
-
 gulp.task('imgmin', function(){
 	return gulp.src([
 			'src/images/*.{gif,jpeg,jpg,png}',
@@ -225,22 +204,85 @@ gulp.task('imgmin', function(){
 		.pipe(gulp.dest(out + 'images'))
 });
 
+gulp.task('copyfavicon', function(){
+	return gulp.src([
+			'src/favicon/*.*'
+		])
+		.pipe(debug())
+		.pipe(copy(__dirname, { prefix: 2 }));
+});
+
 /**
- * COPY IMAGES
+ * MINIFY IMAGES
+ * COPY FAVICONS
  * == END ==
 **/
 
 gulp.task(
 	'default',
 	gulp.parallel(
-		'imgmin',
 		gulp.series(
+			'woff',
+			'woff2',
 			'webfont',
+			'copyttf',
 			'less'
 		),
+		'imgmin',
+		'copyfavicon',
 		'jsMain',
 		'jsApp',
 		'html',
 		'htmlTpl'
 	)
 );
+
+gulp.task('watch', function(){
+	// Font
+	gulp.watch(
+		[
+			'src/fonts/*.ttf'
+		],
+		gulp.series('woff', 'woff2', 'webfont', 'copyttf', 'htmlTpl')
+	);
+	// WebFont
+	gulp.watch(
+		[
+			'src/glyph/*.svg'
+		],
+		gulp.series('webfont', 'htmlTpl')
+	);
+	// JavaScript
+	gulp.watch(
+		[
+			'src/js/*.js',
+			'src/js/**/*.js'
+		],
+		gulp.series('jsMain', 'htmlTpl')
+	);
+	// CSS
+	gulp.watch(
+		[
+			'src/less/*.less',
+			'src/less/**/*.less'
+		],
+		gulp.series('less', 'htmlTpl')
+	);
+	// IMAGES
+	gulp.watch(
+		[
+			'src/images/*.*',
+			'src/images/**/*.*'
+		],
+		gulp.series('imgmin', 'htmlTpl')
+	);
+	// HTML
+	gulp.watch(
+		[
+			'src/pug/*.pug',
+			'src/pug/**/*.pug'
+		],
+		gulp.series('html', 'htmlTpl')
+	);
+
+})

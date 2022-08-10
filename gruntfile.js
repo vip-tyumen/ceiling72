@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 				options: {
 					hashes: true,
 					relativeFontPath: '@{fontpath}',
-					destLess: 'src/less',
+					destLess: 'src/less/fonts',
 					font: 'ceiling72',
 					types: 'ttf,woff,woff2,svg',
 					fontFamilyName: 'Ceiling72',
