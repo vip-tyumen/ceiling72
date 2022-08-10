@@ -24,3 +24,15 @@ tab_width = 4
 
 [**php]
 tab_width = 4
+
+[**css]
+tab_width = 4
+
+[**less]
+tab_width = 4
+
+[**pug]
+tab_width = 4
+
+[**svg]
+tab_width = 4
