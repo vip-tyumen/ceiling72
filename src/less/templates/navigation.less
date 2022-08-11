@@ -1,0 +1,122 @@
+.header {
+	&--nav {
+		background-color: @navbg;
+		color: @navcolor;
+		user-select: none;
+		line-height: 1;
+		ul {
+			display: flex;
+			list-style: none;
+			margin: unset;
+			padding: unset;
+			flex: 1 0 auto;
+			flex-wrap: wrap;
+			li {
+				list-style: none;
+				white-space: nowrap;
+				padding: 0;
+				margin: 0;
+				flex: auto;
+				span,
+				a {
+					transition: background .3s ease,color .3s ease;
+					font-size: 1.1em;
+					display: block;
+					text-decoration: none;
+					padding: 15px;
+					text-align: center;
+					filter: none !important;
+					outline: 0 !important;
+					text-transform: uppercase;
+				}
+				span {
+					background-color: #ffffff;
+					color: @navbg;
+					box-shadow: 0 0 2px @navbg;
+				}
+				a {
+					color: #ffffff;
+					background-color: @navbg;
+					text-decoration: none;
+					box-shadow: inset 0 0 2px #ffffff;
+					&:hover {
+						background-color: #ffffff;
+						color: @navbg;
+						box-shadow: 0 0 2px @navbg;
+					}
+				}
+			}
+			//flex-wrap: ;
+		}
+	}
+}
+.navigation {
+	.navigation {
+		&--button {
+			display: none;
+		}
+	}
+	.nav-btn {
+		width: 30px;
+		height: 30px;
+		margin-bottom: 4px;
+		margin-top: 4px;
+		cursor: pointer;
+		margin-left: 10px;
+	}
+	@media(max-width: 590px) {
+		margin-left: -@padding;
+		margin-right: -@padding;
+		.navigation {
+			&--button {
+				display: block;
+			}
+			&--wrapper {
+				transition: height .3s ease;
+				overflow: hidden;
+				height: 0;
+				nav {
+					ul {
+						flex-direction: column;
+						li {
+							flex: 1;
+							width: 100%;
+							a,
+							span {
+								text-overflow: ellipsis;
+								text-align: left;
+							}
+						}
+					}
+				}
+			}
+		}
+		&.open {
+			.navigation {
+				&--wrapper {
+					transition: height .3s ease;
+					height: 100%;
+				}
+			}
+		}
+	}
+
+}
+.menu_icon_dash {
+	fill: #ffffff;
+	transform-origin: 50% 50%;
+	opacity: 100;
+	transition: transform .3s,opacity .3s;
+}
+.open {
+	.svg___burger_dash_bottom {
+		transform: translateY(16.75%) translateX(16.9%) rotate(135deg);
+	}
+	.svg___burger_dash_middle {
+		transform: rotate(135deg);
+		opacity: 0;
+	}
+	.svg___burger_dash_top {
+		transform: translateY(16.75%) translateX(-16.9%) rotate(45deg);
+	}
+}

@@ -35,9 +35,11 @@
 		"gulp-ttf2woff": "https://github.com/nfroidure/gulp-ttf2woff/archive/refs/heads/master.tar.gz",
 		"gulp-ttf2woff2": "latest",
 		"gulp-uglify": "latest",
+		"gulp-util": "^3.0.8",
 		"imagemin": "latest",
 		"jquery": "latest",
 		"md5": "latest",
-		"time-grunt": "latest"
+		"time-grunt": "latest",
+		"vinyl-ftp": "^0.6.1"
 	}
 }

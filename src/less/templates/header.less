@@ -1,12 +1,63 @@
 .header {
 	&--row {
 		aspect-ratio: 191 / 66;
-		background-image: url('@{imagepath}/logo.png'), linear-gradient(to right, @color1 0%, @color1 50%, @color2 50.01%, @color2 100%);
+		background-image: url('@{imagepath}/logo-mob.png'), linear-gradient(to right, @color1 0%, @color1 50%, @color2 50.01%, @color2 100%);
 		background-repeat: no-repeat, no-repeat;
 		background-position: center center, center center;
 		background-size: contain, auto;
 		max-height: 250px;
-		width: ~'calc(100% + 30px)';
+		width: ~'calc(100% + 30px)';	
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		align-items: center;
+		&-center {
+			aspect-ratio: 1.2 / 1;
+			height: 100%;
+		}
+		&-left,
+		&-right {
+			color: #ffffff;
+			flex: 1;
+			p {
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+		&-left {
+			line-height: 1.4;
+			font-size: 1.5em;
+			padding-left: 15px;
+		}
+		&-right {
+			font-size: 1.19em;
+			line-height: 1.6;
+			padding-right: 15px;
+		}
+		@media(max-width: 490px) {
+			&-left,
+			&-right {
+				display: none;
+			}
+		}
+		@media(max-width: 680px) {
+			&-left {
+   				 font-size: 0.8em;
+				line-height: 1.4;
+			}
+			&-right {
+				font-size: 0.8em;
+				line-height: 1.1;
+			}
+		}
+		@media(max-width: 742px) {
+			aspect-ratio: 566 / 250;
+			background-image: url('@{imagepath}/logo-mob.png'), linear-gradient(to right, @color1 0%, @color1 50%, @color2 50.01%, @color2 100%);
+		}
+		@media(max-width: 566px) {
+			background-size: cover, auto;
+		}
 	}
 	&--nav {
 

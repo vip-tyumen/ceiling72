@@ -23,7 +23,9 @@
 				"assets/site",
 				"assets/snippets",
 				"assets/vendor",
-				"vendor"
+				"vendor",
+				"src/bin",
+				"src/favicon"
 			],
 			"file_exclude_patterns": [
 				"assets/templates/index.html",

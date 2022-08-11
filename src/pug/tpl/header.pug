@@ -1,5 +1,38 @@
 header.container-full.header
 	.row.header--row
+		.header--row-left.text-right
+			p
+				|(3452)743-043
+				br
+				|(3452)42-88-76
+		.header--row-center
+		.header--row-right.text-left
+			p
+				span.text-center.inline-block
+					|Изменим Ваш потолок
+					br
+					|к лучшему
 	.row.header--nav
 		.container
-			|MENU
+			.navigation
+				.navigation--button
+					.nav-btn
+						include menu_btn.svg
+				.navigation--wrapper
+					nav
+						ul
+							li
+								span
+									|Главная
+							li
+								a(href="/#")
+									|Посчитать мой потолок
+							li
+								a(href="/#")
+									|Наши работы
+							li
+								a(href="/#")
+									|Новости
+							li
+								a(href="/#")
+									|Контакты
