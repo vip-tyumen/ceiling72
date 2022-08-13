@@ -1,12 +1,38 @@
-@template: "/assets/templates/projectsoft";
-@fontpath: "@{template}/fonts";
-@imagepath: "@{template}/images";
-@color1: #67af41;
-@color2: #4d9525;
-@navbg: #8bc34a;
-@navcolor: #ffffff;
-@selection-bg: #3a741a;
-@selection-color: #ffffff;
-@fancybox-image-url: "@{imagepath}/fancybox";
-@padding: 15px;
-@width: 1200px;
+@template: 				"/assets/templates/projectsoft";
+@fontpath: 				"@{template}/fonts";
+@imagepath: 			"@{template}/images";
+@color1: 				#67af41;
+@color2: 				#4d9525;
+@color3: 				#ebd830;
+@navbg: 				#8bc34a;
+@navcolor: 				#ffffff;
+@selection-bg: 			#3a741a;
+@selection-color: 		#ffffff;
+@bsh-img-color: 		#848484;
+@breadcrumb-bg: 		#fff173;
+@fancybox-image-url: 	"@{imagepath}/fancybox";
+@padding: 				15px;
+@negative-padding: 		-15px;
+@margin2:				@padding * 2;
+@width: 				1200px;
+
+:root {
+	--color1: 			@color1;
+	--color2: 			@color2;
+	--color3: 			@color3;
+	--navbg: 			@navbg;
+	--navcolor: 		@navcolor;
+	--breadcrumb-bg: 	@breadcrumb-bg;
+	--selection-bg: 	@selection-bg;
+	--selection-color: 	@selection-color;
+	--padding:			@padding;
+	--negative-padding: @negative-padding;
+	--margin2:			@margin2;
+	--bsh-img-color:	@bsh-img-color;
+}
+a {
+	color: var(--color2);
+	&:hover {
+		color: var(--color1);
+	}
+}

@@ -1,0 +1,37 @@
+ul,
+ol {
+    &.breadcrumb {
+        padding-left: var(--padding);
+        padding-right: var(--padding);
+        padding-top: unset;
+        padding-bottom: unset;
+        max-width: @width;
+        margin-top: unset;
+        margin-bottom: unset;
+        margin-left: auto;
+        margin-right: auto;
+        list-style: unset;
+        li {
+            display: inline;
+            &::after {
+                content: "/";
+                margin-right: 5px;
+                margin-left: 5px;
+            }
+            &:last-child {
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.breadcrumbs {
+    display: block;
+    margin-left: var(--negative-padding);
+    margin-right: var(--negative-padding);
+    padding-top: var(--padding);
+    padding-bottom: var(--padding);
+    background-color: var(--breadcrumb-bg);
+    .clearfix();
+}

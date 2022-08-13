@@ -1,5 +1,5 @@
 .footer {
-	background-color: @color2;
+	background-color: var(--color2);
 	color: white;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -11,12 +11,12 @@
 		flex-wrap: nowrap;
 		justify-content: space-between;
 		align-items: center;
-		margin-left: -@padding;
-		margin-right: -@padding;
+		margin-left: var(--negative-padding);
+		margin-right: var(--negative-padding);
 	}
 	&--column {
-		padding-left: @padding;
-		padding-right: @padding;
+		padding-left: var(--padding);
+		padding-right: var(--padding);
 		&.left {
 			font-weight: 800;
 		}

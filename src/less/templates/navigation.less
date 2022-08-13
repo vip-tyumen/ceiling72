@@ -1,7 +1,7 @@
 .header {
 	&--nav {
-		background-color: @navbg;
-		color: @navcolor;
+		background-color: var(--navbg);
+		color: var(--navcolor);
 		user-select: none;
 		line-height: 1;
 		ul {
@@ -23,26 +23,27 @@
 					font-size: 1.1em;
 					display: block;
 					text-decoration: none;
-					padding: 15px;
+					padding: var(--padding);
 					text-align: center;
 					filter: none !important;
 					outline: 0 !important;
 					text-transform: uppercase;
 				}
+				a.active,
 				span {
 					background-color: #ffffff;
-					color: @navbg;
-					box-shadow: 0 0 2px @navbg;
+					color: var(--navbg);
+					box-shadow: 0 0 2px var(--navbg);
 				}
 				a {
 					color: #ffffff;
-					background-color: @navbg;
+					background-color: var(--navbg);
 					text-decoration: none;
 					box-shadow: inset 0 0 2px #ffffff;
 					&:hover {
 						background-color: #ffffff;
-						color: @navbg;
-						box-shadow: 0 0 2px @navbg;
+						color: var(--navbg);
+						box-shadow: 0 0 2px var(--navbg);
 					}
 				}
 			}
@@ -65,8 +66,8 @@
 		margin-left: 10px;
 	}
 	@media(max-width: 590px) {
-		margin-left: -@padding;
-		margin-right: -@padding;
+		margin-left: var(--negative-padding);
+		margin-right: var(--negative-padding);
 		.navigation {
 			&--button {
 				display: block;

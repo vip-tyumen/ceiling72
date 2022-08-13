@@ -1,0 +1,33 @@
+.gallery {
+	&--flex {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		&--item {
+			padding-left: var(--padding);
+			padding-right: var(--padding);
+			padding-top: var(--padding);
+			padding-bottom: var(--padding);
+			&--image {
+				aspect-ratio: 270 / 202;
+				display: block;
+				transition: transform .3s ease;
+				transform-origin: center center;
+				transform: scale(1.0);
+				max-width: 270px;
+				width: 270px;
+			}
+			&--link {
+				display: block;
+				overflow: hidden;
+				max-width: 270px;
+				&:hover {
+					img {
+						transform: scale(1.1);
+					}
+				}
+			}
+		}
+	}
+}

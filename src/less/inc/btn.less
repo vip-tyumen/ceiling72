@@ -1,0 +1,37 @@
+.btn {
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	border-radius: unset;
+	user-select: none;
+	&,
+	&:active,
+	&:focus,
+	&:hover {
+		text-decoration: none;
+		border-radius: unset;
+		box-shadow: unset;
+	}
+	// default
+	&-default {
+		background-color: var(--color2);
+		color: #fff;
+		transition: all .3s ease;
+		border: 1px solid var(--color2);
+		&:focus,
+		&:hover {
+			color: var(--color2);
+			background-color: #fff;
+		}
+	}
+}

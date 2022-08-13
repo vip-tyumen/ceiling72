@@ -23,14 +23,13 @@
 				"assets/site",
 				"assets/snippets",
 				"assets/vendor",
-				"vendor",
 				"src/bin",
-				"src/favicon"
+				"src/favicon",
+				"bower_components"
 			],
 			"file_exclude_patterns": [
 				"assets/templates/index.html",
 				"assets/tvs/index.html",
-				".htaccess",
 				"README.md",
 				"index.php",
 				"robots.txt",

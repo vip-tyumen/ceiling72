@@ -84,7 +84,7 @@ gulp.task('jsMain', function(){
 gulp.task('jsApp', function(){
 	return gulp.src([
 			'node_modules/jquery/dist/jquery.js',
-			'node_modules/fancybox/dist/js/jquery.fancybox.js'
+			'bower_components/fancybox/dist/jquery.fancybox.js'
 		])
 		.pipe(debug())
 		.pipe(concat('app.js'))
@@ -92,6 +92,15 @@ gulp.task('jsApp', function(){
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min' }))
 		.pipe(gulp.dest(out + `js`));
+});
+
+gulp.task('copyJs', function(){
+	return gulp.src([
+			'src/Hyphenopoly/*.*',
+			'src/Hyphenopoly/**/*.*'
+		])
+		.pipe(debug())
+		.pipe(copy(out + 'js/Hyphenopoly', { prefix: 2 }));
 });
 /**
  * JavaScript
@@ -252,26 +261,29 @@ gulp.task('ftp', function(){
 gulp.task(
 	'default',
 	gulp.series(
-		gulp.parallel(
-			'woff',
-			'woff2',
-			'webfont',
-			'copyttf',
-			'less'
+		gulp.series(
+			gulp.parallel(
+				'woff',
+				'woff2',
+				'webfont',
+				'copyttf',
+				'less'
+			),
+			gulp.parallel(
+				'imgmin',
+				'copyfavicon'
+			),
+			gulp.parallel(
+				'jsMain',
+				'jsApp',
+				'copyJs'
+			),
+			gulp.parallel(
+				'html',
+				'htmlTpl'
+			)
 		),
-		gulp.parallel(
-			'imgmin',
-			'copyfavicon'
-		),
-		gulp.parallel(
-			'jsMain',
-			'jsApp'
-		),
-		gulp.parallel(
-			'html',
-			'htmlTpl',
-			'ftp'
-		)
+		'ftp'
 	)
 );
 
@@ -296,7 +308,7 @@ gulp.task('watch', function(){
 			'src/js/*.js',
 			'src/js/**/*.js'
 		],
-		gulp.series('jsMain', 'htmlTpl', 'ftp')
+		gulp.series('jsMain', 'htmlTpl', 'copyJs', 'ftp')
 	);
 	// CSS
 	gulp.watch(

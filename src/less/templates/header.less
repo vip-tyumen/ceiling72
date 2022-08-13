@@ -1,12 +1,12 @@
 .header {
 	&--row {
 		aspect-ratio: 191 / 66;
-		background-image: url('@{imagepath}/logo-mob.png'), linear-gradient(to right, @color1 0%, @color1 50%, @color2 50.01%, @color2 100%);
+		background-image: url('@{imagepath}/logo-mob.png'), linear-gradient(to right, var(--color1) 0%, var(--color1) 50%, var(--color2) 50.01%, var(--color2) 100%);
 		background-repeat: no-repeat, no-repeat;
 		background-position: center center, center center;
 		background-size: contain, auto;
 		max-height: 250px;
-		width: ~'calc(100% + 30px)';	
+		width: ~'calc(100% + var(--padding) * 2)';	
 		display: flex;
 		flex-direction: row;
 		justify-content: space-evenly;
@@ -28,12 +28,12 @@
 		&-left {
 			line-height: 1.4;
 			font-size: 1.5em;
-			padding-left: 15px;
+			padding-left: var(--padding);
 		}
 		&-right {
 			font-size: 1.19em;
 			line-height: 1.6;
-			padding-right: 15px;
+			padding-right: var(--padding);
 		}
 		@media(max-width: 490px) {
 			&-left,
@@ -61,5 +61,18 @@
 	}
 	&--nav {
 
+	}
+}
+header {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		.text-center();
+		@media(max-width: 590px) {
+			.text-left();
+		}
 	}
 }

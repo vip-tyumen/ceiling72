@@ -1,0 +1,47 @@
+doctype html
+html(lang="ru")
+	|{{@FILE assets/templates/projectsoft/html/tpl/head.html}}
+	body
+		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
+		main.container-full
+			.row
+				header.container.hyphenation
+					h1
+						|[*pagetitle*]
+				|<@IF:[*content:isNotEmpty*]>
+				article.container.main-wrapper
+					.hyphenation.text-justify
+						|[*content*]
+				|<@ENDIF>
+				|[[DocLister?
+				|	&parents=`[*id*]`
+				|	&display=`10`
+				|	&tvList=`imageSoc, news_date, news_person`
+				|	&tvPrefix=``
+				|	&orderBy=`news_date DESC`
+				|	&sortBy=`news_date`
+				|	&sortDir=`DESC`
+				|	&tvSortType=`TVDATETIME`
+				|	&noneTPL=`@CODE:<span></span>`
+				|	&debug=`[(debug)]`
+				|	&showParent=`0`
+				|	&urlScheme=`full`
+				|	&noneWrapOuter=`0`
+				|   &PrevNextAlwaysShow=`1`
+				|   &paginate=`pages`
+				|   &paginationMeta=`1`
+				|   &TplWrapPaginate=`@CODE: <div class="container main-wrapper"><div class="row"><div class="container-full text-center"><ul class="pagination">[+wrap+]</ul></div></div></div>`
+				|   &TplNextP=`@CODE: <li class="pagination--item next"><a role="button" class="icon-next" href="[+link+]"></a></li>`
+				|   &TplNextI=`@CODE: <li class="pagination--item next disabled"><span role="button" class="icon-next"></span></li>`
+				|   &TplPrevP=`@CODE: <li class="pagination--item prev"><a role="button" class="icon-prev" href="[+link+]"></a></li>`
+				|   &TplPrevI=`@CODE: <li class="pagination--item prev disabled"><span role="button" class="icon-prev"></span></li>`
+				|   &TplPage=`@CODE: <li class="pagination--item"><a role="button" href="[+link+]">[+num+]</a></li>`
+				|   &TplCurrentPage=`@CODE: <li class="pagination--item active"><span role="button">[+num+]</span></li>`
+				|   &TplDotsPage=`@CODE:<li class="pagination--item dots"><span role="button">...</span></li>`
+				|	&ownerTPL=`@FILE:projectsoft/html/tpl/news`
+				|	&tpl=`@FILE:projectsoft/html/tpl/news_tpl`
+				|	&prepare=`\ProjectSoft\PrepareDL::prepareItem`
+				|]]
+				|[+pages+]
+		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
+		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}

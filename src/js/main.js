@@ -1,4 +1,5 @@
 ;(function($) {
+
 	/**
 	 * --NAVIGATION
 	 **/
@@ -26,7 +27,7 @@
 			nav = $("nav", menu),
 			height = nav.outerHeight(true) + `px`;
 		if($(parent).hasClass('open')) {
-			if($(document).width() <= 590) {
+			if(window.innerWidth <= 590) {
 				menu.css({
 					height: height
 				});
@@ -34,7 +35,7 @@
 				menu.removeAttr('style')
 			}
 		} else {
-			if($(document).width() <= 590) {
+			if(window.innerWidth <= 590) {
 				menu.css({
 					height: 0
 				});
@@ -43,7 +44,8 @@
 			}
 		}
 	}).trigger('resize');
+	
 	/**
-	 * /-NAVIGATION
+	  * fancyapps
 	 **/
 })(jQuery);

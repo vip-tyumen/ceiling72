@@ -1,0 +1,21 @@
+article.container.text-justify.news-item
+	.row
+		.news-item-flex
+			header.news-item-header
+				h3.news-item-header-title
+					|<a class="hyphenation" href="[+url+]" [+link_attributes+]>
+					|	[+title+]
+					|</a>
+			time.news-item-time.icon-icon18(datetime="[+news_date+]")
+				|[+out_date+]
+			.news-item-description
+				p.news-item-description-photo
+					|<a href="[+url+]" [+link_attributes+]>
+					|	<img src="[[phpthumb? &input=`[+imageSoc+]` &options=`w=751,h=422,zc=C`]]" alt="[+alt+]">
+					|</a>
+				p.news-item-description-text
+					span.news-item-description-text-wrapper.hyphenation
+						|[+introtext:nl2br+]
+					|<a class="btn btn-default" href="[+url+]" [+link_attributes+]>
+					|	Подробнее
+					|</a>

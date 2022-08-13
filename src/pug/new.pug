@@ -1,0 +1,25 @@
+doctype html
+html(lang="ru")
+	|{{@FILE assets/templates/projectsoft/html/tpl/head.html}}
+	body
+		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
+		main.container-full.article
+			.row
+				article.container.article--body.hyphenation
+					header.article--header
+						.article--header--title
+							h1
+								|[*pagetitle*]
+					p.article--body--date
+						em
+							time.icon-icon18(datetime="[*news_date*]")
+								|&nbsp;[[aDate? &date=`[*news_date*]`]] года
+					.article--body--text
+						|[*content*]
+					|[[PageBuilder]]
+					p.article--body--person
+						strong
+							em
+								|[*news_person*]
+		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
+		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}

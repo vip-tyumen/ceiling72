@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 					destLess: 'src/less/fonts',
 					font: 'ceiling72',
 					types: 'ttf,woff,woff2,svg',
-					fontFamilyName: 'Ceiling72',
+					fontFamilyName: 'ceiling72',
 					stylesheets: ['less'],
 					syntax: 'bootstrap',
 					execMaxBuffer: 1024 * 200,
