@@ -1,0 +1,42 @@
+blockquote {
+	.clearfix();
+	margin-left: unset;
+	margin-right: unset;
+	margin-top: unset;
+	padding-top: 1em;
+	padding-right: 1em;
+	padding-bottom: 1em;
+	padding-left: 2.6em;
+	position: relative;
+	background-color: #f1f1f1;
+	border-radius: 0.4em;
+	box-shadow: 0 0 2px #939393;
+	&::before {
+		position: absolute;
+		top: 0.5em;
+		left: 0.5em;
+		content: @icon-icon55;
+		font-family: "ceiling72" !important;
+		font-size: 1.3em;
+		speak: none;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+		text-rendering: auto;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-shadow: 2px 2px 1px #ffffff;
+	}
+	* {
+		font-style: italic;
+	}
+	p,
+	ul,
+	ol {
+		&:last-child {
+			margin-bottom: unset;
+		}
+	}
+}

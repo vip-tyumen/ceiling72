@@ -36,7 +36,6 @@
 		"gulp-uglify": "latest",
 		"gulp-util": "^3.0.8",
 		"imagemin": "latest",
-		"jquery": "latest",
 		"md5": "latest",
 		"time-grunt": "latest",
 		"vinyl-ftp": "^0.6.1"

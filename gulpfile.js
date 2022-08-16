@@ -77,20 +77,21 @@ gulp.task('jsMain', function(){
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest(out + `js`))
 		.pipe(uglify())
-		.pipe(rename({suffix: '.min' }))
+		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(out + `js`));
 });
 
 gulp.task('jsApp', function(){
+	// jQuery and plugins
 	return gulp.src([
-			'node_modules/jquery/dist/jquery.js',
+			'bower_components/jquery/dist/jquery.js',
 			'bower_components/fancybox/dist/jquery.fancybox.js'
 		])
 		.pipe(debug())
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest(out + `js`))
 		.pipe(uglify())
-		.pipe(rename({suffix: '.min' }))
+		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(out + `js`));
 });
 

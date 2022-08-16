@@ -3,11 +3,8 @@ html(lang="ru")
 	|{{@FILE assets/templates/projectsoft/html/tpl/head.html}}
 	body
 		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
-		main.container-full
+		main.container-full.article
 			.row
-				.container
-					h1
-						|[*pagetitle*]
-					|[*content*]
+				|{{@FILE assets/templates/projectsoft/html/tpl/title_content.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}

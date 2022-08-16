@@ -37,3 +37,4 @@ test/*
 tests/*
 vendor/*
 bower_components/*
+src/packages

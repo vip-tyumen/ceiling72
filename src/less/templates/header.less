@@ -1,10 +1,11 @@
 .header {
 	&--row {
 		aspect-ratio: 191 / 66;
-		background-image: url('@{imagepath}/logo-mob.png'), linear-gradient(to right, var(--color1) 0%, var(--color1) 50%, var(--color2) 50.01%, var(--color2) 100%);
-		background-repeat: no-repeat, no-repeat;
+		background-color: var(--color2);
+		background-image: url('@{imagepath}/logo-mob.png'), url('@{imagepath}/line.png');
+		background-repeat: no-repeat, repeat-y;
 		background-position: center center, center center;
-		background-size: contain, auto;
+		background-size: contain, 100% 100%;
 		max-height: 250px;
 		width: ~'calc(100% + var(--padding) * 2)';	
 		display: flex;

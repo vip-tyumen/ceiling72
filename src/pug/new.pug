@@ -14,8 +14,10 @@ html(lang="ru")
 						em
 							time.icon-icon18(datetime="[*news_date*]")
 								|&nbsp;[[aDate? &date=`[*news_date*]`]] года
-					.article--body--text
+					|<@IF:[*content:isNotEmpty*]>
+					.article--body--text.hyphenation.text-justify
 						|[*content*]
+					|<@ENDIF>
 					|[[PageBuilder]]
 					p.article--body--person
 						strong

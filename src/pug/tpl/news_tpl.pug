@@ -11,7 +11,7 @@ article.container.text-justify.news-item
 			.news-item-description
 				p.news-item-description-photo
 					|<a href="[+url+]" [+link_attributes+]>
-					|	<img src="[[phpthumb? &input=`[+imageSoc+]` &options=`w=751,h=422,zc=C`]]" alt="[+alt+]">
+					|	<img src="[(site_url)][[phpthumb? &input=`[+imageSoc+]` &options=`w=751,h=422,zc=C`]]" alt="[+alt+]" onload="onLoadImg(this)">
 					|</a>
 				p.news-item-description-text
 					span.news-item-description-text-wrapper.hyphenation

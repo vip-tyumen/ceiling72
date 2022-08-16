@@ -3,19 +3,12 @@ html(lang="ru")
 	|{{@FILE assets/templates/projectsoft/html/tpl/head.html}}
 	body
 		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
-		main.container-full
+		main.container-full.article
 			.row
-				header.container.hyphenation
-					h1
-						|[*pagetitle*]
-				|<@IF:[*content:isNotEmpty*]>
-				article.container.main-wrapper
-					.hyphenation.text-justify
-						|[*content*]
-				|<@ENDIF>
+				|{{@FILE assets/templates/projectsoft/html/tpl/title_content.html}}
 				|[[DocLister?
 				|	&parents=`[*id*]`
-				|	&display=`10`
+				|	&display=`1`
 				|	&tvList=`imageSoc, news_date, news_person`
 				|	&tvPrefix=``
 				|	&orderBy=`news_date DESC`
@@ -31,10 +24,10 @@ html(lang="ru")
 				|   &paginate=`pages`
 				|   &paginationMeta=`1`
 				|   &TplWrapPaginate=`@CODE: <div class="container main-wrapper"><div class="row"><div class="container-full text-center"><ul class="pagination">[+wrap+]</ul></div></div></div>`
-				|   &TplNextP=`@CODE: <li class="pagination--item next"><a role="button" class="icon-next" href="[+link+]"></a></li>`
-				|   &TplNextI=`@CODE: <li class="pagination--item next disabled"><span role="button" class="icon-next"></span></li>`
-				|   &TplPrevP=`@CODE: <li class="pagination--item prev"><a role="button" class="icon-prev" href="[+link+]"></a></li>`
-				|   &TplPrevI=`@CODE: <li class="pagination--item prev disabled"><span role="button" class="icon-prev"></span></li>`
+				|   &TplNextP=`@CODE: <li class="pagination--item next"><a role="button" class="icon-icon04" href="[+link+]"></a></li>`
+				|   &TplNextI=`@CODE: <li class="pagination--item next disabled"><span role="button" class="icon-icon04"></span></li>`
+				|   &TplPrevP=`@CODE: <li class="pagination--item prev"><a role="button" class="icon-icon03" href="[+link+]"></a></li>`
+				|   &TplPrevI=`@CODE: <li class="pagination--item prev disabled"><span role="button" class="icon-icon03"></span></li>`
 				|   &TplPage=`@CODE: <li class="pagination--item"><a role="button" href="[+link+]">[+num+]</a></li>`
 				|   &TplCurrentPage=`@CODE: <li class="pagination--item active"><span role="button">[+num+]</span></li>`
 				|   &TplDotsPage=`@CODE:<li class="pagination--item dots"><span role="button">...</span></li>`
