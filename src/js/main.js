@@ -1,7 +1,7 @@
 ;(function($) {
 	
 	/**
-	 * --NAVIGATION
+	 * NAVIGATION
 	 **/
 	$('.nav-btn').on('click', function(e) {
 		e.preventDefault();
@@ -48,4 +48,46 @@
 	/**
 	  * fancyapps
 	 **/
+	$(document).on('click', "#callme", function(e){
+		e.preventDefault();
+		let form = $('.formcallme');
+		$.fancybox.open(form, {
+			touch: false,
+			clickSlide: false,
+			clickOutside: false,
+		});
+		/*if(callMe) {
+			console.log(callMe.status);
+			let output = callMe.output;
+			$.fancybox.open(output, {
+				touch: false,
+				clickSlide: false,
+				clickOutside: false,
+			})
+		}*/
+		return !1;
+	}).on('submit', "#callme_potolok", function(e){
+		e.preventDefault();
+		let formData = new FormData(this);
+		console.log(this);
+		$.ajax({
+			type: 'POST',
+			url: window.location.origin + window.location.pathname,
+			data: formData,
+			async: false,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(msg){
+				let c = $(msg.forms.callme),
+					form = $('.formcallme', c).html();
+				console.log(form);
+				$(".formcallme").html(form);
+			},
+			error: function(a, b, c){
+				console.log(a, b, c);
+			}
+		})
+		return !1;
+	})
 })(jQuery);

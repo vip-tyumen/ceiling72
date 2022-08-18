@@ -1,3 +1,6 @@
+.header--buttons
+	button#callme.btn.btn-default(type="button")
+		|Заказать звонок
 header.container-full.header
 	.row.header--row
 		.header--row-left.text-right
@@ -21,24 +24,24 @@ header.container-full.header
 				.navigation--wrapper
 					nav
 						|[[DLMenu?
-						|	&parents=`0`
-						|	&maxDepth=`1`
-						|	&showParent=`0`
-						|	&urlScheme=`full`
-						|	&ownerTPL=`@CODE: <ul>[+dl.wrap+]</ul>`
-						|	&rowTpl=`@CODE: <li><a href="[+url+]"[+classes+] [+link_attributes+]>[+title+]</a></li>`
-						|	&rowHereTpl=`@CODE: <li><span[+classes+]>[+title+]</span></li>`
-						|	&rowClass=``
-						|	&firstClass=``
-						|	&lastClass=``
-						|	&levelClass=``
-						|	&webLinkClass=``
-						|	&parentClass=``
-						|	&hereClass=`active`
-						|	&activeClass=`active`
-						|	&oddClass=``
-						|	&evenClass=``
-						|	&debug=`[(debug)]`
+						|   &parents=`0`
+						|   &maxDepth=`1`
+						|   &showParent=`0`
+						|   &urlScheme=`full`
+						|   &ownerTPL=`@CODE: <ul>[+dl.wrap+]</ul>`
+						|   &rowTpl=`@CODE: <li><a href="[+url+]"[+classes+] [+link_attributes+]>[+title+]</a></li>`
+						|   &rowHereTpl=`@CODE: <li><span[+classes+]>[+title+]</span></li>`
+						|   &rowClass=``
+						|   &firstClass=``
+						|   &lastClass=``
+						|   &levelClass=``
+						|   &webLinkClass=``
+						|   &parentClass=``
+						|   &hereClass=`active`
+						|   &activeClass=`active`
+						|   &oddClass=``
+						|   &evenClass=``
+						|   &debug=`[(debug)]`
 						|]]
 	|<@IF:[*parent:isnot(0)*]>
 	|[[DLCrumbs? &showCurrent=`1`]]

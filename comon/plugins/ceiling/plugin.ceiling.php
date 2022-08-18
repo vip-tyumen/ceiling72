@@ -31,6 +31,26 @@ switch ($e->name) {
 		$modx->event->output(serialize($params['menu']));
 		break;
 	case "OnWebPagePrerender":
+		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'):
+			if(!empty($_POST["formid"])):
+				$fid = $_POST["formid"];
+				switch($fid){
+					case "callme":
+						header("Content-type: application/json; charset=utf-8");
+						$ob = new stdClass();
+						$str = $modx->documentOutput;
+						$re = '/(?:<!--InitFormCallme-->(?<callme>.*)<!--FormCallme-->)/Usi';
+						preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
+						$ob->forms= array(
+							"callme"=>trim($matches["callme"][0])
+						);
+						$modx->documentOutput = json_encode($ob);
+						break;
+					default:
+						break;
+				}
+			endif;
+		endif;
 		PluginEvolution::minifyHTML($modx);
 		break;
 }

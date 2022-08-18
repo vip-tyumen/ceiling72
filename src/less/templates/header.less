@@ -1,4 +1,19 @@
 .header {
+	position: relative;
+	&--buttons {
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		max-width: 100%;
+		padding-left: @padding;
+		padding-right: @padding;
+		z-index: 10;
+		.text-right();
+		.btn-default {
+			box-shadow: 0 0 0px 1px #fff;
+		}
+	}
 	&--row {
 		aspect-ratio: 191 / 66;
 		background-color: var(--color2);
@@ -44,7 +59,7 @@
 		}
 		@media(max-width: 680px) {
 			&-left {
-   				 font-size: 0.8em;
+				 font-size: 0.8em;
 				line-height: 1.4;
 			}
 			&-right {
@@ -54,7 +69,7 @@
 		}
 		@media(max-width: 742px) {
 			aspect-ratio: 566 / 250;
-			background-image: url('@{imagepath}/logo-mob.png'), linear-gradient(to right, @color1 0%, @color1 50%, @color2 50.01%, @color2 100%);
+			background-image: url('@{imagepath}/logo-mob.png'), url('@{imagepath}/line.png');
 		}
 		@media(max-width: 566px) {
 			background-size: cover, auto;

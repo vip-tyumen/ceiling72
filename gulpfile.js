@@ -1,6 +1,7 @@
 const gulp = require('gulp'),
 	gutil = require( 'gulp-util' ),
 	fs = require('fs'),
+	path = require('path'),
 	autoprefixer = require('gulp-autoprefixer'),
 	clean = require('gulp-clean'),
 	cleanCSS = require('gulp-clean-css'),
@@ -28,6 +29,7 @@ const out = `assets/templates/projectsoft/`,
 		ligatures: true,
 		font: 'Ceiling72'
 	},
+	base64 = fs.readFileSync(path.join(__dirname, 'src/images/mini100.png')).toString('base64'),
 	/**
 	{
 		"host": "localhost",
@@ -130,7 +132,8 @@ gulp.task('html', function(){
 					"img_path" : "assets/templates/projectsoft/images/",
 					"site_name": "[(site_name)]",
 					"tpl": out + `html/tpl/`,
-					"hash": md
+					"hash": md,
+					"base64": 'data:image/png;base64,' + base64
 				}
 			})
 		)
@@ -155,7 +158,8 @@ gulp.task('htmlTpl', function(){
 					"img_path" : "assets/templates/projectsoft/images/",
 					"site_name": "[(site_name)]",
 					"tpl": out + `html/tpl/`,
-					"hash": md
+					"hash": md,
+					"base64": 'data:image/png;base64,' + base64
 				}
 			})
 		)

@@ -1,0 +1,38 @@
+div.formcallme(style="display: none;")
+	form#callme_potolok(method="post")
+		input(type="hidden" name="formid" value="callme")
+		input(type="hidden" value="[+url.value+]" name="url")
+		h5.text-center
+			|МЫ ВАМ ПЕРЕЗВОНИМ
+		|[+form.messages+]
+		div
+			.form-group.form-field
+				label.control-label(for="theme")
+					span.red *
+					|  Тема:
+				div
+					input#theme.form-control(type="text" placeholder="Фамилия" name="theme" value="[+theme.value+]")
+			.form-group.form-field
+				label.control-label(for="last_name")
+					span.red *
+					|  Фамилия:
+				div
+					input#last_name.form-control(type="text" placeholder="Фамилия" name="last_name" value="[+last_name.value+]")
+			.form-group.form-field
+				label.control-label(for="first_name")
+					span.red *
+					|  Имя:
+				div
+					input.form-control(type="text" name="first_name" placeholder="Как к Вам обращаться" value="[+first_name.value+]")
+			.form-group.form-field
+				label.control-label(for="first_name")
+					span.red *
+					|  Телефон:
+				div
+					input.form-control(type="text" name="phone" placeholder="Ваш телефон" value="[+phone.value+]")
+			.form-group.form-field.text-center
+				button.btn.btn-default(type="submit")
+					|ОТПРАВИТЬ
+			small.text-center
+				|Отправляя форму Вы соглашаетесь с&nbsp;
+				a(href="[~1~]" target="_blank" rel="nofollow") Политикой конфиденциальности.
