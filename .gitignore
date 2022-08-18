@@ -30,6 +30,7 @@ assets/snippets
 assets/templates/*.*
 assets/templates/projectsoft
 assets/tvs/*.*
+assets/tvs/pagebuilder
 assets/vendor
 manager/*
 node_modules/*
