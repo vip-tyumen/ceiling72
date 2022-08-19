@@ -56,20 +56,10 @@
 			clickSlide: false,
 			clickOutside: false,
 		});
-		/*if(callMe) {
-			console.log(callMe.status);
-			let output = callMe.output;
-			$.fancybox.open(output, {
-				touch: false,
-				clickSlide: false,
-				clickOutside: false,
-			})
-		}*/
 		return !1;
 	}).on('submit', "#callme_potolok", function(e){
 		e.preventDefault();
 		let formData = new FormData(this);
-		console.log(this);
 		$.ajax({
 			type: 'POST',
 			url: window.location.origin + window.location.pathname,
@@ -79,10 +69,10 @@
 			contentType: false,
 			processData: false,
 			success: function(msg){
+				let btnClose = $('[data-fancybox-close]', $('.formcallme')).clone();
 				let c = $(msg.forms.callme),
-					form = $('.formcallme', c).html();
-				console.log(form);
-				$(".formcallme").html(form);
+					form = c.html();
+				$(".formcallme").html(form).append(btnClose);
 			},
 			error: function(a, b, c){
 				console.log(a, b, c);

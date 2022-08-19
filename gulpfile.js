@@ -39,7 +39,8 @@ const out = `assets/templates/projectsoft/`,
 		"domain": "/testsite.vip"
 	}
 	**/
-	data = JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`}));
+	data = JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`})),
+	well = "Wellcom";
 
 /**
  * CSS
@@ -322,13 +323,13 @@ gulp.task(
 	'default',
 	gulp.series(
 		gulp.series(
-			gulp.parallel(
+			/*gulp.parallel(
 				'woff',
 				'woff2',
 				'webfont',
 				'copyttf',
 				'less'
-			),
+			),*/
 			gulp.parallel(
 				'imgmin',
 				'copyfavicon'
@@ -349,19 +350,19 @@ gulp.task(
 
 gulp.task('watch', function(){
 	// Font
-	gulp.watch(
+	/*gulp.watch(
 		[
 			'src/fonts/*.ttf'
 		],
 		gulp.series('woff', 'woff2', 'webfont', 'copyttf', 'htmlTpl', 'ftpFonts')
-	);
+	);*/
 	// WebFont
-	gulp.watch(
+	/*gulp.watch(
 		[
 			'src/glyph/*.svg'
 		],
 		gulp.series('webfont', 'htmlTpl', 'ftpFonts')
-	);
+	);*/
 	// JavaScript
 	gulp.watch(
 		[

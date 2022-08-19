@@ -1,10 +1,10 @@
 div.formcallme(style="display: none;")
+	h5.text-center
+		|МЫ ВАМ ПЕРЕЗВОНИМ
+	|[+form.messages+]
 	form#callme_potolok(method="post")
 		input(type="hidden" name="formid" value="callme")
 		input(type="hidden" value="[+url.value+]" name="url")
-		h5.text-center
-			|МЫ ВАМ ПЕРЕЗВОНИМ
-		|[+form.messages+]
 		div
 			.form-group.form-field
 				label.control-label(for="theme")
@@ -25,7 +25,7 @@ div.formcallme(style="display: none;")
 				div
 					input.form-control(type="text" name="first_name" placeholder="Как к Вам обращаться" value="[+first_name.value+]")
 			.form-group.form-field
-				label.control-label(for="first_name")
+				label.control-label(for="phone")
 					span.red *
 					|  Телефон:
 				div

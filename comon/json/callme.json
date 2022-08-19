@@ -4,6 +4,7 @@
 	"api"						: "0",
 	"to"						: "projectsoft@projectsoft.ru",
 	"bcc"						: "projectsoft2009@yandex.ru",
+	"messagesOuterTpl"			: "@CODE:<div class=\"alert alert-danger\" role=\"alert\">[+messages+]</div>",
 	"successTpl"				: "@CODE:<div><div id=\"message_form_success\"><h2 class=\"text-center\">Спасибо!</h2><p class=\"text-center\">Наши менеджеры свяжутся с Вами в свмое ближайшее время.</p></div></div>",
 	"messagesTpl"				: "@CODE:[+required+][+errors+]",
 	"messagesErrorOuterTpl"		: "@CODE:<ul class=\"error_list\"><li>[+messages+]</li></ul>",
