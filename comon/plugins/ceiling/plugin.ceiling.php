@@ -42,7 +42,18 @@ switch ($e->name) {
 						$re = '/(?:<!--InitFormCallme-->(?<callme>.*)<!--FormCallme-->)/Usi';
 						preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
 						$ob->forms= array(
-							"callme"=>trim($matches["callme"][0])
+							"form"=>trim($matches["callme"][0])
+						);
+						$modx->documentOutput = json_encode($ob);
+						break;
+					case "zamer":
+						header("Content-type: application/json; charset=utf-8");
+						$ob = new stdClass();
+						$str = $modx->documentOutput;
+						$re = '/(?:<!--InitFormZamer-->(?<callme>.*)<!--FormZamer-->)/Usi';
+						preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
+						$ob->forms= array(
+							"form"=>trim($matches["callme"][0])
 						);
 						$modx->documentOutput = json_encode($ob);
 						break;

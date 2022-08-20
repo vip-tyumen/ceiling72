@@ -44,7 +44,5 @@ switch($e->name){
 	case "onSendBot":
 	$bot = new SendBot($params);
 	$rest = $bot->send();
-	$out = '<pre><code>' . print_r($rest, true) . '</code></pre>';
-	echo $out;
 	break;
 }

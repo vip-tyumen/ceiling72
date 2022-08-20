@@ -15,8 +15,9 @@
     "tests"
   ],
   "dependencies": {
-	"jquery": "3.6.0",
+    "jquery": "3.6.0",
     "fancybox": "3.5.7",
-    "bootstrap": "3.4.1"
+    "bootstrap": "3.4.1",
+    "jquery.maskedinput": "^1.4.1"
   }
 }

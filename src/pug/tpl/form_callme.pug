@@ -1,35 +1,35 @@
-div.formcallme(style="display: none;")
+div.formcallme.formsender(style="display: none;")
 	h5.text-center
-		|МЫ ВАМ ПЕРЕЗВОНИМ
+		|ЗАКАЗ ЗВОНКА
 	|[+form.messages+]
 	form#callme_potolok(method="post")
 		input(type="hidden" name="formid" value="callme")
 		input(type="hidden" value="[+url.value+]" name="url")
 		div
 			.form-group.form-field
-				label.control-label(for="theme")
+				label.control-label(for="theme-callme")
 					span.red *
 					|  Тема:
 				div
-					input#theme.form-control(type="text" placeholder="Фамилия" name="theme" value="[+theme.value+]")
+					input#theme-callme.form-control(type="text" placeholder="Тема" name="theme" value="Заказ звонка" autocomplete="off")
 			.form-group.form-field
-				label.control-label(for="last_name")
+				label.control-label(for="last_name-callme")
 					span.red *
 					|  Фамилия:
 				div
-					input#last_name.form-control(type="text" placeholder="Фамилия" name="last_name" value="[+last_name.value+]")
+					input#last_name-callme.form-control(type="text" placeholder="Фамилия" name="last_name" value="[+last_name.value+]" autocomplete="off")
 			.form-group.form-field
-				label.control-label(for="first_name")
+				label.control-label(for="first_name-callme")
 					span.red *
 					|  Имя:
 				div
-					input.form-control(type="text" name="first_name" placeholder="Как к Вам обращаться" value="[+first_name.value+]")
+					input#first_name-callme.form-control(type="text" name="first_name" placeholder="Как к Вам обращаться" value="[+first_name.value+]" autocomplete="off")
 			.form-group.form-field
-				label.control-label(for="phone")
+				label.control-label(for="phone-callme")
 					span.red *
 					|  Телефон:
 				div
-					input.form-control(type="text" name="phone" placeholder="Ваш телефон" value="[+phone.value+]")
+					input#phone-callme.form-control(type="text" name="phone" placeholder="Ваш телефон" value="[+phone.value+]" autocomplete="off")
 			.form-group.form-field.text-center
 				button.btn.btn-default(type="submit")
 					|ОТПРАВИТЬ

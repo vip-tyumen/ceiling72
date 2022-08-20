@@ -13,6 +13,38 @@
 		.btn-default {
 			box-shadow: 0 0 0px 1px #fff;
 		}
+		&--wrapp {
+			display: inline-block;
+			padding: var(--padding);
+			background-color: rgba(255, 255, 255, 0.3);
+			border-radius: 0.4em;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			.text-center();
+			button {
+				margin-left: .5em;
+				&:first-child {
+					margin-left: unset;
+				}
+			}
+			@media (max-width: 410px)
+			{
+				display: flex;
+				flex-direction: column;
+				button {
+					margin-left: .5em;
+					margin-right: .5em;
+					&:first-child {
+						margin-left: .5em;
+						margin-bottom: 0.5em;
+					}
+				}
+			}
+		}
+		@media (max-width: 370px) {
+			padding-left: unset;
+			padding-right: unset;
+		}
 	}
 	&--row {
 		aspect-ratio: 191 / 66;

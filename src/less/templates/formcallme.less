@@ -1,9 +1,36 @@
-.formcallme {
-	#callme_potolok {
-		.form-field {
-			&:nth-child(1),
-			&:nth-child(2) {
-				display: none;
+.formsender {
+	.form-field {
+		&:nth-child(1),
+		&:nth-child(2) {
+			display: none;
+		}
+	}
+	h1, h2, h3, h4, h5, h6 {
+		margin-top: unset;
+	}
+}
+
+.formsender {
+	&.fancybox-content {
+		&.loading {
+			&::after {
+				display: block;
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				min-width: 100%;
+				width: 100%;
+				min-height: 100%;
+				height: 100%;
+				background-position: center center;
+				background-size: 50% 50%;
+				background-repeat: no-repeat;
+				background-image: data-uri('base64/loading.svg');
+				background-color: white;
+				z-index: 500;
 			}
 		}
 	}
@@ -15,5 +42,22 @@
 	&-control {
 		display: block;
 		width: 100%;
+		padding-left: 15px;
+		padding-right: 15px;
+		line-height: 2em;
+		margin-top: 0.3em;
+		appearance: none;
+		border: unset;
+		box-shadow: 0 0 1px 1px var(--selection-bg);
+		border-radius: 0.2em;
+		outline: unset !important;
+		&:focus {
+			box-shadow: 0 0 1px 1px var(--selection-bg), 0 0 3px 1px var(--selection-bg);;
+		}
+	}
+}
+.control{
+	&-label {
+		font-size: 0.8em;
 	}
 }

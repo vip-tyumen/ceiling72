@@ -10,7 +10,7 @@
 	"prepareAfterProcess": "\\ProjectSoft\\PrepareForm::prepareAfterProcessCallme",
 	"prepareProcess": "\\ProjectSoft\\PrepareForm::prepareProcessCallme",
 	"prepare": "\\ProjectSoft\\PrepareForm::prepareCallme",
-	"formTpl": "@FILE: projectsoft/html/tpl/form_callme",
+	"formTpl": "@FILE: projectsoft/html/tpl/form_zamer",
 	"reportTpl": "@FILE: projectsoft/html/tpl/form_callme_send",
 	"messagesTpl": "@CODE:[+required+][+errors+]",
 	"successTpl": "@CODE:<div><h5 class=\"text-center\">Форма отправлена</h5><p>Спасибо. Наши менеджеры свяжутся с Вами в самое ближайшее время.</p></div>",

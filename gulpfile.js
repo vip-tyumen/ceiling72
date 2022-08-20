@@ -88,7 +88,8 @@ gulp.task('jsApp', function(){
 	// jQuery and plugins
 	return gulp.src([
 			'bower_components/jquery/dist/jquery.js',
-			'bower_components/fancybox/dist/jquery.fancybox.js'
+			'bower_components/fancybox/dist/jquery.fancybox.js',
+			'bower_components/jquery.maskedinput/dist/jquery.maskedinput.js'
 		])
 		.pipe(debug())
 		.pipe(concat('app.js'))
@@ -323,13 +324,13 @@ gulp.task(
 	'default',
 	gulp.series(
 		gulp.series(
-			/*gulp.parallel(
+			gulp.parallel(
 				'woff',
 				'woff2',
 				'webfont',
 				'copyttf',
 				'less'
-			),*/
+			),
 			gulp.parallel(
 				'imgmin',
 				'copyfavicon'
@@ -350,26 +351,26 @@ gulp.task(
 
 gulp.task('watch', function(){
 	// Font
-	/*gulp.watch(
+	gulp.watch(
 		[
 			'src/fonts/*.ttf'
 		],
 		gulp.series('woff', 'woff2', 'webfont', 'copyttf', 'htmlTpl', 'ftpFonts')
-	);*/
+	);
 	// WebFont
-	/*gulp.watch(
+	gulp.watch(
 		[
 			'src/glyph/*.svg'
 		],
 		gulp.series('webfont', 'htmlTpl', 'ftpFonts')
-	);*/
+	);
 	// JavaScript
 	gulp.watch(
 		[
 			'src/js/*.js',
 			'src/js/**/*.js'
 		],
-		gulp.series('jsMain', 'htmlTpl', 'copyJs', 'ftpJs')
+		gulp.series('jsApp', 'jsMain', 'htmlTpl', 'copyJs', 'ftpJs')
 	);
 	// CSS
 	gulp.watch(

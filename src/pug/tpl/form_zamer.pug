@@ -1,0 +1,38 @@
+div.formzamer.formsender(style="display: none;")
+	h5.text-center
+		|ВЫЗОВ ЗАМЕРЩИКА
+	|[+form.messages+]
+	form#zamer_potolok(method="post")
+		input(type="hidden" name="formid" value="zamer")
+		input(type="hidden" value="[+url.value+]" name="url")
+		div
+			.form-field
+				label.control-label(for="theme-zamer")
+					span.red *
+					|  Тема:
+				div
+					input#theme-zamer.form-control(type="text" placeholder="Тема" name="theme" value="Вызов замерщика" autocomplete="off")
+			.form-group.form-field
+				label.control-label(for="last_name-zamer")
+					span.red *
+					|  Фамилия:
+				div
+					input#last_name-zamer.form-control(type="text" placeholder="Фамилия" name="last_name" value="[+last_name.value+]" autocomplete="off")
+			.form-group.form-field
+				label.control-label(for="first_name-zamer")
+					span.red *
+					|  Имя:
+				div
+					input#first_name-zamer.form-control(type="text" name="first_name" placeholder="Как к Вам обращаться" value="[+first_name.value+]" autocomplete="off")
+			.form-group.form-field
+				label.control-label(for="phone-zamer")
+					span.red *
+					|  Телефон:
+				div
+					input#phone-zamer.form-control(type="text" name="phone" placeholder="Ваш телефон" value="[+phone.value+]" autocomplete="off")
+			.form-group.form-field.text-center
+				button.btn.btn-default(type="submit")
+					|ОТПРАВИТЬ
+			small.text-center
+				|Отправляя форму Вы соглашаетесь с&nbsp;
+				a(href="[~1~]" target="_blank" rel="nofollow") Политикой конфиденциальности.
