@@ -18,11 +18,7 @@
 				"assets/import",
 				"assets/js",
 				"assets/lib",
-				"assets/modules",
-				"assets/plugins",
 				"assets/site",
-				"assets/snippets",
-				"assets/vendor",
 				"src/bin",
 				"src/favicon",
 				"bower_components"

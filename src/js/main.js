@@ -1,38 +1,52 @@
 ;(function($) {
-	$.fancybox.defaults.transitionEffect = "circular",
-    $.fancybox.defaults.transitionDuration = 500,
-    $.fancybox.defaults.lang = "ru",
-    $.fancybox.defaults.i18n.ru = {
-        CLOSE: "Закрыть",
-        NEXT: "Следующий",
-        PREV: "Предыдущий",
-        ERROR: "Запрошенный контент не может быть загружен.<br/>Повторите попытку позже.",
-        PLAY_START: "Начать слайдшоу",
-        PLAY_STOP: "Остановить слайдшоу",
-        FULL_SCREEN: "Полный экран",
-        THUMBS: "Миниатюры",
-        DOWNLOAD: "Скачать",
-        SHARE: "Поделиться",
-        ZOOM: "Увеличить"
-    };
-	var hideScrollbar = true;
-	function initFancyBox() {
+
+	/**
+	 * Fancybox defaults options
+	 **/
+	$.fancybox.defaults.onInit = function() {
 		if (
 			!$.fancybox.getInstance() &&
-			hideScrollbar !== false &&
+			$.fancybox.defaults.hideScrollbar !== false &&
 			!$.fancybox.isMobile &&
 			document.body.scrollHeight > window.innerHeight
 		) {
 			$("head").append(
-				`<style id="header--buttons" type="text/css">.header--buttons{right:` +
+				`<style id="header-buttons" type="text/css">.header--buttons{right:` +
 					(window.innerWidth - document.documentElement.clientWidth) +
 				`px;}</style>`
 			);
+		} else if($("body").hasClass('compensate-for-scrollbar')){
+			let mr = $(".compensate-for-scrollbar").css("margin-right");
+			$("head").append(
+				`<style id="header-buttons" type="text/css">.header--buttons{right:` +
+					mr +
+				`;}</style>`
+			);
 		}
 	}
-	function closeFancyBox() {
-		$("#header--buttons").remove();
+	$.fancybox.defaults.afterClose = function() {
+		$("#header-buttons", $('head')).remove();
 	}
+	$.fancybox.defaults.hideScrollbar = true;
+	$.fancybox.defaults.transitionEffect = "circular";
+	$.fancybox.defaults.transitionDuration = 500;
+	$.fancybox.defaults.loop = true;
+	$.fancybox.defaults.lang = "ru";
+	$.fancybox.defaults.i18n.ru = {
+		CLOSE: "Закрыть",
+		NEXT: "Следующий",
+		PREV: "Предыдущий",
+		ERROR: "Запрошенный контент не может быть загружен.<br/>Повторите попытку позже.",
+		PLAY_START: "Начать слайдшоу",
+		PLAY_STOP: "Остановить слайдшоу",
+		FULL_SCREEN: "Полный экран",
+		THUMBS: "Миниатюры",
+		DOWNLOAD: "Скачать",
+		SHARE: "Поделиться",
+		ZOOM: "Увеличить"
+	};
+
+
 	/**
 	 * NAVIGATION
 	 **/
@@ -80,7 +94,7 @@
 	}).trigger('resize');
 	
 	/**
-	  * fancyapps
+	  * Forms
 	 **/
 	$(document)
 	.on('click', ".zamer-btn", function(e){
@@ -88,14 +102,12 @@
 		let form = $('.formzamer'),
 			theme = $('input[name=theme]', form);
 		//theme.val('Вызов замерщика');
-		initFancyBox();
 		$.fancybox.open(form, {
 			touch: false,
 			clickSlide: false,
 			clickOutside: false,
 			hideScrollbar: hideScrollbar,
-			onInit: initFancyBox,
-			afterClose: closeFancyBox
+			loop: false
 		});
 		return !1;
 	})
@@ -104,14 +116,12 @@
 		let form = $('.formcallme'),
 			theme = $('input[name=theme]', form);
 		//theme.val('Заказ звонка');
-		initFancyBox();
 		$.fancybox.open(form, {
 			touch: false,
 			clickSlide: false,
 			clickOutside: false,
 			hideScrollbar: hideScrollbar,
-			onInit: initFancyBox,
-			afterClose: closeFancyBox
+			loop: false
 		});
 		return !1;
 	})
@@ -143,6 +153,23 @@
 				wrapp.removeClass('loading');
 			}
 		})
+		return !1;
+	});
+
+	/**
+	 * Works
+	 **/
+	$(document)
+	.on('click', '[data-work]', function(e){
+		e.preventDefault();
+		let str = $(this).attr('data-work').replace(/,]$/, ']');
+		$(this).attr({'data-work': str});
+		try {
+			let fnb = JSON.parse(str);
+			$.fancybox.open(fnb);
+		}catch(err){
+			console.log('Error JSON parse');
+		}
 		return !1;
 	})
 })(jQuery);

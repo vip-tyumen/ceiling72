@@ -5,7 +5,16 @@ html(lang="ru")
 		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
 		main.container-full.article
 			.row
-				|{{@FILE assets/templates/projectsoft/html/tpl/title_content.html}}
+				article.container.article--body.hyphenation
+					header.article--header
+						.article--header--title
+							h1
+								|[*pagetitle*]
+					|<@IF:[*content:isNotEmpty*]>
+					.article--body--text.hyphenation.text-justify
+						|[*content*]
+					|<@ENDIF>
+					|[[PageBuilder]]
 		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/forms.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}
