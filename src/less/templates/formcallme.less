@@ -11,6 +11,7 @@
 }
 
 .formsender {
+	user-select: none;
 	&.fancybox-content {
 		&.loading {
 			&::after {
@@ -37,27 +38,48 @@
 }
 .form {
 	&-group {
-		margin-bottom: 1em;
+		margin-bottom: 1.3em;
+		position: relative;
 	}
 	&-control {
 		display: block;
 		width: 100%;
-		padding-left: 15px;
-		padding-right: 15px;
-		line-height: 2em;
+		padding-left: @padding + 7;
+		padding-right: @padding + 7;
+		padding-top: 0.6em;
+		padding-bottom: 0.6em;
+		line-height: 1.5em;
 		margin-top: 0.3em;
 		appearance: none;
 		border: unset;
 		box-shadow: 0 0 1px 1px var(--selection-bg);
 		border-radius: 0.2em;
 		outline: unset !important;
-		&:focus {
-			box-shadow: 0 0 1px 1px var(--selection-bg), 0 0 3px 1px var(--selection-bg);;
+		user-select: auto;
+		&::placeholder {
+			color: transparent !important;
+			user-select: none !important;
 		}
-	}
-}
-.control{
-	&-label {
-		font-size: 0.8em;
+		~ label {
+			pointer-events: none;
+			position: absolute;
+			left: @padding;
+			background-color: transparent;
+			padding: 0 7px;
+			color: #888;
+			top: 1em;
+			transition: all .3s ease;
+			font-size: 0.8em;
+			user-select: none !important;
+		}
+		&:focus,
+		&:not(:placeholder-shown) {
+			~ label {
+				background-color: #fff;
+				top: -0.7em;
+				color: var(--color2);
+				font-weight: 600;
+			}
+		}
 	}
 }

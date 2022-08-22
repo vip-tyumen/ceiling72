@@ -106,7 +106,7 @@
 			touch: false,
 			clickSlide: false,
 			clickOutside: false,
-			hideScrollbar: hideScrollbar,
+			hideScrollbar: $.fancybox.defaults.hideScrollbar,
 			loop: false
 		});
 		return !1;
@@ -120,7 +120,7 @@
 			touch: false,
 			clickSlide: false,
 			clickOutside: false,
-			hideScrollbar: hideScrollbar,
+			hideScrollbar: $.fancybox.defaults.hideScrollbar,
 			loop: false
 		});
 		return !1;

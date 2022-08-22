@@ -65,8 +65,7 @@
 	font-display: swap;
 }
 // Classes all icons
-[class^="icon-"]:before,
-[class*=" icon-"]:before {
+.mixglyph() {
 	font-family: "ceiling72" !important;
 	speak: none;
 	font-style: normal;
@@ -77,6 +76,10 @@
 	text-rendering: auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+	.mixglyph();
 }
 // Classes icons
 .icon-icon01 {

@@ -8,13 +8,28 @@ html(lang="ru")
 				article.container.article--body.hyphenation
 					header.article--header
 						.article--header--title
-							h1
-								|[*pagetitle*]
 					|<@IF:[*content:isNotEmpty*]>
 					.article--body--text.hyphenation.text-justify
 						|[*content*]
 					|<@ENDIF>
-					|[[PageBuilder]]
+					|[[DocLister?
+					|	&parents=`3`
+					|	&display=`4`
+					|	&tvPrefix=``
+					|	&tvList=`imageSoc`
+					|	&urlScheme=`full`
+					|	&prepare=`\ProjectSoft\PrepareDL::prepareWork`
+					|	&tpl=`@FILE:projectsoft/html/tpl/work_tpl`
+					|	&ownerTPL=`@CODE:
+					|<div class="gallery">
+					|	<h2 class="text-center">НАШИ РАБОТЫ</h2>
+					|	<div class="row">
+					|		<div class="gallery--flex">
+					|			[+dl.wrap+]
+					|		</div>
+					|	</div>
+					|</div>`
+					|]]
 		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/forms.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}

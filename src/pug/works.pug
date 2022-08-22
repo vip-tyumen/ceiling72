@@ -10,19 +10,26 @@ html(lang="ru")
 						.article--header--title
 							h1
 								|[[alterTitle]]
-					p.article--body--date
-						em
-							time.icon-icon18(datetime="[*news_date*]")
-								|&nbsp;[[aDate? &date=`[*news_date*]`]] года
 					|<@IF:[*content:isNotEmpty*]>
 					.article--body--text.hyphenation.text-justify
 						|[*content*]
 					|<@ENDIF>
-					|[[PageBuilder]]
-					p.article--body--person
-						strong
-							em
-								|[*news_person*]
+					|[[DocLister?
+					|	&parents=`[*id*]`
+					|	&tvPrefix=``
+					|	&tvList=`imageSoc`
+					|	&urlScheme=`full`
+					|	&prepare=`\ProjectSoft\PrepareDL::prepareWork`
+					|	&tpl=`@FILE:projectsoft/html/tpl/work_tpl`
+					|	&ownerTPL=`@CODE:
+					|<div class="gallery">
+					|	<div class="row">
+					|		<div class="gallery--flex">
+					|			[+dl.wrap+]
+					|		</div>
+					|	</div>
+					|</div>`
+					|]]
 		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/forms.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}

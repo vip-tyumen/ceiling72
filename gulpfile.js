@@ -193,7 +193,7 @@ gulp.task('woff2', function(){
 		.pipe(woff2())
 		.pipe(gulp.dest(out + `fonts`));
 });
-
+/*
 gulp.task('webfont', function (cb) {
 		exec(
 			'grunt webfont -v',
@@ -205,7 +205,7 @@ gulp.task('webfont', function (cb) {
 		);
 	}
 );
-
+*/
 gulp.task('copyttf', function(){
 	return gulp.src([
 			'src/fonts/*.ttf'
@@ -327,7 +327,7 @@ gulp.task(
 			gulp.parallel(
 				'woff',
 				'woff2',
-				'webfont',
+				//'webfont',
 				'copyttf',
 				'less'
 			),
@@ -355,14 +355,14 @@ gulp.task('watch', function(){
 		[
 			'src/fonts/*.ttf'
 		],
-		gulp.series('woff', 'woff2', 'webfont', 'copyttf', 'htmlTpl', 'ftpFonts')
+		gulp.series('woff', 'woff2', /*'webfont',*/ 'copyttf', 'htmlTpl', 'ftpFonts')
 	);
 	// WebFont
 	gulp.watch(
 		[
 			'src/glyph/*.svg'
 		],
-		gulp.series('webfont', 'htmlTpl', 'ftpFonts')
+		gulp.series(/*'webfont',*/ 'htmlTpl', 'ftpFonts')
 	);
 	// JavaScript
 	gulp.watch(
