@@ -1,0 +1,11 @@
+article.container.text-justify
+	.review-slick-item
+		header.review-slick-item-header
+			|<img src="[(site_url)][[phpthumb? &input=`[+imageSoc+]` &options=`w=200,h=200,zc=C`]]" alt="[+alt+]" onload="onLoadImg(this)">
+			h3.review-slick-item-title
+				|[+title+]
+		p.review-slick-item-text
+			|[+introtext:nl2br+]
+			time.review-slick-item-time.icon-icon18(datetime="[+news_date+]")
+				em
+					|[+out_date+]

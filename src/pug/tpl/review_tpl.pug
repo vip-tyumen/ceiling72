@@ -1,0 +1,14 @@
+article.container.text-justify.news-item
+	.row
+		.news-item-flex
+			header.news-item-header
+				h3.news-item-header-title
+					|[+title+]
+			time.news-item-time.icon-icon18(datetime="[+news_date+]")
+				|[+out_date+]
+			.news-item-description
+				p.news-item-description-photo
+					|<img src="[(site_url)][[phpthumb? &input=`[+imageSoc+]` &options=`w=300,h=169,zc=C`]]" alt="[+alt+]" onload="onLoadImg(this)">
+				p.news-item-description-text
+					span.news-item-description-text-wrapper.hyphenation
+						|[+introtext:nl2br+]

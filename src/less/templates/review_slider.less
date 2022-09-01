@@ -1,0 +1,135 @@
+.review {
+	&-slider {
+		h2 {
+			span {
+				display: block;
+				font-weight: normal;
+				font-size: 0.7em;
+				line-height: 1;
+			}
+		}
+		&--wrap {
+			.review {
+				&-slick {
+					&-item {
+						display: flex;
+						flex-direction: row;
+						flex-wrap: wrap;
+						overflow: hidden;
+						&-header {
+							order: 0;
+							display: flex;
+							flex-direction: column;
+							transform: translate(-220px, 0);
+							.text-center();
+							&,
+							img {
+								max-width: 200px;
+								width: 200px;
+							}
+							img {
+								display: inline-block;
+								border-radius: 50%;
+								overflow: hidden;
+							}
+						}
+						&-title {
+							margin-top: 0em;
+							margin-bottom: 0.5em;
+							font-size: 1.5em;
+						}
+						&-time {
+							display: block;
+							width: 100%;
+							.text-right();
+							margin-bottom: .5em;
+							margin-top: .5em;
+							&::before {
+								margin-right: 0.3em;
+							}
+						}
+						&-text {
+							order: 1;
+							width: ~'calc(100% - 200px)';
+							padding-left: 30px;
+							display: flex;
+							flex-direction: column;
+							justify-content: center;
+							transform: translate(100%, 0);
+						}
+						&-header,
+						&-text {
+							opacity: 0;
+							transition: all 0.5s ease 0.5s;
+						}
+						@media (max-width: 600px) {
+							flex-direction: column;
+							&-header {
+								align-items: center;
+								.text-center();
+							}
+							&-text {
+								padding-left: unset;
+							}
+							&-header,
+							&-text {
+								max-width: 100%;
+								width: 100%;
+								transform: unset;
+							}
+						}
+					}
+				}
+			}
+			.slick {
+				&-active {
+					.review {
+						&-slick {
+							&-item {
+								&-header,
+								&-text {
+									opacity: 1;
+									transform: translate(0px, 0px);
+									@media (max-width: 600px) {
+										transform: unset;
+									}
+								}
+							}
+						}
+					}
+				}
+				&-prev,
+				&-next {
+					z-index: 2;
+					top: 105px;
+					&::before {
+						color: white;
+						overflow: hidden;
+						font-family: "ceiling72" !important;
+						text-shadow: 0 0 3px black;
+					}
+				}
+				&-next {
+					left: 195px;
+					&::before {
+						content: @icon-icon04;
+					}
+				}
+				&-prev {
+					left: 16px;
+					&::before {
+						content: @icon-icon03;
+					}
+				}
+				@media (max-width: 600px) {
+					&-next {
+						left: ~'calc(50% + 80px)';
+					}
+					&-prev {
+						left: ~'calc(50% - 100px)';
+					}
+				}
+			}
+		}
+	}
+}

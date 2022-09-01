@@ -171,5 +171,20 @@
 			console.log('Error JSON parse');
 		}
 		return !1;
-	})
+	});
+	/**
+	 * Reviews
+	 **/
+	$('.review-slider--wrap').slick({
+		adaptiveHeight: true,
+		autoplay: true,
+		autoplaySpeed: 5000,
+		arrows: true,
+		dots: false,
+		fade: true,
+		cssEase: 'linear',
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1
+	});
 })(jQuery);

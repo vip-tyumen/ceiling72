@@ -89,7 +89,8 @@ gulp.task('jsApp', function(){
 	return gulp.src([
 			'bower_components/jquery/dist/jquery.js',
 			'bower_components/fancybox/dist/jquery.fancybox.js',
-			'bower_components/jquery.maskedinput/dist/jquery.maskedinput.js'
+			'bower_components/jquery.maskedinput/dist/jquery.maskedinput.js',
+			'bower_components/slick-carousel/slick/slick.js'
 		])
 		.pipe(debug())
 		.pipe(concat('app.js'))

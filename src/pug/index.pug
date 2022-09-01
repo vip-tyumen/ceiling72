@@ -13,10 +13,38 @@ html(lang="ru")
 						|[*content*]
 					|<@ENDIF>
 					|[[DocLister?
+					|	&parents=`22`
+					|	&display=`4`
+					|	&tvPrefix=``
+					|	&tvList=`imageSoc, news_date`
+					|	&tvPrefix=``
+					|	&orderBy=`news_date DESC`
+					|	&sortBy=`news_date`
+					|	&sortDir=`DESC`
+					|	&tvSortType=`TVDATETIME`
+					|	&urlScheme=`full`
+					|	&tpl=`@FILE:projectsoft/html/tpl/review_slick`
+					|	&prepare=`\ProjectSoft\PrepareDL::prepareItem`
+					|	&ownerTPL=`@CODE:
+					|<div class="review-slider">
+					|	<h2 class="text-center">ОТЗЫВЫ <span>почему выбирают нас</span></h2>
+					|	<div class="row">
+					|		<div class="review-slider--wrap">
+					|			[+dl.wrap+]
+					|		</div>
+					|	</div>
+					|</div>`
+					|]]
+					|[[DocLister?
 					|	&parents=`3`
 					|	&display=`4`
 					|	&tvPrefix=``
-					|	&tvList=`imageSoc`
+					|	&tvList=`imageSoc, news_date`
+					|	&tvPrefix=``
+					|	&orderBy=`news_date DESC`
+					|	&sortBy=`news_date`
+					|	&sortDir=`DESC`
+					|	&tvSortType=`TVDATETIME`
 					|	&urlScheme=`full`
 					|	&prepare=`\ProjectSoft\PrepareDL::prepareWork`
 					|	&tpl=`@FILE:projectsoft/html/tpl/work_tpl`
