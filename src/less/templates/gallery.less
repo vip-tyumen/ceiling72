@@ -12,7 +12,6 @@
 			&--image {
 				aspect-ratio: 270 / 202;
 				display: block;
-				transition: transform .3s ease;
 				transform-origin: center center;
 				transform: scale(1.0);
 				max-width: 100%;
@@ -33,7 +32,7 @@
 					position: absolute;
 					top: 4%;
 					left: 4%;
-					background-color: #fff;
+					background-color: rgba(255, 255, 255, 0);
 					overflow: hidden;
 					font-size: 5em;
 					display: flex;
@@ -42,9 +41,9 @@
 					width: 92%;
 					height: 92%;
 					transform-origin: center center;
-					transition: opacity .3s ease, transform .3s ease;
-					opacity: 0;
+					transition: background-color .3s ease, opacity .2s ease, transform .3s ease;
 					transform: scale(0.95);
+					opacity: 0;
 				}
 				&:hover {
 					box-shadow: 0 0 3px var(--color2);
@@ -52,7 +51,8 @@
 						transform: scale(1.1);
 					}
 					&::after {
-						opacity: 0.5;
+						background-color: rgba(255, 255, 255, 0.5);
+						opacity: 1;
 						transform: scale(1.0);
 					}
 				}

@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 					fontFamilyName: 'ceiling72',
 					stylesheets: ['less'],
 					syntax: 'bootstrap',
-					execMaxBuffer: 1024 * 200,
+					execMaxBuffer: 1024 * 50000,
 					htmlDemo: false,
 					version: "1.0.0",
 					normalize: true,

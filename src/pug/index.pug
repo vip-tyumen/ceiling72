@@ -8,10 +8,15 @@ html(lang="ru")
 				article.container.article--body.hyphenation
 					header.article--header
 						.article--header--title
+							h2.text-center
+								|ПЯТЬ ПРИЧИН РАБОТАТЬ С НАМИ
+								span
+									|почему выбирают нашу компанию
 					|<@IF:[*content:isNotEmpty*]>
 					.article--body--text.hyphenation.text-justify
 						|[*content*]
 					|<@ENDIF>
+				article.container.article--body.hyphenation
 					|[[DocLister?
 					|	&parents=`22`
 					|	&display=`4`
@@ -26,15 +31,18 @@ html(lang="ru")
 					|	&tpl=`@FILE:projectsoft/html/tpl/review_slick`
 					|	&prepare=`\ProjectSoft\PrepareDL::prepareItem`
 					|	&ownerTPL=`@CODE:
-					|<div class="review-slider">
-					|	<h2 class="text-center">ОТЗЫВЫ <span>почему выбирают нас</span></h2>
-					|	<div class="row">
-					|		<div class="review-slider--wrap">
-					|			[+dl.wrap+]
-					|		</div>
+					|<header class="article--header review-slider">
+					|	<div class="article--header--title">
+					|		<h2 class="text-center">ОТЗЫВЫ<span>почему выбирают нас</span></h2>
+					|	</div>
+					|</header>
+					|<div class="row article--body--text hyphenation">
+					|	<div class="review-slider--wrap">
+					|		[+dl.wrap+]
 					|	</div>
 					|</div>`
 					|]]
+				article.container.article--body.hyphenation
 					|[[DocLister?
 					|	&parents=`3`
 					|	&display=`4`
@@ -49,8 +57,12 @@ html(lang="ru")
 					|	&prepare=`\ProjectSoft\PrepareDL::prepareWork`
 					|	&tpl=`@FILE:projectsoft/html/tpl/work_tpl`
 					|	&ownerTPL=`@CODE:
+					|<header class="article--header review-slider">
+					|	<div class="article--header--title">
+					|		<h2 class="text-center">НАШИ РАБОТЫ</h2>
+					|	</div>
+					|</header>
 					|<div class="gallery">
-					|	<h2 class="text-center">НАШИ РАБОТЫ</h2>
 					|	<div class="row">
 					|		<div class="gallery--flex">
 					|			[+dl.wrap+]
@@ -58,6 +70,15 @@ html(lang="ru")
 					|	</div>
 					|</div>`
 					|]]
+				article.container.article--body.hyphenation
+					header.article--header
+						.article--header--title
+							h2.text-center
+								|СВЯЖИТЕСЬ С НАМИ
+								span
+									|контактная информация
+					.map
+						#map
 		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/forms.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}

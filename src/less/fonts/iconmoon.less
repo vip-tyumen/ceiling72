@@ -1,0 +1,39 @@
+@import "variables";
+
+@font-face {
+  font-family: '@{icomoon-font-family}';
+  src:  url('@{icomoon-font-path}/@{icomoon-font-family}.eot?8eatdc');
+  src:  url('@{icomoon-font-path}/@{icomoon-font-family}.eot?8eatdc#iefix') format('embedded-opentype'),
+    url('@{icomoon-font-path}/@{icomoon-font-family}.ttf?8eatdc') format('truetype'),
+    url('@{icomoon-font-path}/@{icomoon-font-family}.woff?8eatdc') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="moon-"], [class*=" moon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '@{icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.moon-location {
+  &:before {
+    content: @moon-location; 
+  }
+}
+.moon-location2 {
+  &:before {
+    content: @moon-location2; 
+  }
+}
+

@@ -43,7 +43,13 @@ head
 	|
 	|[[ogImage]]
 	// Styles
-	link(type="text/css" rel="stylesheet" href="[(site_url)]assets/templates/projectsoft/css/main.css?" + hash)
+	link(type="text/css" rel="stylesheet" href="[(site_url)]assets/templates/projectsoft/css/main.min.css?" + hash)
 	link(type="text/css" rel="stylesheet" href="[(site_url)]css.css?" + hash)
 	script(type="text/javascript")
-		|function onLoadImg(el) { el.style.opacity = 1; }
+		|const onLoadImg = function(el) {
+		|	el.classList.add('load');
+		|	let intLoad = setTimeout(function(){
+		|		el.parentNode.classList.add('load');
+		|		clearTimeout(intLoad);
+		|	}, 1000);
+		|}

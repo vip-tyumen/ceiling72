@@ -1,0 +1,18 @@
+.gallery--flex--item--link,
+.review-slick-item-header,
+.news-item-description-photo a {
+	background-image: data-uri('base64/loading.svg');
+	background-size: 65% 65%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	img {
+		opacity: 0;
+		transition: all .3s ease;
+		&.load {
+			opacity: 1;
+		}
+	}
+	&.load {
+		background-image: unset;
+	}
+}

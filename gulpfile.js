@@ -194,7 +194,7 @@ gulp.task('woff2', function(){
 		.pipe(woff2())
 		.pipe(gulp.dest(out + `fonts`));
 });
-/*
+
 gulp.task('webfont', function (cb) {
 		exec(
 			'grunt webfont -v',
@@ -206,7 +206,7 @@ gulp.task('webfont', function (cb) {
 		);
 	}
 );
-*/
+
 gulp.task('copyttf', function(){
 	return gulp.src([
 			'src/fonts/*.ttf'

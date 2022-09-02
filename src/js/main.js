@@ -185,6 +185,58 @@
 		cssEase: 'linear',
 		infinite: true,
 		speed: 500,
-		slidesToShow: 1
+		slidesToShow: 1,
+		pauseOnFocus: false,
+		waitForAnimate: false,
+		useTransform: false,
+		useCSS: false
 	});
+	const loadYandexMap = function(){
+		$("#map").length && function(){
+			$("#map").empty();
+			var addre_map = $.trim($("#orgAddress").text()),
+				phone_map = $("#orgPhones").html(),
+				email_map = $.trim($("#orgEmail").text()),
+				point_map = $("#orgAddress").data("point").split(",").map(Number);
+			window.mapCeiling = new ymaps.Map("map", {
+				center: point_map,
+				zoom: 17,
+				controls: ["typeSelector", "zoomControl", "fullscreenControl"]
+			});
+			var placemark = new ymaps.Placemark(point_map,{
+				balloonContent: `<div class="ballon text-left">` +
+	`<div class="ballon__close" onclick="window.mapCeiling.balloon.close();">x</div>` +
+	`<p>` + addre_map + `</p>` +
+	`<p class="text-right map__phones">` + phone_map + `</p>` +
+	`<div class="text-center">` +
+		`<a href="mailto:` + email_map + `" >` + email_map + `</a>` +
+	`</div>` +
+`</div>`
+			},{
+				iconLayout: "default#image",
+				iconImageHref: "/assets/templates/projectsoft/images/placemark.png?_=v0.0",
+				iconImageSize: [36, 52],
+				iconImageOffset: [-18, -50],
+				balloonLayout: "default#imageWithContent",
+				balloonImageHref: "/assets/templates/projectsoft/images/placemark.png?_=v0.0",
+				balloonImageOffset: [-18, -50],
+				balloonImageSize: [36, 52],
+				balloonShadow: !0,
+				balloonAutoPan: !0
+			});
+			window.mapCeiling.behaviors.disable("scrollZoom"),
+			window.mapCeiling.geoObjects.add(placemark),
+			placemark.balloon.open()
+		}();
+	}
+	if ($("#map").length) {
+		const scriptMap = document.createElement("script");
+		scriptMap.type = "text/javascript",
+		scriptMap.src = "https://api-maps.yandex.ru/2.1.79/?apikey=3c2b4de9-2ac7-4e6d-9bca-8e0bd0b32f36&lang=ru_RU",
+		scriptMap.onload = function() {
+			ymaps.ready(loadYandexMap)
+		}
+		,
+		document.body.append(scriptMap)
+	}
 })(jQuery);
