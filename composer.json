@@ -32,12 +32,17 @@
 		"php": ">=5.6",
 		"ext-json": "*",
 		"projectsoft/gboyksosh":"dev-master",
+		"projectsoft/ceiling72": "dev-main",
 		"ralouphie/mimey": "^2.1"
 	},
 	"repositories": [
 		{
 			"type": "vcs",
 			"url": "https://github.com/KSOSH/KSOSH_composer"
+		},
+		{
+			"type": "vcs",
+			"url": "https://github.com/vip-tyumen/ceiling72_composer"
 		}
 	],
 	"minimum-stability": "dev",

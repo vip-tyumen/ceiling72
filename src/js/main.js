@@ -205,11 +205,15 @@
 			});
 			var placemark = new ymaps.Placemark(point_map,{
 				balloonContent: `<div class="ballon text-left">` +
-	`<div class="ballon__close" onclick="window.mapCeiling.balloon.close();">x</div>` +
+	`<div class="ballon__close" onclick="window.mapCeiling.balloon.close();"></div>` +
 	`<p>` + addre_map + `</p>` +
 	`<p class="text-right map__phones">` + phone_map + `</p>` +
 	`<div class="text-center">` +
 		`<a href="mailto:` + email_map + `" >` + email_map + `</a>` +
+	`</div>` +
+	`<div class="ballon__buttons text-center">` +
+		`<button class="ballon-btn callme-btn btn btn-default" style="margin-top: .6em;margin-bottom: .3em;" type="button">ЗАКАЗАТЬ ЗВОНОК</button><br>` +
+		`<button class="ballon-btn zamer-btn btn btn-default" type="button">ВЫЗВАТЬ ЗАМЕРЩИКА</button>` +
 	`</div>` +
 `</div>`
 			},{

@@ -65,7 +65,7 @@
 						&-header,
 						&-text {
 							opacity: 0;
-							transition: transform 0.5s ease 0.4s,opacity 0.5s ease 0.8s;
+							transition: transform .5s ease 0s, opacity 0.3s ease 0s;
 						}
 						@media (max-width: 600px) {
 							flex-direction: column;
@@ -95,6 +95,7 @@
 								&-text {
 									opacity: 1;
 									transform: translate(0px, 0px);
+									transition: transform .3s linear;
 									@media (max-width: 600px) {
 										transform: unset;
 									}

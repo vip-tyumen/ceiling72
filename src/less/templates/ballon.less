@@ -4,8 +4,8 @@
 	position: relative;
 	border: 1px solid #d8d8da;
 	text-align: left!important;
-	margin-left: 52px;
-	margin-top: -48px;
+	margin-left: 45px;
+	margin-top: -58px;
 	max-width: 240px;
 	width: 240px;
 	user-select: none;
@@ -37,11 +37,18 @@
 		right: 6px;
 		top: 3px;
 		cursor: pointer;
+		&::before {
+			.mixglyph();
+			content: @icon-icon56;
+		}
 	}
 	@media(max-width: 579px){
 		margin-top: unset;
+		margin-left: unset;
 		max-width: unset;
-		width: 100%;
+		width: auto;
+		border: unset;
+		padding: 5px;
 		&::before,
 		&::after,
 		&__close {
