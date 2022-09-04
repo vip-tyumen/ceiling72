@@ -27,6 +27,50 @@
 			.text-right();
 		}
 	}
+	&--list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		align-items: center;
+		.social--list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			margin-left: 1em;
+			&--item{
+				p {
+					padding-right: 15px;
+				}
+				a {
+					text-decoration: none;
+					font-size: 2em;
+					color: white;
+					i {
+						&:before {
+							display: block;
+							transition: all .3s ease;
+							transform: scale(1);
+						}
+					}
+					&:hover {
+						i {
+							&:before {
+								transform: scale(1.2);
+							}
+						}
+					}
+				}
+				&:last-child p {
+					padding-right: 0;
+				}
+			}
+		}
+	}
+
+
 	@media(max-width: 790px) {
 		&--flex {
 			flex-direction: column;

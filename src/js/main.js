@@ -171,6 +171,22 @@
 			console.log('Error JSON parse');
 		}
 		return !1;
+	})
+	/**
+	 * MENU
+	 **/
+	.on('click', '.navigation .navigation--wrapper nav ul li a', function(e){
+		const regex = /(#.+)$/;
+		const href = this.href;
+		let m, id;
+		if ((m = regex.exec(href)) !== null) {
+			if(href === window.location.href + m[1]){
+				e.preventDefault();
+				id = m[1];
+				console.log(id);
+				return !1;
+			}
+		}
 	});
 	/**
 	 * Reviews
