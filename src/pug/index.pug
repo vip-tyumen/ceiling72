@@ -5,19 +5,17 @@ html(lang="ru")
 		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
 		main.container-full.article
 			.row
-				|<@IF:[*content:isNotEmpty*]>
-				article.container.article--body.hyphenation
-					.article--body--text.hyphenation
-						|[*content*]
-				|<@ENDIF>
 				section#actions.container.article--body.hyphenation
-					header.article--header
-						.article--header--title
-							h2.text-center
-								|АКЦИИ
-					.article--body--text.hyphenation
-						|Вывод Акций
-						.countdown(data-days="5")
+					.actions
+						.actions-slider
+							article.article--body--text.hyphenation
+								.action-slider-item
+									img(src="assets/templates/projectsoft/images/pension.png" alt="ПОСТОЯННАЯ СКИДКА ДЛЯ ПЕНСИОНЕРОВ 10%")
+									.countdown.left-bottom(data-days="2")
+							article.article--body--text.hyphenation
+								.action-slider-item
+									img(src="assets/templates/projectsoft/images/pension.png" alt="ПОСТОЯННАЯ СКИДКА ДЛЯ ПЕНСИОНЕРОВ 10%")
+									.countdown.left-bottom(data-days="5")
 				section#calculation.container.article--body.hyphenation
 					header.article--header
 						.article--header--title

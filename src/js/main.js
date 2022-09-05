@@ -196,12 +196,27 @@
 					});
 					setTimeout(function(){
 						window.location.hash = id;
-					}, 100);
+					}, 500);
 					return !1;
 				}
 			}
 		}
 	});
+	/**
+	 * Set scroll position
+	 **/
+	let hash = window.location.hash;
+	window.scrollTo(0, 0);
+	if($(hash).length){
+		$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
+		setTimeout(function(){
+			$(hash)[0].scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+			$('.navigation .navigation--wrapper nav ul li a[href*="' + hash + '"]').addClass('active');
+		}, 500);
+	}
 	/**
 	 * Reviews
 	 **/
@@ -217,9 +232,22 @@
 		speed: 500,
 		slidesToShow: 1,
 		pauseOnFocus: false,
+		pauseOnHover: true,
 		waitForAnimate: false,
 		useTransform: false,
 		useCSS: false
+	});
+	$('.actions-slider').slick({
+		adaptiveHeight: true,
+		autoplay: true,
+		autoplaySpeed: 5000,
+		arrows: true,
+		dots: false,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		pauseOnFocus: false,
+		pauseOnHover: true
 	});
 	const loadYandexMap = function(){
 		$("#map").length && function(){
@@ -272,21 +300,6 @@
 		}
 		,
 		document.body.append(scriptMap)
-	}
-	/**
-	 * Set scroll position
-	 **/
-	let hash = window.location.hash;
-	window.scrollTo(0, 0);
-	if($(hash).length){
-		$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
-		$(hash)[0].scrollIntoView({
-			behavior: 'smooth',
-			block: 'start'
-		});
-		setTimeout(function(){
-			$('.navigation .navigation--wrapper nav ul li a[href*="' + hash + '"]').addClass('active');
-		}, 300);
 	}
 	/**
 	 * CountDown
@@ -362,7 +375,7 @@
 							$node.find('.curr').text(data.curr[label]);
 							$node.find('.next').text(data.next[label]);
 							// Wait for a repaint to then flip
-							_.delay(function($node) {
+							SCOPE.delay(function($node) {
 								$node.addClass('flip');
 							}, 50, $node);
 						});

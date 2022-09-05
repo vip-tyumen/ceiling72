@@ -1,0 +1,61 @@
+.action {
+	&-slider {
+		&-item {
+			position: relative;
+			.countdown {
+				position: absolute;
+				z-index: 5;
+				&.left {
+					&-top {
+						top: 10px;
+						left: 15px;
+					}
+					&-bottom {
+						bottom: 10px;
+						left: 15px;
+					}
+				}
+				&.right {
+					&-top {
+						top: 10px;
+						right: 15px;
+					}
+					&-bottom {
+						bottom: 10px;
+						right: 15px;
+					}
+				}
+				.label {
+					text-shadow: 0 0 4px white;
+				}
+			}
+		}
+	}
+	&s {
+		margin-top: 15px;
+		.slick {
+			&-next,
+			&-prev {
+				z-index: 10;
+				&:before {
+					.mixglyph();
+					font-size: 40px;
+					margin-top: -20px;
+					display: block;
+				}
+			}
+			&-next {
+				right: 10px;
+				&:before {
+					content: @icon-icon04;
+				}
+			}
+			&-prev {
+				left: 10px;
+				&:before {
+					content: @icon-icon03;
+				}
+			}
+		}
+	}
+}
