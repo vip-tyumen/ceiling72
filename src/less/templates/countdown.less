@@ -1,0 +1,105 @@
+.countdown {
+	width: 100%;
+	margin-bottom: 25px;
+}
+.countdown {
+	//height: 130px;
+}
+.countdown .time {
+	border-radius: 5px;
+	box-shadow: 0 0 4px 0 rgba(0,0,0,0.5);
+	display: inline-block;
+	text-align: center;
+	position: relative;
+	height: 91px;
+	width: 65px;
+	perspective: 479px;
+	backface-visibility: hidden;
+	transform: translateZ(0);
+	transform: translate3d(0,0,0);
+	margin-left: 10px;
+	&:first-child {
+		margin-left: unset;
+	}
+}
+.countdown .count {
+	background: #e4e4e4;
+	color: #6a6a6a;
+	display: block;
+	font-family: 'OSW', sans-serif;
+	font-weight: 300;
+	font-size: 44.8px;
+	line-height: 87px;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	text-shadow: 1px 1px 2px #ffffff, -1px -1px 2px #000000;
+	top: 0;
+	width: 100%;
+	transform: translateZ(0);
+	transform-style: flat;
+}
+.countdown .count.top {
+	border-top: 1px solid rgba(255,255,255,0.2);
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+	border-radius: 5px 5px 0 0;
+	height: 50%;
+	transform-origin: 50% 100%;
+}
+.countdown .count.bottom {
+	background-image: linear-gradient(rgba(255,255,255,0.1), transparent);
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	border-radius: 0 0 5px 5px;
+	line-height: 0;
+	height: 50%;
+	top: 50%;
+	transform-origin: 50% 0;
+}
+.countdown .count.next {
+
+}
+.countdown .label {
+	font-size: normal;
+	margin-top: 5px;
+	display: block;
+	position: absolute;
+	top: 95px;
+	width: 100%;
+}
+/* Animation start */
+.countdown .count.curr.top {
+	transform: rotateX(0deg);
+	z-index: 3;
+}
+.countdown .count.next.bottom {
+	transform: rotateX(90deg);
+	z-index: 2;
+}
+/* Animation end */
+.countdown .flip .count.curr.top {
+	transition: all 250ms ease-in-out;
+	transform: rotateX(-90deg);
+}
+.countdown .flip .count.next.bottom {
+	transition: all 250ms ease-in-out 250ms;
+	transform: rotateX(0deg);
+}
+@media screen and (max-width: 48em) {
+	.countdown {
+		width: 100%;
+		margin-bottom: 18px;
+	}
+	.countdown .time {
+		height: 70px;
+		width: 48px;
+	}
+	.countdown .count {
+		font-size: 24px;
+		line-height: 67px;
+	}
+	.countdown .label {
+		font-size: 13px;
+		top: 72px;
+	}
+}

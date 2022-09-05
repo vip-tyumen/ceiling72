@@ -1,4 +1,4 @@
-;(function($) {
+;(function($, SCOPE) {
 
 	/**
 	 * Fancybox defaults options
@@ -176,15 +176,29 @@
 	 * MENU
 	 **/
 	.on('click', '.navigation .navigation--wrapper nav ul li a', function(e){
-		const regex = /(#.+)$/;
-		const href = this.href;
-		let m, id;
+		const regex = /(#.+)$/,
+			_this = this,
+			href = _this.href;
+		let m, id, len, path;
+		path = window.location.origin + window.location.pathname;
 		if ((m = regex.exec(href)) !== null) {
-			if(href === window.location.href + m[1]){
-				e.preventDefault();
-				id = m[1];
-				console.log(id);
-				return !1;
+			id = m[1];
+			len = $(id).length;
+			path = path + id;
+			if(href == path){
+				if(len>0) {
+					e.preventDefault();
+					$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
+					$(_this).addClass('active');
+					$(id)[0].scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+					setTimeout(function(){
+						window.location.hash = id;
+					}, 100);
+					return !1;
+				}
 			}
 		}
 	});
@@ -259,4 +273,103 @@
 		,
 		document.body.append(scriptMap)
 	}
-})(jQuery);
+	/**
+	 * Set scroll position
+	 **/
+	let hash = window.location.hash;
+	window.scrollTo(0, 0);
+	if($(hash).length){
+		$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
+		$(hash)[0].scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+		setTimeout(function(){
+			$('.navigation .navigation--wrapper nav ul li a[href*="' + hash + '"]').addClass('active');
+		}, 300);
+	}
+	/**
+	 * CountDown
+	 **/
+	 function strfobj(str, labels) {
+		var parsed = str.match(/([0-9]{2})/gi),
+			obj = {};
+		labels.forEach(function(label, i) {
+			obj[label] = parsed[i]
+		});
+		return obj;
+	}
+	// Return the time components that diffs
+	function diff(obj1, obj2, labels) {
+		var diffs = [];
+		labels.forEach(function(key) {
+			if (obj1[key] !== obj2[key]) {
+				diffs.push(key);
+			}
+		});
+		return diffs;
+	}
+	// Start countdown
+ 	$('.countdown').each(function(a, b){
+ 		//console.log(a, b);
+ 		const _this = $(b),
+ 			_index = a;;
+		var labels_ru = ['ДНЕЙ', 'ЧАСОВ', 'МИНУТ', 'СЕКУНД'],
+			labels = ['days', 'hours', 'minutes', 'seconds'],
+			currDate = '00:00:00:00',
+			nextDate = '00:00:00:00',
+			date = new Date(),
+			days = Number(_this.data('days'));
+		days = days ? days : 1;
+		_this.data({index: a});
+		if(days >= 0){
+			var initData = strfobj(currDate, labels),
+				template = SCOPE.template($("#coundownTemplate").html());
+			labels.forEach(function(label, i) {
+				_this.append(template({
+					curr: initData[label],
+					next: initData[label],
+					label: label,
+					label_ru: labels_ru[i]
+				}));
+			});
+	  		date.setDate(date.getDate() + days);
+			var day = date.getDate(),
+				month = date.getMonth() + 1,
+				year = date.getFullYear(),
+				out = "";
+			day = day > 9 ? String(day) : "0"+String(day);
+			month = month > 9 ? String(month) : "0"+String(month);
+			out += year + "/" + month + "/" + day + " " + "00:00:00";
+			_this.countdown(out, function(event){
+				var newDate = event.strftime('%d:%H:%M:%S'),
+					data;
+				if (newDate !== nextDate) {
+					currDate = nextDate;
+					nextDate = newDate;
+					// Setup the data
+					data = {
+						'curr': strfobj(currDate, labels),
+						'next': strfobj(nextDate, labels)
+					};
+					if (!event.elapsed) {
+						// Apply the new values to each node that changed
+						diff(data.curr, data.next, labels).forEach(function(label) {
+							var selector = '.%s'.replace(/%s/, label),
+								$node = _this.find(selector);
+							// Update the node
+							$node.removeClass('flip');
+							$node.find('.curr').text(data.curr[label]);
+							$node.find('.next').text(data.next[label]);
+							// Wait for a repaint to then flip
+							_.delay(function($node) {
+								$node.addClass('flip');
+							}, 50, $node);
+						});
+					}
+				}
+			});
+		}
+	});
+
+})(jQuery, _);
