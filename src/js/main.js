@@ -201,12 +201,24 @@
 				}
 			}
 		}
+	})
+	.on('click', '.navigation .navigation--wrapper nav ul li span.active', function(e){
+		e.preventDefault();
+		window.scrollTo(0, 0);
+		$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
+		setTimeout(function(){
+			window.location.hash = "";
+		}, 200);
+		return !1;
 	});
 	/**
 	 * Set scroll position
 	 **/
 	let hash = window.location.hash;
-	window.scrollTo(0, 0);
+	setTimeout(function(){
+		window.scrollTo(0, 0);
+	}, 300);
+
 	if($(hash).length){
 		$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
 		setTimeout(function(){
