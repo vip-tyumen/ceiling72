@@ -5,10 +5,9 @@ html(lang="ru")
 		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
 		main.container-full.article
 			.row
-				|{{@FILE assets/templates/projectsoft/html/tpl/title_content.html}}
 				|[[DocLister?
 				|	&parents=`[*id*]`
-				|	&display=`1`
+				|	&display=`10`
 				|	&tvList=`imageSoc, news_date, news_person`
 				|	&tvPrefix=``
 				|	&orderBy=`news_date DESC`
@@ -31,11 +30,13 @@ html(lang="ru")
 				|   &TplPage=`@CODE: <li class="pagination--item"><a role="button" href="[+link+]">[+num+]</a></li>`
 				|   &TplCurrentPage=`@CODE: <li class="pagination--item active"><span role="button">[+num+]</span></li>`
 				|   &TplDotsPage=`@CODE:<li class="pagination--item dots"><span role="button">...</span></li>`
-				|	&ownerTPL=`@FILE:projectsoft/html/tpl/news`
+				|	&ownerTPL=`@FILE:projectsoft/html/tpl/news_page`
 				|	&tpl=`@FILE:projectsoft/html/tpl/news_tpl`
 				|	&prepare=`\ProjectSoft\PrepareDL::prepareItem`
 				|]]
 				|[+pages+]
+				// КОНТАКТЫ и КАРТА
+				|{{@FILE assets/templates/projectsoft/html/tpl/contacts.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/forms.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}

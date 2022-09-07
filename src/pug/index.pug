@@ -92,6 +92,8 @@ html(lang="ru")
 					|		[+dl.wrap+]
 					|	</div>
 					|</div>`
+					|	&noneWrapOuter=`0`
+					|	&noneTPL=`@CODE:<span></span>`
 					|]]
 				// НАШИ РАБОТЫ
 				section#work.container.article--body.hyphenation
@@ -121,6 +123,8 @@ html(lang="ru")
 					|		</div>
 					|	</div>
 					|</div>`
+					|	&noneWrapOuter=`0`
+					|	&noneTPL=`@CODE:<span></span>`
 					|]]
 				// КАТАЛОГ
 				section#catalog.container.article--body.hyphenation
@@ -146,45 +150,31 @@ html(lang="ru")
 					|<div class="article--body--text.hyphenation">
 					|	[+dl.wrap+]
 					|</div>`
+					|	&noneWrapOuter=`0`
+					|	&noneTPL=`@CODE:<span></span>`
 					|]]
 				// НОВОСТИ
 				section#news.container.article--body.hyphenation
-					header.article--header
-						.article--header--title
-							h2.text-center
-								|НОВОСТИ
-								span
-									|новости нашей компании
-					.article--body--text.hyphenation
-						|[[DocLister?
-						|	&parents=`2`
-						|	&display=`4`
-						|	&tvList=`imageSoc, news_date, news_person`
-						|	&tvPrefix=``
-						|	&orderBy=`news_date DESC`
-						|	&sortBy=`news_date`
-						|	&sortDir=`DESC`
-						|	&tvSortType=`TVDATETIME`
-						|	&noneTPL=`@CODE:<span></span>`
-						|	&debug=`[(debug)]`
-						|	&showParent=`0`
-						|	&urlScheme=`full`
-						|	&noneWrapOuter=`0`
-						|	&ownerTPL=`@FILE:projectsoft/html/tpl/news`
-						|	&tpl=`@FILE:projectsoft/html/tpl/news_tpl`
-						|	&prepare=`\ProjectSoft\PrepareDL::prepareItem`
-						|]]
+					|[[DocLister?
+					|	&parents=`2`
+					|	&display=`4`
+					|	&tvList=`imageSoc, news_date, news_person`
+					|	&tvPrefix=``
+					|	&orderBy=`news_date DESC`
+					|	&sortBy=`news_date`
+					|	&sortDir=`DESC`
+					|	&tvSortType=`TVDATETIME`
+					|	&noneTPL=`@CODE:<span></span>`
+					|	&debug=`[(debug)]`
+					|	&showParent=`0`
+					|	&urlScheme=`full`
+					|	&noneWrapOuter=`0`
+					|	&ownerTPL=`@FILE:projectsoft/html/tpl/news`
+					|	&tpl=`@FILE:projectsoft/html/tpl/news_tpl`
+					|	&prepare=`\ProjectSoft\PrepareDL::prepareItem`
+					|]]
 				// КОНТАКТЫ и КАРТА
-				section#contacts.container.article--body.hyphenation
-					header.article--header
-						.article--header--title
-							h2.text-center
-								|СВЯЖИТЕСЬ С НАМИ
-								span
-									|контактная информация
-					.article--body--tex.map
-						#map
-					.article--body--text.hyphenation
+				|{{@FILE assets/templates/projectsoft/html/tpl/contacts.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/forms.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}
