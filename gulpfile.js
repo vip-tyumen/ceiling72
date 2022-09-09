@@ -50,7 +50,8 @@ gulp.task('less', function () {
 	let md = uniqid().replace(/\s/g, '');
 	return gulp.src([
 			'src/less/main.less',
-			'src/less/editor.less'
+			'src/less/editor.less',
+			'src/less/ceiling72.less'
 		])
 		.pipe(debug())
 		.pipe(less({modifyVars:{'@hash': md}}))
