@@ -3,26 +3,80 @@
 		&-item {
 			position: relative;
 			.countdown {
-				position: absolute;
 				z-index: 5;
-				&.left {
-					&-top {
-						top: 10px;
+				&.top {
+					&_left {
+						position: absolute;
+						width: unset;
+						top: 15px;
 						left: 15px;
 					}
-					&-bottom {
-						bottom: 10px;
-						left: 15px;
+					&_right {
+						position: absolute;
+						width: unset;
+						top: 15px;
+						right: 15px;
+					}
+					&_center {
+						position: absolute;
+						.text-center();
+						top: 15px;
 					}
 				}
-				&.right {
-					&-top {
-						top: 10px;
+				&.bottom {
+					&_left {
+						position: absolute;
+						width: unset;
+						bottom: 15px;
+						left: 15px;
+					}
+					&_right {
+						position: absolute;
+						width: unset;
+						bottom: 15px;
 						right: 15px;
 					}
-					&-bottom {
-						bottom: 10px;
+					&_center {
+						position: absolute;
+						.text-center();
+						bottom: 15px;
+					}
+				}
+				&.center {
+					position: absolute;
+					top: ~'calc(50% - 60.5px)';
+					.text-center();
+					&_left {
+						position: absolute;
+						width: unset;
+						left: 15px;
+						top: ~'calc(50% - 60.5px)';
+					}
+					&_right {
+						position: absolute;
+						width: unset;
 						right: 15px;
+						top: ~'calc(50% - 60.5px)';
+					}
+				}
+				&.relative {
+					&_left {
+						.text-left();
+						padding-top: 10px;
+						padding-left: @padding;
+						padding-right: @padding;
+					}
+					&_center {
+						.text-center();
+						padding-top: 10px;
+						padding-left: @padding;
+						padding-right: @padding;
+					}
+					&_right {
+						.text-right();
+						padding-top: 10px;
+						padding-left: @padding;
+						padding-right: @padding;
 					}
 				}
 				.label {

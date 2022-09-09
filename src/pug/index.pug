@@ -5,18 +5,7 @@ html(lang="ru")
 		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
 		main.container-full.article
 			.row
-				// АКЦИИ
-				section#actions.container.article--body.hyphenation
-					.actions
-						.actions-slider
-							article.article--body--text.hyphenation
-								.action-slider-item
-									img(src="assets/templates/projectsoft/images/pension.png" alt="ПОСТОЯННАЯ СКИДКА ДЛЯ ПЕНСИОНЕРОВ 10%")
-									.countdown.left-bottom(data-days="2" style="position: relative; top: unset; left: unset; right: unset; bottom: unset; margin-top: 10px;padding-left:5px; padding-right: 5px;")
-							article.article--body--text.hyphenation
-								.action-slider-item
-									img(src="assets/templates/projectsoft/images/pension.png" alt="ПОСТОЯННАЯ СКИДКА ДЛЯ ПЕНСИОНЕРОВ 10%")
-									.countdown.left-bottom(data-days="5" style="position: relative; top: unset; left: unset; right: unset; bottom: unset; margin-top: 10px;padding-left:5px; padding-right: 5px;")
+				|{{@FILE assets/templates/projectsoft/html/tpl/actions_slider.html}}
 				// КАЛЬКУЛЯТОР
 				section#calculation.container.article--body.hyphenation
 					header.article--header
@@ -99,7 +88,7 @@ html(lang="ru")
 				section#work.container.article--body.hyphenation
 					|[[DocLister?
 					|	&parents=`3`
-					|	&display=`4`
+					|	&display=`0`
 					|	&tvPrefix=``
 					|	&tvList=`imageSoc, news_date`
 					|	&tvPrefix=``

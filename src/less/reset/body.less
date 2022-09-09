@@ -60,9 +60,38 @@ h6 {
 		line-height: 1;
 	}
 }
+dl {
+	&.fl {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		justify-content: flex-start;
+		dt {
+			flex: 0;
+			min-width: 46px;
+			width: 46px;
+			.text-right();
+		}
+		dd {
+			margin-left: unset;
+			width: ~'calc(100% - 46px)';
+			flex:  ~'calc(100% - 46px)';
+			max-width:  ~'calc(100% - 46px)';
+		}
+	}
+}
 .red {
 	color: red;
 }
 .hidden {
 	display: none !important;
+}
+.policy ol {
+	list-style-type: upper-roman;
+	li {
+		&::marker {
+			font-weight: bold;
+		}
+	}
 }
