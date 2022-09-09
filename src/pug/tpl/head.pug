@@ -1,6 +1,6 @@
 head
 	title
-		|[*titl*]
+		|👍 [*titl*]
 	base(href="[(site_url)]")
 	meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
 	meta(http-equiv="X-UA-Compatible" content="IE=EmulateIE9")
@@ -22,13 +22,13 @@ head
 	meta(name="msapplication-TileImage" content="[(site_url)]mstile-144x144.png")
 	meta(name="theme-color" content="#ffffff")
 	// SEO
-	meta(name="title" content="[*titl:notags:strip*]")
+	meta(name="title" content="👍 [*titl:notags:strip*]")
 	meta(name="description" content="[*desc:notags:strip*]")
 	meta(name="keywords" content="[*keyw:notags:strip*]")
 	meta(name="author" content="[(site_name)]")
 	link(rel="alternate" type="application/rss+xml" title="[(site_name)] | Новости" href!="[!getFullUrl? &id=`8`!]")
 	meta(name="og:description" content="[*desc:notags:strip*]")
-	meta(name="twitter:title" content="[*titl:notags:strip*]")
+	meta(name="twitter:title" content="👍 [*titl:notags:strip*]")
 	meta(name="twitter:description" content="[*desc:notags:strip*]")
 	meta(name="twitter:card" content="summary_large_image")
 	meta(name="twitter:site:id" content="summary_large_image")
@@ -38,7 +38,7 @@ head
 	|<@IF:[*id:is(2)*]>
 	link(rel="canonical" href!="[!getFullUrl? &id=`[*id*]`!]")
 	|<@ENDIF>
-	meta(name="og:title" content="[*titl:notags:strip*]")
+	meta(name="og:title" content="👍 [*titl:notags:strip*]")
 	meta(name="og:description" content="[*desc:notags:strip*]")
 	|
 	|[[ogImage]]
