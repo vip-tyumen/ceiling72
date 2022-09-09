@@ -60,4 +60,5 @@ assets/tvs/multitv/templates
 
 assets/tvs/multitv/configs/*
 
+!assets/tvs/multitv/configs/cause.config.inc.php
 !assets/tvs/multitv/configs/gallery.config.inc.php
