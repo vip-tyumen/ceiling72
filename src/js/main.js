@@ -1,5 +1,80 @@
 ;(function($, SCOPE) {
+	const config = typeof window.config == 'function' ? window.config() : {},
+		price_mini = Number(config.mini) >= 0 ? Number(config.mini) : 0,
+		price_area = Number(config.area) >= 0 ? Number(config.area) : 0,
+		price_carn = Number(config.carn) >= 0 ? Number(config.carn) : 0,
+		price_trub = Number(config.trub) >= 0 ? Number(config.trub) : 0,
+		price_svet = Number(config.svet) >= 0 ? Number(config.svet) : 0;
+	/**
+	 * Калькулятор
+	 **/
+	function calculation() {
+		/*
+		Площадь помещения: 20 (400*20=8000)
+		Потолочный карниз: 12 (350*12=4200)
+		Кол-во трубопроводов: 3 (200*3=600)
+		Кол-во точек освещения: 4 (300*4=1200)
+		Итоговая сумма заказа: 14000
 
+		{
+			"mini": 1,
+			"area": 1,
+			"carn": 1,
+			"trub": 1,
+			"svet": 1
+		}
+		*/
+		let mini = price_mini.toFixed(0),
+			$calc = $("#calculator"),
+			$area = Number($('[name=area]', $calc).val()),
+			$carn = Number($('[name=carn]', $calc).val()),
+			$trub = Number($('[name=trub]', $calc).val()),
+			$svet = Number($('[name=svet]', $calc).val()),
+			$output = $('.output', $calc),
+			str = [],
+			area = 0,
+			carn = 0,
+			trub = 0,
+			svet = 0,
+			sum = 0;
+		$area = $area >= 0 ? $area : 0;
+		$carn = $carn >= 0 ? $carn : 0;
+		$trub = $trub >= 0 ? $trub : 0;
+		$svet = $svet >= 0 ? $svet : 0;
+		if($area){
+			area = (price_area * $area).toFixed(0);
+			str.push(`Площадь помещения: ${$area} (${price_area} * ${$area}=${area}₽)`);
+		}
+		if($carn){
+			carn = (price_carn * $carn).toFixed(0);
+			str.push(`Потолочный карниз: ${$carn} (${price_carn} * ${$carn}=${carn}₽)`);
+		}
+		if($trub){
+			trub = (price_trub * $trub).toFixed(0);
+			str.push(`Кол-во трубопроводов: ${$trub} (${price_trub} * ${$trub}=${trub}₽)`);
+		}
+		if($svet){
+			svet = (price_svet * $svet).toFixed(0);
+			str.push(`Кол-во точек освещения: ${$svet} (${price_svet} * ${$svet}=${svet}₽)`);
+		}
+		sum = Number(Number(area) + Number(carn) + Number(trub) + Number(svet)).toFixed(0);
+		sum = Number(sum) <= Number(mini) ? mini : sum;
+		str.push(`Итоговая сумма заказа: ${sum}₽`);
+		$output.html(sum + `&#8381;`);
+		return {
+			enabled: str.length ? true : false,
+			text: str.join('<br>'),
+			sum: sum
+		};
+	}
+	function resetCalculation(){
+		let $calc = $("#calculator")
+		$('[name=area]', $calc).val(0);
+		$('[name=carn]', $calc).val(0);
+		$('[name=trub]', $calc).val(0);
+		$('[name=svet]', $calc).val(0);
+		calculation();
+	}
 	/**
 	 * Fancybox defaults options
 	 **/
@@ -154,12 +229,16 @@
 			}
 		})
 		return !1;
-	});
-
+	})
+	.on('input', '#calculator input, #calculator select', function(e){
+		e.preventDefault();
+		let obj = calculation();
+		console.log(obj);
+		return !1;
+	})
 	/**
 	 * Works
 	 **/
-	$(document)
 	.on('click', '[data-work]', function(e){
 		e.preventDefault();
 		let str = $(this).attr('data-work').replace(/,]$/, ']');
@@ -396,5 +475,5 @@
 			});
 		}
 	});
-
+ 	resetCalculation();
 })(jQuery, _);

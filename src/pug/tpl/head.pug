@@ -52,4 +52,13 @@ head
 		|		el.parentNode.classList.add('load');
 		|		clearTimeout(intLoad);
 		|	}, 100);
-		|}
+		|};
+		|window.config = function(){
+		|	return {
+		|		mini: [(price_mini)],
+		|		area: [(price_area)],
+		|		carn: [(price_carn)],
+		|		trub: [(price_trub)],
+		|		svet: [(price_svet)],
+		|	};
+		|};
