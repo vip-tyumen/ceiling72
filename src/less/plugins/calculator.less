@@ -1,0 +1,73 @@
+
+.calculator {
+	.messages {
+		ul,
+		ol {
+			.text-left();
+		}
+	}
+	&--wrap {
+		position: relative;
+		width: 100%;
+		max-width: 100%;
+		display: flex;
+		flex-direction: row;
+		.calc {
+			width: 50%;
+			max-width: 50%;
+			padding-left: 15px;
+			padding-right: 15px;
+			padding-top: 0.7em;
+			padding-bottom: 0.7em;
+			overflow: hidden;
+			&.flex {
+				.form-group {
+					&:nth-child(1),
+					&:nth-child(2) {
+						display: none !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+#calculation {
+	background-image: url('@{imagepath}/yellow_rul-mini.png');
+	background-repeat: no-repeat;
+	background-size: 90px 105px;
+	background-position: 15px 15px;
+	.article--header--title {
+		h2 {
+			padding-left: 90px;
+			padding-right: 90px;
+			margin-top: 1.6em;
+			margin-bottom: 1.2em;
+		}
+	}
+}
+
+.formcalc {
+	position: relative;
+	&.loading {
+		&::after {
+			display: block;
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			min-width: 100%;
+			width: 100%;
+			min-height: 100%;
+			height: 100%;
+			background-position: center center;
+			background-size: 50% 50%;
+			background-repeat: no-repeat;
+			background-image: data-uri('base64/loading.svg');
+			background-color: white;
+			z-index: 500;
+		}
+	}
+}

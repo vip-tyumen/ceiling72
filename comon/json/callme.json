@@ -1,7 +1,6 @@
 {
 	"formMethod": "post",
 	"protectSubmit": "0",
-	"to": "projectsoft2009@yandex.ru",
 	"messagesOuterTpl": "@CODE:<div class=\"alert alert-danger\" role=\"alert\">[+messages+]</div>",
 	"messagesTpl": "@CODE:[+required+][+errors+]",
 	"messagesErrorOuterTpl": "@CODE:<ul class=\"error_list\"><li>[+messages+]</li></ul>",

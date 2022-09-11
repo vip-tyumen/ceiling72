@@ -1,4 +1,5 @@
 .formsender {
+	user-select: none;
 	.form-field {
 		&:nth-child(1),
 		&:nth-child(2) {
@@ -8,10 +9,6 @@
 	h1, h2, h3, h4, h5, h6 {
 		margin-top: unset;
 	}
-}
-
-.formsender {
-	user-select: none;
 	&.fancybox-content {
 		&.loading {
 			&::after {
@@ -36,50 +33,80 @@
 		}
 	}
 }
+
 .form {
 	&-group {
 		margin-bottom: 1.3em;
 		position: relative;
 	}
-	&-control {
-		display: block;
-		width: 100%;
-		padding-left: @padding + 7;
-		padding-right: @padding + 7;
-		padding-top: 0.6em;
-		padding-bottom: 0.6em;
-		line-height: 1.5em;
-		margin-top: 0.3em;
-		appearance: none;
-		border: unset;
-		box-shadow: 0 0 1px 1px var(--selection-bg);
-		border-radius: 0.2em;
-		outline: unset !important;
-		user-select: auto;
-		&::placeholder {
-			color: transparent !important;
-			user-select: none !important;
+}
+.form-control {
+	display: block;
+	width: 100%;
+	padding-left: 22px;
+	padding-right: 22px;
+	padding-top: 0.6em;
+	padding-bottom: 0.6em;
+	line-height: 1.5em;
+	margin-top: 0.3em;
+	appearance: none;
+	border: unset;
+	box-shadow: 0 0 1px 1px var(--selection-bg);
+	border-radius: 0.2em;
+	outline: unset !important;
+	user-select: auto;
+	&::placeholder {
+		color: transparent !important;
+		user-select: none !important;
+	}
+	&[type="checkbox"] {
+		display: inline-block;
+		width: 0;
+		padding: 0.6em;
+		margin-top: 0px !important;
+		vertical-align: middle;
+		&:checked {
+			background-image: url("data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0D%0A%3C!--%20Generator%3A%20Adobe%20Illustrator%2025.3.1%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%206.00%20Build%200)%20%20--%3E%0D%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Capa_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0D%0A%09%20viewBox%3D%220%200%20518.7%20518.7%22%20style%3D%22enable-background%3Anew%200%200%20518.7%20518.7%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0D%0A%3Cstyle%20type%3D%22text%2Fcss%22%3E%0D%0A%09.st0%7Bfill%3A%234D9525%3B%7D%0D%0A%3C%2Fstyle%3E%0D%0A%3Cg%3E%0D%0A%09%3Cpath%20class%3D%22st0%22%20d%3D%22M450.1%2C181.2L236.3%2C394.9c-15.8%2C15.8-41.5%2C15.8-57.4%2C0L68.6%2C284.6c-15.8-15.8-15.8-41.5%2C0-57.4%0D%0A%09%09c15.8-15.8%2C41.5-15.8%2C57.4%2C0l81.7%2C81.7l185.1-185.1c15.8-15.8%2C41.5-15.8%2C57.4%2C0C466%2C139.6%2C466%2C165.3%2C450.1%2C181.2z%22%2F%3E%0D%0A%3C%2Fg%3E%0D%0A%3C%2Fsvg%3E%0D%0A");
+			background-position: center center;
+			background-size: contain;
 		}
-		~ label {
-			pointer-events: none;
-			position: absolute;
-			left: @padding;
-			background-color: transparent;
-			padding: 0 7px;
-			color: #888;
-			top: 1em;
-			transition: all .3s ease;
-			font-size: 0.8em;
-			user-select: none !important;
+	}
+	~ label {
+		pointer-events: none;
+		position: absolute;
+		left: 15px;
+		background-color: transparent;
+		padding: 0 7px;
+		color: #888;
+		top: 1em;
+		transition: all 0.3s ease;
+		font-size: 0.8em;
+		user-select: none !important;
+		white-space: nowrap !important;
+		max-width: calc(100% - 30px);
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
+		> span {
+			display: block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap !important;
 		}
-		&:focus,
-		&:not(:placeholder-shown) {
-			~ label {
-				background-color: #fff;
-				top: -0.7em;
-				color: var(--color2);
-				font-weight: 600;
-			}
-		}
+	}
+	&:focus ~ label,
+	&:not(:placeholder-shown) ~ label {
+		background-color: #fff;
+		top: -0.7em;
+		color: var(--color2);
+		font-weight: 600;
+	}
+	&.output {
+		padding-left: unset;
+		padding-right: unset;
+		-webkit-box-shadow: unset !important;
+		box-shadow: unset !important;
+		font-size: 1.43em;
+		font-weight: bold;
+		margin-bottom: 0;
 	}
 }

@@ -8,6 +8,16 @@
 	/**
 	 * Калькулятор
 	 **/
+	function formatMoney(num) {
+		// const regex = /(\d)(?=(?:\d{3})+$)/g;
+		// const subst = `$1 `;
+		// const str = String(num);
+		// const result = str.replace(regex, subst);
+		var arr = num.match(/^(\d+)((?:\.\d+)?)$/);
+		console.log(arr);
+		arr[2] = arr[2] ? arr[2] : '';
+		return arr[1].replace(/(\d)(?=(?:\d{3})+$)/g, '$1\u00A0') + arr[2];
+	}
 	function calculation() {
 		/*
 		Площадь помещения: 20 (400*20=8000)
@@ -25,11 +35,12 @@
 		}
 		*/
 		let mini = price_mini.toFixed(0),
-			$calc = $("#calculator"),
+			$calc = $("#form_calc"),
 			$area = Number($('[name=area]', $calc).val()),
 			$carn = Number($('[name=carn]', $calc).val()),
 			$trub = Number($('[name=trub]', $calc).val()),
 			$svet = Number($('[name=svet]', $calc).val()),
+			$action = $('[name=action]', $calc),
 			$output = $('.output', $calc),
 			str = [],
 			area = 0,
@@ -41,39 +52,53 @@
 		$carn = $carn >= 0 ? $carn : 0;
 		$trub = $trub >= 0 ? $trub : 0;
 		$svet = $svet >= 0 ? $svet : 0;
+		console.log($action);
 		if($area){
 			area = (price_area * $area).toFixed(0);
-			str.push(`Площадь помещения: ${$area} (${price_area} * ${$area}=${area}₽)`);
+			str.push(`Площадь помещения: ${$area} (${price_area} * ${$area}=${area})`);
 		}
 		if($carn){
 			carn = (price_carn * $carn).toFixed(0);
-			str.push(`Потолочный карниз: ${$carn} (${price_carn} * ${$carn}=${carn}₽)`);
+			str.push(`Потолочный карниз: ${$carn} (${price_carn} * ${$carn}=${carn})`);
 		}
 		if($trub){
 			trub = (price_trub * $trub).toFixed(0);
-			str.push(`Кол-во трубопроводов: ${$trub} (${price_trub} * ${$trub}=${trub}₽)`);
+			str.push(`Кол-во трубопроводов: ${$trub} (${price_trub} * ${$trub}=${trub})`);
 		}
 		if($svet){
 			svet = (price_svet * $svet).toFixed(0);
-			str.push(`Кол-во точек освещения: ${$svet} (${price_svet} * ${$svet}=${svet}₽)`);
+			str.push(`Кол-во точек освещения: ${$svet} (${price_svet} * ${$svet}=${svet})`);
 		}
 		sum = Number(Number(area) + Number(carn) + Number(trub) + Number(svet)).toFixed(0);
 		sum = Number(sum) <= Number(mini) ? mini : sum;
-		str.push(`Итоговая сумма заказа: ${sum}₽`);
-		$output.html(sum + `&#8381;`);
+		if($action.prop('checked')) {
+			// Проценты
+		}
+		str.push(`Итоговая сумма заказа: ${sum}`);
+		let format_sum = formatMoney(sum);
+		if($area < 1 && $carn < 1 && $trub < 1 && $svet < 1) {
+			$output.html(`Итого: 0\u00A0руб.`);
+			return {
+				enabled: false,
+				text: `Итоговая сумма заказа: 0`,
+				sum: 0
+			};
+		}
+		$output.html(`Итого: ${format_sum}\u00A0руб.`);
 		return {
 			enabled: str.length ? true : false,
-			text: str.join('<br>'),
+			text: str.join("\n"),
 			sum: sum
 		};
 	}
 	function resetCalculation(){
-		let $calc = $("#calculator")
-		$('[name=area]', $calc).val(0);
-		$('[name=carn]', $calc).val(0);
-		$('[name=trub]', $calc).val(0);
-		$('[name=svet]', $calc).val(0);
-		calculation();
+		let $calc = $("#form_calc")
+		$('[name=area]', $calc).val('');
+		$('[name=carn]', $calc).val('');
+		$('[name=trub]', $calc).val('');
+		$('[name=svet]', $calc).val('');
+		let obj = calculation();
+		console.log(obj);
 	}
 	/**
 	 * Fancybox defaults options
@@ -167,7 +192,7 @@
 			}
 		}
 	}).trigger('resize');
-	
+
 	/**
 	  * Forms
 	 **/
@@ -230,12 +255,65 @@
 		})
 		return !1;
 	})
-	.on('input', '#calculator input, #calculator select', function(e){
+	.on('input change paste keyup', '#form_calc input, #form_calc select', function(e){
 		e.preventDefault();
+		if(this.type == 'number') {
+			const max = Number(this.max),
+				val = Number(this.value);
+			if(val >= max) {
+				this.value = max;
+			}
+		}
 		let obj = calculation();
 		console.log(obj);
 		return !1;
 	})
+	.on('submit', '#form_calc', function(e){
+		e.preventDefault();
+		const form_calc = $(this),
+			ids = this.id.split('_'),
+			id = ids[0],
+			wrapp = $('#calculator .messages');
+		let obj = calculation(),
+			formData = new FormData(this);
+		console.info(obj, wrapp, '.form' + id);
+		if(obj.enabled) {
+			formData.set("message", obj.text);
+			$('#calculator').addClass('loading');
+			$.ajax({
+				type: 'POST',
+				url: window.location.origin + window.location.pathname,
+				data: formData,
+				async: false,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(msg){
+					if(msg.forms) {
+						if(msg.forms["form"]) {
+							let c = $(msg.forms["form"]),
+								form = c.html();
+							wrapp.html(form);
+							$('[name=phone]', form_calc).mask("+7(999)999-99-99");
+						} else {
+							wrapp.html("<p>Неудачная отправка формы<br>Попробуйте ещё раз.</p>");
+						}
+					} else {
+						wrapp.html("<p>Неудачная отправка формы<br>Попробуйте ещё раз.</p>");
+					}
+					$('#calculator').removeClass('loading');
+				},
+				error: function(a, b, c){
+					console.log(a, b, c);
+					$('#calculator').removeClass('loading');
+				}
+			})
+		} else {
+			wrapp.html("<p>Заполните правильно поля формы</p>");
+		}
+		return !1;
+	})
+	.on('reset', '#form_calc', resetCalculation)
 	/**
 	 * Works
 	 **/
@@ -476,4 +554,5 @@
 		}
 	});
  	resetCalculation();
+ 	console.log(document.currentScript.src);
 })(jQuery, _);
