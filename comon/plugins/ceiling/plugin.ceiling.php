@@ -57,6 +57,17 @@ switch ($e->name) {
 						);
 						$modx->documentOutput = json_encode($ob);
 						break;
+					case "calc":
+						header("Content-type: application/json; charset=utf-8");
+						$ob = new stdClass();
+						$str = $modx->documentOutput;
+						$re = '/(?:<!--InitFormCalc-->(?<callme>.*)<!--FormCalc-->)/Usi';
+						preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
+						$ob->forms= array(
+							"form"=>trim($matches["callme"][0])
+						);
+						$modx->documentOutput = json_encode($ob);
+						break;
 					default:
 						break;
 				}

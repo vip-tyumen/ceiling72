@@ -1,0 +1,46 @@
+{
+	"formMethod": "post",
+	"protectSubmit": "0",
+	"messagesOuterTpl": "@CODE:<div class=\"alert alert-danger\" role=\"alert\">[+messages+]</div>",
+	"messagesTpl": "@CODE:[+required+][+errors+]",
+	"messagesErrorOuterTpl": "@CODE:<ul class=\"error_list\"><li>[+messages+]</li></ul>",
+	"messagesErrorSplitter": "</li><li>",
+	"errorTpl": "@CODE:<li>[+message+]</li>",
+	"prepareAfterProcess": "\\ProjectSoft\\PrepareForm::prepareAfterProcessCallme",
+	"prepareProcess": "\\ProjectSoft\\PrepareForm::prepareProcessCallme",
+	"prepare": "\\ProjectSoft\\PrepareForm::prepareCallme",
+	"formTpl": "@FILE: projectsoft/html/tpl/calculator",
+	"reportTpl": "@FILE: projectsoft/html/tpl/form_callme_send",
+	"messagesTpl": "@CODE:[+required+][+errors+]",
+	"successTpl": "@CODE:<div><h5 class=\"text-center\">Форма отправлена</h5><p>Спасибо. Наши менеджеры свяжутся с Вами в самое ближайшее время.</p></div>",
+	"rules"	: {
+		"theme": {
+			"custom" : {
+				"function": "\\ProjectSoft\\FormValidator::strLength",
+				"params": [2],
+				"message": "Вы не можете отправить данные"
+			}
+		},
+		"last_name": {
+			"custom" : {
+				"function": "\\ProjectSoft\\FormValidator::isNull",
+				"params": [0],
+				"message": "Вы не можете отправить данные"
+			}
+		},
+		"first_name": {
+			"custom" : {
+				"function": "\\ProjectSoft\\FormValidator::strLength",
+				"params": [2],
+				"message": "Слишком короткое Имя"
+			}
+		},
+		"phone": {
+			"custom" : {
+				"function": "\\ProjectSoft\\FormValidator::phoneValid",
+				"params": [0],
+				"message": "Телефон введён не корректно"
+			}
+		}
+	}
+}

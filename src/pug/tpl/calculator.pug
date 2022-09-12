@@ -2,7 +2,11 @@
 	.formcalc#calculator
 		.messages--wrap.text-center.container-full
 			.messages.inline-block
+				|[+form.messages+]
 		form.calculator--wrap#form_calc(method="post")
+			input(type="hidden" name="formid" value="calc")
+			input(type="hidden" value="[+url.value+]" name="url")
+			input(type="hidden" value="[+message.value+]" name="message")
 			.calc
 				.form-group.form-field
 					input.form-control(type="number" name="area" min="0" max="10000" step="1" placeholder="0" autocomplete="off" required)

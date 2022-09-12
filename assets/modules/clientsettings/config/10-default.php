@@ -34,6 +34,12 @@ return [
 			'type'  => 'number',
 			'note'  => 'Измеряется в <span style="font-size: 2em;">₽</span> (руб.)',
 			'default_text' => '0',
+		],
+		'price_proc' => [
+			'caption' => 'Процентная ставка',
+			'type'  => 'number',
+			'note'  => 'Измеряется в <span style="font-size: 2em;">%</span>',
+			'default_text' => '0',
 		]
 	],
 ];

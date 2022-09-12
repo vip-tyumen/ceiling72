@@ -5,6 +5,7 @@
 		price_carn = Number(config.carn) >= 0 ? Number(config.carn) : 0,
 		price_trub = Number(config.trub) >= 0 ? Number(config.trub) : 0,
 		price_svet = Number(config.svet) >= 0 ? Number(config.svet) : 0;
+		price_proc = Number(config.proc) >= 0 ? Number(config.proc) : 0;
 	/**
 	 * Калькулятор
 	 **/
@@ -13,6 +14,7 @@
 		// const subst = `$1 `;
 		// const str = String(num);
 		// const result = str.replace(regex, subst);
+		num = String(num);
 		var arr = num.match(/^(\d+)((?:\.\d+)?)$/);
 		console.log(arr);
 		arr[2] = arr[2] ? arr[2] : '';
@@ -34,71 +36,99 @@
 			"svet": 1
 		}
 		*/
-		let mini = price_mini.toFixed(0),
-			$calc = $("#form_calc"),
-			$area = Number($('[name=area]', $calc).val()),
-			$carn = Number($('[name=carn]', $calc).val()),
-			$trub = Number($('[name=trub]', $calc).val()),
-			$svet = Number($('[name=svet]', $calc).val()),
-			$action = $('[name=action]', $calc),
-			$output = $('.output', $calc),
-			str = [],
-			area = 0,
-			carn = 0,
-			trub = 0,
-			svet = 0,
-			sum = 0;
-		$area = $area >= 0 ? $area : 0;
-		$carn = $carn >= 0 ? $carn : 0;
-		$trub = $trub >= 0 ? $trub : 0;
-		$svet = $svet >= 0 ? $svet : 0;
-		console.log($action);
-		if($area){
-			area = (price_area * $area).toFixed(0);
-			str.push(`Площадь помещения: ${$area} (${price_area} * ${$area}=${area})`);
-		}
-		if($carn){
-			carn = (price_carn * $carn).toFixed(0);
-			str.push(`Потолочный карниз: ${$carn} (${price_carn} * ${$carn}=${carn})`);
-		}
-		if($trub){
-			trub = (price_trub * $trub).toFixed(0);
-			str.push(`Кол-во трубопроводов: ${$trub} (${price_trub} * ${$trub}=${trub})`);
-		}
-		if($svet){
-			svet = (price_svet * $svet).toFixed(0);
-			str.push(`Кол-во точек освещения: ${$svet} (${price_svet} * ${$svet}=${svet})`);
-		}
-		sum = Number(Number(area) + Number(carn) + Number(trub) + Number(svet)).toFixed(0);
-		sum = Number(sum) <= Number(mini) ? mini : sum;
-		if($action.prop('checked')) {
-			// Проценты
-		}
-		str.push(`Итоговая сумма заказа: ${sum}`);
-		let format_sum = formatMoney(sum);
-		if($area < 1 && $carn < 1 && $trub < 1 && $svet < 1) {
-			$output.html(`Итого: 0\u00A0руб.`);
+		const mini = price_mini.toFixed(0),
+			$calc = $("#form_calc");
+		if($calc.length) {
+			let $area = Number($('[name=area]', $calc).val()),
+				$carn = Number($('[name=carn]', $calc).val()),
+				$trub = Number($('[name=trub]', $calc).val()),
+				$svet = Number($('[name=svet]', $calc).val()),
+				$action = $('[name=action]', $calc),
+				$output = $('.output', $calc),
+				str = [],
+				area = 0,
+				carn = 0,
+				trub = 0,
+				svet = 0,
+				sum = 0;
+			$area = $area >= 0 ? $area : 0;
+			$carn = $carn >= 0 ? $carn : 0;
+			$trub = $trub >= 0 ? $trub : 0;
+			$svet = $svet >= 0 ? $svet : 0;
+			if($area){
+				area = (price_area * $area).toFixed(0);
+				str.push(`Площадь помещения: ${$area}\u00A0м². (${price_area}x${$area}=${area})`);
+			}else{
+				$('[name=area]', $calc).val('');
+			}
+			if($carn){
+				carn = (price_carn * $carn).toFixed(0);
+				str.push(`Потолочный карниз: ${$carn}\u00A0м. (${price_carn}x${$carn}=${carn})`);
+			}else{
+				$('[name=carn]', $calc).val('')
+			}
+			if($trub){
+				trub = (price_trub * $trub).toFixed(0);
+				str.push(`Кол-во трубопроводов: ${$trub}\u00A0шт. (${price_trub}x${$trub}=${trub})`);
+			}else{
+				$('[name=trub]', $calc).val('')
+			}
+			if($svet){
+				svet = (price_svet * $svet).toFixed(0);
+				str.push(`Кол-во точек освещения: ${$svet}\u00A0шт. (${price_svet}x${$svet}=${svet})`);
+			}else{
+				$('[name=svet]', $calc).val('')
+			}
+			sum = Number(Number(area) + Number(carn) + Number(trub) + Number(svet)).toFixed(0);
+			sum = Number(sum) <= Number(mini) ? mini : sum;
+			let out_sum = sum;
+			if($action.prop('checked')) {
+				// Проценты
+				str.push(`Является новосёлом или пенсионером`);
+				if(price_proc) {
+					str.push(`Процентная ставка: ${price_proc}%`);
+					out_sum = Number(sum) - Number(price_proc) * Number(sum) / 100;
+					out_sum = Number(out_sum) <= Number(mini) ? mini : out_sum;
+					str.push(`Сумма с учётом процентов: ${out_sum}\u00A0руб.`);
+				}
+			}
+			str.push(`Итоговая сумма заказа: ${sum}\u00A0руб.`);
+			if($area < 1 && $carn < 1 && $trub < 1 && $svet < 1) {
+				$output.html(`Итого: 0\u00A0руб.`);
+				return {
+					enabled: false,
+					text: `Итоговая сумма заказа: 0`,
+					sum: 0
+				};
+			}
+			let format_sum = formatMoney(out_sum);
+			$output.html(`Итого: ${format_sum}\u00A0руб.`);
+			let text = str.join("\n");
+			$('[name=message]', $calc).val(text);
+			return {
+				enabled: str.length ? true : false,
+				text: text,
+				sum: sum
+			};
+		} else {
 			return {
 				enabled: false,
-				text: `Итоговая сумма заказа: 0`,
+				text: '',
 				sum: 0
-			};
+			}
 		}
-		$output.html(`Итого: ${format_sum}\u00A0руб.`);
-		return {
-			enabled: str.length ? true : false,
-			text: str.join("\n"),
-			sum: sum
-		};
 	}
 	function resetCalculation(){
-		let $calc = $("#form_calc")
-		$('[name=area]', $calc).val('');
-		$('[name=carn]', $calc).val('');
-		$('[name=trub]', $calc).val('');
-		$('[name=svet]', $calc).val('');
+		let $calc = $("#form_calc");
+		if($calc.length) {
+			$calc[0].reset();
+			$('[name=area]', $calc).val('');
+			$('[name=carn]', $calc).val('');
+			$('[name=trub]', $calc).val('');
+			$('[name=svet]', $calc).val('');
+			$('[name=message]', $calc).val('');
+		}
 		let obj = calculation();
-		console.log(obj);
 	}
 	/**
 	 * Fancybox defaults options
@@ -292,8 +322,13 @@
 					if(msg.forms) {
 						if(msg.forms["form"]) {
 							let c = $(msg.forms["form"]),
-								form = c.html();
-							wrapp.html(form);
+								form = $(c.html());
+							wrapp.empty();
+							if($("#form_calc", form).length){
+								$('.calculator').empty().append(form)
+							} else {
+								wrapp.append(form);
+							}
 							$('[name=phone]', form_calc).mask("+7(999)999-99-99");
 						} else {
 							wrapp.html("<p>Неудачная отправка формы<br>Попробуйте ещё раз.</p>");
@@ -302,10 +337,11 @@
 						wrapp.html("<p>Неудачная отправка формы<br>Попробуйте ещё раз.</p>");
 					}
 					$('#calculator').removeClass('loading');
+					resetCalculation();
 				},
 				error: function(a, b, c){
-					console.log(a, b, c);
 					$('#calculator').removeClass('loading');
+					resetCalculation();
 				}
 			})
 		} else {
@@ -553,6 +589,6 @@
 			});
 		}
 	});
+ 	$('#calc').append($("#calcform").children());
  	resetCalculation();
- 	console.log(document.currentScript.src);
 })(jQuery, _);

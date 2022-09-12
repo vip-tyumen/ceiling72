@@ -3,6 +3,7 @@
 |	&controller=`Form`
 |	&formid=`callme`
 |	&config=`callme:/comon/json`
+|	&to=`[(email_to)]`
 |!]
 |<!--FormCallme-->
 |<!--InitFormZamer-->
@@ -10,5 +11,17 @@
 |	&controller=`Form`
 |	&formid=`zamer`
 |	&config=`zamer:/comon/json`
+|	&to=`[(email_to)]`
 |!]
 |<!--FormZamer-->
+|<!--InitFormCalc-->
+|
+#calcform(style="display: none !important;")
+	|[!FormLister?
+	|	&controller=`Form`
+	|	&formid=`calc`
+	|	&config=`calc:/comon/json`
+	|	&to=`[(email_to)]`
+	|!]
+|
+|<!--FormCalc-->
