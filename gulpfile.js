@@ -102,15 +102,18 @@ gulp.task('jsApp', function(){
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(out + `js`));
 });
-
+/*
 gulp.task('copyJs', function(){
 	return gulp.src([
 			'src/Hyphenopoly/*.*',
-			'src/Hyphenopoly/**/*.*'
+			'src/Hyphenopoly/*'
 		])
 		.pipe(debug())
 		.pipe(copy(out + 'js/Hyphenopoly', { prefix: 2 }));
 });
+*/		
+/*.*
+*/
 /**
  * JavaScript
  * == END ==
@@ -342,7 +345,7 @@ gulp.task(
 			gulp.parallel(
 				'jsMain',
 				'jsApp',
-				'copyJs'
+				//'copyJs'
 			),
 			gulp.parallel(
 				'html',
@@ -374,7 +377,7 @@ gulp.task('watch', function(){
 			'src/js/*.js',
 			'src/js/**/*.js'
 		],
-		gulp.series('jsApp', 'jsMain', 'htmlTpl', 'copyJs', 'ftpJs')
+		gulp.series('jsApp', 'jsMain', 'htmlTpl', /*'copyJs',*/ 'ftpJs')
 	);
 	// CSS
 	gulp.watch(

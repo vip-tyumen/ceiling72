@@ -47,5 +47,29 @@ return [
 			'note'  => 'Можно указать ID пользователя или канала. Бот должен быть добавлен админом на канал или к пользователю в телеграм.<br>Наш канал: <a href="https://t.me/+8nXkHLW28P05NTMy" target="_blank"><b>ПОТОЛОК72.РФ</b></a><br>ID Telegram chanel: -1001594403406',
 			'default_text' => '-1001594403406',
 		],
+		'ymap_point' => [
+			'caption' => 'Yandex Map координаты организации',
+			'type'  => 'custom_tv:ymap',
+			'note'  => 'Точка организации на карте',
+			'default_text' => '',
+		],
+		'orgAddress' => [
+			'caption' => 'Адрес Организации',
+			'type'  => 'text',
+			'note'  => 'Адрес организации',
+			'default_text' => '',
+		],
+		'orgPhones' => [
+			'caption' => 'Телефоны Организации',
+			'type'  => 'richtext',
+			'note'  => 'Телефоны Организации',
+			'default_text' => '',
+		],
+		'orgEmail' => [
+			'caption' => 'Email почта Организации',
+			'type'  => 'text',
+			'note'  => 'Email почта Организации',
+			'default_text' => '',
+		],
 	],
 ];

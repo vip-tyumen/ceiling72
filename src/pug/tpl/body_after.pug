@@ -1,12 +1,10 @@
 .hidden
-	#orgAddress(data-point="57.104687, 65.602377")
-		|г. Тюмень, ул. Моторостроителей, 14/1, офис 102.[(orgAddress)][(orgPoint)]
+	#orgAddress(data-point="[(ymap_point)]")
+		|[(orgAddress)]
 	#orgPhones
-		|8(908) 874-30-43
-		br
-		|8(345) 242-88-76[(orgPhones)]
+		|[(orgPhones:nl2br)]
 	#orgEmail
-		|vip-potolok72@mail.ru[(orgEmail)]
+		|[(orgEmail)]
 script(type="text/template" id="coundownTemplate")
 	|<div class="time <%= label %>">
 	| 	<span class="count curr top"><%= curr %></span>
