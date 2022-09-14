@@ -79,9 +79,8 @@
 .formcalc {
 	position: relative;
 	&.loading {
-		&::after {
+		.loading {
 			display: block;
-			content: "";
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -91,8 +90,10 @@
 			width: 100%;
 			min-height: 100%;
 			height: 100%;
+			opacity: 0.7;
 			background-position: center center;
 			background-size: 50% 50%;
+			background-color: white;
 			background-repeat: no-repeat;
 			background-image: data-uri('base64/loading.svg');
 			background-color: white;

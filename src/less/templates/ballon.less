@@ -44,6 +44,23 @@
 			content: @icon-icon58;
 		}
 	}
+	.entry {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-top: 7px;
+		&::before {
+			content: "";
+			display: block;
+			margin-right: 10px;
+			width: 16px;
+			height: 16px;
+			background-image: data-uri('base64/entity.png');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+	}
 	@media(max-width: 578px){
 		margin-top: unset;
 		margin-left: unset;
@@ -57,6 +74,12 @@
 			display: none;
 		}
 	}
+}
+[class*="-gotoymaps"],
+[class^="-gotoymaps"],
+[class*="-gototaxi"],
+[class^="-gototaxi"] {
+	display: none !important;
 }
 body[class^="-fullscreen"],
 body[class*="-fullscreen"] {

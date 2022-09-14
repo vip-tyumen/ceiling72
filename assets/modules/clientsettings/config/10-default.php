@@ -17,20 +17,26 @@ return [
 			'note'  => 'Измеряется в <span style="font-size: 2em;">₽</span> (руб.)',
 			'default_text' => '0',
 		],
-		'price_carn' => [
-			'caption' => 'Цена метр карниза',
-			'type'  => 'number',
-			'note'  => 'Измеряется в <span style="font-size: 2em;">₽</span> (руб.)',
-			'default_text' => '0',
-		],
-		'price_trub' => [
-			'caption' => 'Цена за один трубопровод',
+		'price_lustr' => [
+			'caption' => 'Цена за одину Люстру',
 			'type'  => 'number',
 			'note'  => 'Измеряется в <span style="font-size: 2em;">₽</span> (руб.)',
 			'default_text' => '0',
 		],
 		'price_svet' => [
-			'caption' => 'Цена за одину точку освящения',
+			'caption' => 'Цена за один Светильник',
+			'type'  => 'number',
+			'note'  => 'Измеряется в <span style="font-size: 2em;">₽</span> (руб.)',
+			'default_text' => '0',
+		],
+		'price_carn' => [
+			'caption' => 'Потолочные карнизы для штор',
+			'type'  => 'number',
+			'note'  => 'Измеряется в <span style="font-size: 2em;">₽</span> (руб.)',
+			'default_text' => '0',
+		],
+		'price_zagl' => [
+			'caption' => 'Заглушка вместо плинтуса по периметру',
 			'type'  => 'number',
 			'note'  => 'Измеряется в <span style="font-size: 2em;">₽</span> (руб.)',
 			'default_text' => '0',

@@ -1,5 +1,6 @@
 .calculator.row
 	.formcalc#calculator
+		span.loading
 		.messages--wrap.text-center.container-full
 			.messages.inline-block
 				|[+form.messages+]
@@ -13,17 +14,21 @@
 					label
 						span Площадь помещения (кв. м.)
 				.form-group.form-field
-					input.form-control(type="number" name="carn" min="0" max="40000" step="1" placeholder="0" autocomplete="off")
+					input.form-control(type="number" name="lustr" min="0" max="1000" step="1" placeholder="0" autocomplete="off")
 					label
-						span Потолочный карниз (м.)
-				.form-group.form-field
-					input.form-control(type="number" name="trub" min="0" max="1000" step="1" placeholder="0" autocomplete="off")
-					label
-						span Кол-во трубопроводов (шт.)
+						span Кол-во люстр (шт.)
 				.form-group.form-field
 					input.form-control(type="number" name="svet" min="0" max="1000" step="1" placeholder="0" autocomplete="off")
 					label
-						span Кол-во точек освещения (шт.)
+						span Кол-во светильников (шт.)
+				.form-group.form-field
+					input.form-control(type="number" name="carn" min="0" max="40000" step="1" placeholder="0" autocomplete="off")
+					label
+						span Потолочный карниз для штор (м.)
+				.form-group.form-field
+					input.form-control(type="number" name="zagl" min="0" max="40000" step="1" placeholder="0" autocomplete="off")
+					label
+						span Заглушка вместо плинтуса по периметру (м.)
 			.calc.flex
 				.form-group.form-field
 					input.form-control(type="text" placeholder="Тема" name="theme" value="Расчёт потолка" autocomplete="off")

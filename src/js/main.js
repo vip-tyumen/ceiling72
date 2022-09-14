@@ -2,9 +2,10 @@
 	const config = typeof window.config == 'function' ? window.config() : {},
 		price_mini = Number(config.mini) >= 0 ? Number(config.mini) : 0,
 		price_area = Number(config.area) >= 0 ? Number(config.area) : 0,
+		price_lustr = Number(config.lustr) >= 0 ? Number(config.lustr) : 0,
+		price_svet = Number(config.svet) >= 0 ? Number(config.svet) : 0,
 		price_carn = Number(config.carn) >= 0 ? Number(config.carn) : 0,
-		price_trub = Number(config.trub) >= 0 ? Number(config.trub) : 0,
-		price_svet = Number(config.svet) >= 0 ? Number(config.svet) : 0;
+		price_zagl = Number(config.zagl) >= 0 ? Number(config.zagl) : 0,
 		price_proc = Number(config.proc) >= 0 ? Number(config.proc) : 0;
 	/**
 	 * Калькулятор
@@ -21,57 +22,39 @@
 		return arr[1].replace(/(\d)(?=(?:\d{3})+$)/g, '$1\u00A0') + arr[2];
 	}
 	function calculation() {
-		/*
-		Площадь помещения: 20 (400*20=8000)
-		Потолочный карниз: 12 (350*12=4200)
-		Кол-во трубопроводов: 3 (200*3=600)
-		Кол-во точек освещения: 4 (300*4=1200)
-		Итоговая сумма заказа: 14000
-
-		{
-			"mini": 1,
-			"area": 1,
-			"carn": 1,
-			"trub": 1,
-			"svet": 1
-		}
-		*/
 		const mini = price_mini.toFixed(0),
 			$calc = $("#form_calc");
 		if($calc.length) {
 			let $area = Number($('[name=area]', $calc).val()),
-				$carn = Number($('[name=carn]', $calc).val()),
-				$trub = Number($('[name=trub]', $calc).val()),
+				$lustr = Number($('[name=lustr]', $calc).val()),
 				$svet = Number($('[name=svet]', $calc).val()),
+				$carn = Number($('[name=carn]', $calc).val()),
+				$zagl = Number($('[name=zagl]', $calc).val()),
 				$action = $('[name=action]', $calc),
 				$output = $('.output', $calc),
 				str = [],
 				area = 0,
-				carn = 0,
-				trub = 0,
+				lustr = 0,
 				svet = 0,
+				carn = 0,
+				zagl = 0,
 				sum = 0;
 			$area = $area >= 0 ? $area : 0;
-			$carn = $carn >= 0 ? $carn : 0;
-			$trub = $trub >= 0 ? $trub : 0;
+			$lustr = $lustr >= 0 ? $lustr : 0;
 			$svet = $svet >= 0 ? $svet : 0;
+			$carn = $carn >= 0 ? $carn : 0;
+			$zagl = $zagl >= 0 ? $zagl : 0;
 			if($area){
 				area = (price_area * $area).toFixed(0);
 				str.push(`Площадь помещения: ${$area}\u00A0м². (${price_area}x${$area}=${area})`);
 			}else{
 				$('[name=area]', $calc).val('');
 			}
-			if($carn){
-				carn = (price_carn * $carn).toFixed(0);
-				str.push(`Потолочный карниз: ${$carn}\u00A0м. (${price_carn}x${$carn}=${carn})`);
+			if($lustr){
+				lustr = (price_lustr * $lustr).toFixed(0);
+				str.push(`Кол-во люстр: ${$lustr}\u00A0шт. (${price_lustr}x${$lustr}=${lustr})`);
 			}else{
-				$('[name=carn]', $calc).val('')
-			}
-			if($trub){
-				trub = (price_trub * $trub).toFixed(0);
-				str.push(`Кол-во трубопроводов: ${$trub}\u00A0шт. (${price_trub}x${$trub}=${trub})`);
-			}else{
-				$('[name=trub]', $calc).val('')
+				$('[name=lustr]', $calc).val('')
 			}
 			if($svet){
 				svet = (price_svet * $svet).toFixed(0);
@@ -79,7 +62,19 @@
 			}else{
 				$('[name=svet]', $calc).val('')
 			}
-			sum = Number(Number(area) + Number(carn) + Number(trub) + Number(svet)).toFixed(0);
+			if($carn){
+				carn = (price_carn * $carn).toFixed(0);
+				str.push(`Потолочный карниз: ${$carn}\u00A0м. (${price_carn}x${$carn}=${carn})`);
+			}else{
+				$('[name=carn]', $calc).val('')
+			}
+			if($zagl){
+				zagl = (price_zagl * $zagl).toFixed(0);
+				str.push(`Заглушка вместо плинтуса: ${$zagl}\u00A0м. (${price_zagl}x${$zagl}=${zagl})`);
+			}else{
+				$('[name=zagl]', $calc).val('')
+			}
+			sum = Number(Number(area) + Number(lustr) + Number(svet) + Number(carn) + Number(zagl)).toFixed(0);
 			sum = Number(sum) <= Number(mini) ? mini : sum;
 			let out_sum = sum;
 			if($action.prop('checked')) {
@@ -93,7 +88,7 @@
 				}
 			}
 			str.push(`Итоговая сумма заказа: ${sum}\u00A0руб.`);
-			if($area < 1 && $carn < 1 && $trub < 1 && $svet < 1) {
+			if($area < 1 && $lustr < 1 && $svet < 1 && $carn < 1 && $zagl < 1) {
 				$output.html(`Итого: 0\u00A0руб.`);
 				return {
 					enabled: false,
@@ -122,10 +117,10 @@
 		let $calc = $("#form_calc");
 		if($calc.length) {
 			$calc[0].reset();
-			$('[name=area]', $calc).val('');
-			$('[name=carn]', $calc).val('');
-			$('[name=trub]', $calc).val('');
-			$('[name=svet]', $calc).val('');
+			//$('[name=area]', $calc).val('');
+			//$('[name=carn]', $calc).val('');
+			//$('[name=trub]', $calc).val('');
+			//$('[name=svet]', $calc).val('');
 			$('[name=message]', $calc).val('');
 		}
 		let obj = calculation();
@@ -199,7 +194,8 @@
 		$(parent).toggleClass('open');
 		return !1;
 	});
-	$(window).on('resize', function(){
+	$(window)
+	.on('resize', function(){
 		let parent = $('.navigation'),
 			menu = $(".navigation--wrapper", parent),
 			nav = $("nav", menu),
@@ -221,7 +217,8 @@
 				menu.removeAttr('style')
 			}
 		}
-	}).trigger('resize');
+	})
+	.trigger('resize');
 
 	/**
 	  * Forms
@@ -266,10 +263,11 @@
 			type: 'POST',
 			url: window.location.origin + window.location.pathname,
 			data: formData,
-			async: false,
+			async: true,
 			cache: false,
 			contentType: false,
 			processData: false,
+			dataType: 'json',
 			success: function(msg){
 				let btnClose = $('[data-fancybox-close]', wrapp).clone(),
 					c = $(msg.forms["form"]),
@@ -295,7 +293,6 @@
 			}
 		}
 		let obj = calculation();
-		console.log(obj);
 		return !1;
 	})
 	.on('submit', '#form_calc', function(e){
@@ -306,18 +303,18 @@
 			wrapp = $('#calculator .messages');
 		let obj = calculation(),
 			formData = new FormData(this);
-		console.info(obj, wrapp, '.form' + id);
 		if(obj.enabled) {
-			formData.set("message", obj.text);
-			$('#calculator').addClass('loading');
+			//formData.set("message", obj.text);
+			$('.formcalc').addClass('loading');
 			$.ajax({
 				type: 'POST',
 				url: window.location.origin + window.location.pathname,
 				data: formData,
-				async: false,
+				async: true,
 				cache: false,
 				contentType: false,
 				processData: false,
+				dataType: 'json',
 				success: function(msg){
 					if(msg.forms) {
 						if(msg.forms["form"]) {
@@ -336,11 +333,11 @@
 					} else {
 						wrapp.html("<p>Неудачная отправка формы<br>Попробуйте ещё раз.</p>");
 					}
-					$('#calculator').removeClass('loading');
+					$('.formcalc').removeClass('loading');
 					resetCalculation();
 				},
 				error: function(a, b, c){
-					$('#calculator').removeClass('loading');
+					$('.formcalc').removeClass('loading');
 					resetCalculation();
 				}
 			})
@@ -397,7 +394,10 @@
 	})
 	.on('click', '.navigation .navigation--wrapper nav ul li span.active', function(e){
 		e.preventDefault();
-		window.scrollTo(0, 0);
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
 		$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
 		setTimeout(function(){
 			window.location.hash = "";
@@ -467,9 +467,11 @@
 				controls: ["typeSelector", "zoomControl", "fullscreenControl"]
 			});
 			var placemark = new ymaps.Placemark(point_map,{
-				balloonContent: `<div class="ballon text-left">` +
+				balloonContent: `<div class="ballon text-left" oncontextmenu="return !1;">` +
 	`<div class="ballon__close" onclick="window.mapCeiling.balloon.close();"></div>` +
-	`<p>` + addre_map + `</p>` +
+	`<p>` + addre_map + `<br>` +
+		`<a class="entry" href="https://yandex.ru/maps/?rtext=~` + point_map + `&z=16" target="_blank">Как доехать</a>` +
+	`</p>` +
 	`<p class="text-right map__phones">` + phone_map + `</p>` +
 	`<div class="text-center">` +
 		`<a href="mailto:` + email_map + `" >` + email_map + `</a>` +
@@ -591,4 +593,30 @@
 	});
  	$('#calc').append($("#calcform").children());
  	resetCalculation();
+ 	var scrollWin = function(e){
+		const header = $("header.header"),
+			html = $("html"),
+			height = header.height() + 100;
+		if(window.pageYOffset > height) {
+			!html.hasClass('scrup') && html.addClass('scrup');
+		} else {
+			html.hasClass('scrup') && (html.removeClass('scrup'), window.location.hash = "",
+			$('.navigation .navigation--wrapper nav ul li a[href*="#"], .navigation .navigation--wrapper nav ul li a[href^="#"]').removeClass('active'));
+		}
+	};
+ 	setTimeout(function(){
+ 		$(window).on('scroll resize', scrollWin);
+		$(document).on('click', '.scrollup', function(e){
+			e.preventDefault();
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth',
+			});
+			$('.navigation .navigation--wrapper nav ul li a[href*="#"], .navigation .navigation--wrapper nav ul li a[href^="#"]').removeClass('active');
+			setTimeout(function(){
+				window.location.hash = "";
+			}, 200);
+		});
+		scrollWin();
+ 	}, 1000);
 })(jQuery, _);
