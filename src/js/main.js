@@ -11,13 +11,8 @@
 	 * Калькулятор
 	 **/
 	function formatMoney(num) {
-		// const regex = /(\d)(?=(?:\d{3})+$)/g;
-		// const subst = `$1 `;
-		// const str = String(num);
-		// const result = str.replace(regex, subst);
 		num = String(num);
 		var arr = num.match(/^(\d+)((?:\.\d+)?)$/);
-		console.log(arr);
 		arr[2] = arr[2] ? arr[2] : '';
 		return arr[1].replace(/(\d)(?=(?:\d{3})+$)/g, '$1\u00A0') + arr[2];
 	}
@@ -98,6 +93,7 @@
 			}
 			let format_sum = formatMoney(out_sum);
 			$output.html(`Итого: ${format_sum}\u00A0руб.`);
+
 			let text = str.join("\n");
 			$('[name=message]', $calc).val(text);
 			return {
@@ -117,14 +113,12 @@
 		let $calc = $("#form_calc");
 		if($calc.length) {
 			$calc[0].reset();
-			//$('[name=area]', $calc).val('');
-			//$('[name=carn]', $calc).val('');
-			//$('[name=trub]', $calc).val('');
-			//$('[name=svet]', $calc).val('');
 			$('[name=message]', $calc).val('');
 		}
 		let obj = calculation();
 	}
+	$('.output', "#form_calc").html(`Итого: 0\u00A0руб.`)
+	 $("#smal-output").html(`Минимальная сумма заказа: ` + formatMoney(price_mini) + `\u00A0руб.`);
 	/**
 	 * Fancybox defaults options
 	 **/
@@ -228,7 +222,6 @@
 		e.preventDefault();
 		let form = $('.formzamer'),
 			theme = $('input[name=theme]', form);
-		//theme.val('Вызов замерщика');
 		$.fancybox.open(form, {
 			touch: false,
 			clickSlide: false,
@@ -242,7 +235,6 @@
 		e.preventDefault();
 		let form = $('.formcallme'),
 			theme = $('input[name=theme]', form);
-		//theme.val('Заказ звонка');
 		$.fancybox.open(form, {
 			touch: false,
 			clickSlide: false,
@@ -304,7 +296,6 @@
 		let obj = calculation(),
 			formData = new FormData(this);
 		if(obj.enabled) {
-			//formData.set("message", obj.text);
 			$('.formcalc').addClass('loading');
 			$.ajax({
 				type: 'POST',
@@ -378,8 +369,6 @@
 			if(href == path){
 				if(len>0) {
 					e.preventDefault();
-					$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
-					$(_this).addClass('active');
 					$(id)[0].scrollIntoView({
 						behavior: 'smooth',
 						block: 'start'
@@ -398,7 +387,6 @@
 			top: 0,
 			behavior: 'smooth',
 		});
-		$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
 		setTimeout(function(){
 			window.location.hash = "";
 		}, 200);
@@ -408,18 +396,13 @@
 	 * Set scroll position
 	 **/
 	let hash = window.location.hash;
-	setTimeout(function(){
-		window.scrollTo(0, 0);
-	}, 300);
 
 	if($(hash).length){
-		$('.navigation .navigation--wrapper nav ul li a').removeClass('active');
 		setTimeout(function(){
 			$(hash)[0].scrollIntoView({
 				behavior: 'smooth',
 				block: 'start'
 			});
-			$('.navigation .navigation--wrapper nav ul li a[href*="' + hash + '"]').addClass('active');
 		}, 500);
 	}
 	/**
@@ -530,10 +513,9 @@
 		return diffs;
 	}
 	// Start countdown
- 	$('.countdown').each(function(a, b){
- 		//console.log(a, b);
- 		const _this = $(b),
- 			_index = a;;
+	$('.countdown').each(function(a, b){
+		const _this = $(b),
+			_index = a;;
 		var labels_ru = ['ДНЕЙ', 'ЧАСОВ', 'МИНУТ', 'СЕКУНД'],
 			labels = ['days', 'hours', 'minutes', 'seconds'],
 			currDate = '00:00:00:00',
@@ -553,7 +535,7 @@
 					label_ru: labels_ru[i]
 				}));
 			});
-	  		date.setDate(date.getDate() + days);
+			date.setDate(date.getDate() + days);
 			var day = date.getDate(),
 				month = date.getMonth() + 1,
 				year = date.getFullYear(),
@@ -591,21 +573,26 @@
 			});
 		}
 	});
- 	$('#calc').append($("#calcform").children());
- 	resetCalculation();
- 	var scrollWin = function(e){
+	var scrollWin = function(e){
 		const header = $("header.header"),
 			html = $("html"),
 			height = header.height() + 100;
 		if(window.pageYOffset > height) {
 			!html.hasClass('scrup') && html.addClass('scrup');
 		} else {
-			html.hasClass('scrup') && (html.removeClass('scrup'), window.location.hash = "",
+			html.hasClass('scrup') && (html.removeClass('scrup'),
 			$('.navigation .navigation--wrapper nav ul li a[href*="#"], .navigation .navigation--wrapper nav ul li a[href^="#"]').removeClass('active'));
 		}
+		if(window.pageYOffset < 20) {
+			(window.location.hash.length > 2) && (window.location.hash = "");
+		}
 	};
- 	setTimeout(function(){
- 		$(window).on('scroll resize', scrollWin);
+
+	$('#calc').append($("#calcform").children());
+	resetCalculation();
+
+	setTimeout(function(){
+		$(window).on('scroll resize', scrollWin);
 		$(document).on('click', '.scrollup', function(e){
 			e.preventDefault();
 			window.scrollTo({
@@ -615,8 +602,8 @@
 			$('.navigation .navigation--wrapper nav ul li a[href*="#"], .navigation .navigation--wrapper nav ul li a[href^="#"]').removeClass('active');
 			setTimeout(function(){
 				window.location.hash = "";
-			}, 200);
+			}, 500);
 		});
 		scrollWin();
- 	}, 1000);
+	}, 1000);
 })(jQuery, _);

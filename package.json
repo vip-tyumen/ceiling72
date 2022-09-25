@@ -17,6 +17,7 @@
 	},
 	"homepage": "https://github.com/vip-tyumen/ceiling72#readme",
 	"devDependencies": {
+		"blueimp-md5": "^2.19.0",
 		"grunt": "latest",
 		"grunt-webfont": "latest",
 		"gulp": "latest",

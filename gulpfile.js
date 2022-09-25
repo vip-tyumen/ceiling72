@@ -24,6 +24,10 @@ const out = `assets/templates/projectsoft/`,
 		var md5 = require('md5');
 		return md5((new Date()).getTime()).toString().replace(/\s/g, '');
 	},
+	uni = function(str) {
+		let md5 = require('blueimp-md5');
+		return md5((new Date()).getTime().toString());
+	},
 	webfont_config = {
 		types:'woff2,woff,ttf,svg',
 		ligatures: true,
@@ -47,7 +51,7 @@ const out = `assets/templates/projectsoft/`,
  * == START ==
 **/
 gulp.task('less', function () {
-	let md = uniqid().replace(/\s/g, '');
+	let md = uni();//uniqid().replace(/\s/g, '');
 	return gulp.src([
 			'src/less/main.less',
 			'src/less/editor.less',
@@ -124,7 +128,7 @@ gulp.task('copyJs', function(){
  * == START ==
 **/
 gulp.task('html', function(){
-	let md = uniqid().replace(/\s/g, '');
+	let md = uni();//uniqid().replace(/\s/g, '');
 	return gulp.src([
 			'src/pug/*.pug'
 		])
@@ -150,7 +154,7 @@ gulp.task('html', function(){
 });
 
 gulp.task('htmlTpl', function(){
-	let md = uniqid().replace(/\s/g, '');
+	let md = uni();//uniqid().replace(/\s/g, '');
 	return gulp.src([
 			'src/pug/tpl/*.pug'
 		])
@@ -330,28 +334,18 @@ gulp.task('ftpFonts', function(){
 gulp.task(
 	'default',
 	gulp.series(
-		gulp.series(
-			gulp.parallel(
-				'woff',
-				'woff2',
-				//'webfont',
-				'copyttf',
-				'less'
-			),
-			gulp.parallel(
-				'imgmin',
-				'copyfavicon'
-			),
-			gulp.parallel(
-				'jsMain',
-				'jsApp',
-				//'copyJs'
-			),
-			gulp.parallel(
-				'html',
-				'htmlTpl'
-			)
-		),
+		'woff',
+		'woff2',
+		//'webfont',
+		'copyttf',
+		'less',
+		'imgmin',
+		'copyfavicon',
+		'jsMain',
+		'jsApp',
+		//'copyJs',
+		'html',
+		'htmlTpl',
 		'ftp'
 	)
 );
