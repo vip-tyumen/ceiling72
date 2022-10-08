@@ -4,7 +4,7 @@ if (!defined('MODX_BASE_PATH')) {
 	die('For'); 
 }
 use ProjectSoft\PluginEvolution;
-
+//
 $e =& $modx->event;
 $params = $e->params;
 switch ($e->name) {
@@ -31,46 +31,86 @@ switch ($e->name) {
 		$modx->event->output(serialize($params['menu']));
 		break;
 	case "OnWebPagePrerender":
+		// 10, 11, 12
+		$arr = [
+			$modx->config['site_unavailable_page'],
+			$modx->config['unauthorized_page'],
+			$modx->config['error_page']
+		];
+		$id = (int)$modx->documentIdentifier;
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'):
-			if(!empty($_POST["formid"])):
-				$fid = $_POST["formid"];
-				switch($fid){
-					case "callme":
-						header("Content-type: application/json; charset=utf-8");
-						$ob = new stdClass();
-						$str = $modx->documentOutput;
-						$re = '/(?:<!--InitFormCallme-->(?<callme>.*)<!--FormCallme-->)/Usi';
-						preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
-						$ob->forms= array(
-							"form"=>trim($matches["callme"][0])
-						);
-						$modx->documentOutput = json_encode($ob);
-						break;
-					case "zamer":
-						header("Content-type: application/json; charset=utf-8");
-						$ob = new stdClass();
-						$str = $modx->documentOutput;
-						$re = '/(?:<!--InitFormZamer-->(?<callme>.*)<!--FormZamer-->)/Usi';
-						preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
-						$ob->forms= array(
-							"form"=>trim($matches["callme"][0])
-						);
-						$modx->documentOutput = json_encode($ob);
-						break;
-					case "calc":
-						header("Content-type: application/json; charset=utf-8");
-						$ob = new stdClass();
-						$str = $modx->documentOutput;
-						$re = '/(?:<!--InitFormCalc-->(?<callme>.*)<!--FormCalc-->)/Usi';
-						preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
-						$ob->forms= array(
-							"form"=>trim($matches["callme"][0])
-						);
-						$modx->documentOutput = json_encode($ob);
-						break;
-					default:
-						break;
-				}
+			$ob = new stdClass();
+			header("Content-type: application/json; charset=utf-8");
+			if (!in_array($id, $arr)):
+				if(!empty($_POST["formid"])):
+					$fid = $_POST["formid"];
+					switch($fid){
+						case "callme":
+							$str = $modx->documentOutput;
+							$re = '/(?:<!--InitFormCallme-->(?<callme>.*)<!--FormCallme-->)/Usi';
+							preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
+							$ob->forms= array(
+								"form"=>trim($matches["callme"][0])
+							);
+							break;
+						case "zamer":
+							$str = $modx->documentOutput;
+							$re = '/(?:<!--InitFormZamer-->(?<callme>.*)<!--FormZamer-->)/Usi';
+							preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
+							$ob->forms= array(
+								"form"=>trim($matches["callme"][0])
+							);
+							break;
+						case "calc":
+							$str = $modx->documentOutput;
+							$re = '/(?:<!--InitFormCalc-->(?<callme>.*)<!--FormCalc-->)/Usi';
+							preg_match_all($re, $str, $matches, PREG_PATTERN_ORDER, 0);
+							$ob->forms= array(
+								"form"=>trim($matches["callme"][0])
+							);
+							break;
+						default:
+							break;
+					}
+				endif;
+				$modx->documentOutput = json_encode($ob);
+			else:
+				$ob->forms = array(
+					"form" => "Not found output"
+				);
+				$modx->documentOutput = json_encode($ob);
+				if ($id == $modx->config['site_unavailable_page']):
+					$responseCode = 'HTTP/1.0 503 Service Unavailable';
+					header($responseCode);
+					$modx->sendForward($id, $responseCode);
+				endif;
+				if ($id == $modx->config['unauthorized_page']):
+					$responseCode = 'HTTP/1.1 401 Unauthorized';
+					header($responseCode);
+					$modx->sendForward($id, $responseCode);
+				endif;
+				if ($id == $modx->config['site_unavailable_page']):
+					$responseCode = 'HTTP/1.0 404 Not Found';
+					header($responseCode);
+					$modx->sendForward($id, $responseCode);
+				endif;
+			endif;
+		endif;
+		if (in_array($id, $arr)):
+			if ($id == $modx->config['site_unavailable_page']):
+				$responseCode = 'HTTP/1.0 503 Service Unavailable';
+				header($responseCode);
+				$modx->invokeEvent('OnPageNotFound');
+			endif;
+			if ($id == $modx->config['unauthorized_page']):
+				$responseCode = 'HTTP/1.1 401 Unauthorized';
+				header($responseCode);
+				$modx->invokeEvent('OnPageUnauthorized');
+			endif;
+			if ($id == $modx->config['error_page']):
+				$responseCode = 'HTTP/1.0 404 Not Found';
+				header($responseCode);
+				$modx->invokeEvent('OnPageNotFound');
 			endif;
 		endif;
 		PluginEvolution::minifyHTML($modx);

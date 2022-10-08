@@ -2,11 +2,9 @@ doctype html
 html(lang="ru")
 	|{{@FILE assets/templates/projectsoft/html/tpl/head.html}}
 	body
-		|{{@FILE assets/templates/projectsoft/html/tpl/header_btns.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/header.html}}
 		main.container-full.article
 			.row
-				|{{@FILE assets/templates/projectsoft/html/tpl/actions_slider.html}}
 				article.container.article--body.hyphenation
 					header.article--header
 						.article--header--title
@@ -16,24 +14,7 @@ html(lang="ru")
 					.article--body--text.hyphenation.text-justify
 						|[*content*]
 					|<@ENDIF>
-					|[[DocLister?
-					|	&parents=`[*id*]`
-					|	&tvPrefix=``
-					|	&tvList=`imageSoc`
-					|	&urlScheme=`full`
-					|	&prepare=`\ProjectSoft\PrepareDL::prepareWork`
-					|	&tpl=`@FILE:projectsoft/html/tpl/work_tpl`
-					|	&ownerTPL=`@CODE:
-					|<div class="gallery">
-					|	<div class="row">
-					|		<div class="gallery--flex">
-					|			[+dl.wrap+]
-					|		</div>
-					|	</div>
-					|</div>`
-					|]]
 				// КОНТАКТЫ и КАРТА
 				|{{@FILE assets/templates/projectsoft/html/tpl/contacts.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/footer.html}}
-		|{{@FILE assets/templates/projectsoft/html/tpl/forms.html}}
 		|{{@FILE assets/templates/projectsoft/html/tpl/body_after.html}}

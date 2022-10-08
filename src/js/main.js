@@ -459,10 +459,10 @@
 	`<div class="text-center">` +
 		`<a href="mailto:` + email_map + `" >` + email_map + `</a>` +
 	`</div>` +
-	`<div class="ballon__buttons text-center">` +
+	(window.pages ? '' : `<div class="ballon__buttons text-center">` +
 		`<button class="ballon-btn callme-btn btn btn-default" style="margin-top: .6em;margin-bottom: .3em;" type="button">ЗАКАЗАТЬ ЗВОНОК</button><br>` +
 		`<button class="ballon-btn zamer-btn btn btn-default" type="button">ВЫЗВАТЬ ЗАМЕРЩИКА</button>` +
-	`</div>` +
+	`</div>`) +
 `</div>`
 			},{
 				iconLayout: "default#image",

@@ -16,6 +16,8 @@ script(type="text/template" id="coundownTemplate")
 	|	<span class="label"><%= label_ru.length < 7 ? label_ru : label_ru.substr(0, 3)  %></span>
 	|</div>
 script(type="text/javascript" src="[(site_url)]assets/templates/projectsoft/js/app.min.js?" + hash)
+script
+	|window.pages = ![!InErrorPage!];
 script(type="text/javascript" src="[(site_url)]assets/templates/projectsoft/js/main.min.js?" + hash)
 |
 |{{YandexMetrica}}
