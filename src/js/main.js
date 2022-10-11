@@ -449,7 +449,7 @@
 				zoom: 17,
 				controls: ["typeSelector", "zoomControl", "fullscreenControl"]
 			});
-			var placemark = new ymaps.Placemark(point_map,{
+			var placemark = new ymaps.Placemark(point_map, {
 				balloonContent: `<div class="ballon text-left" oncontextmenu="return !1;">` +
 	`<div class="ballon__close" onclick="window.mapCeiling.balloon.close();"></div>` +
 	`<p>` + addre_map + `<br>` +
@@ -474,7 +474,8 @@
 				balloonImageOffset: [-18, -50],
 				balloonImageSize: [36, 52],
 				balloonShadow: !0,
-				balloonAutoPan: !0
+				balloonAutoPan: !0,
+				hideIconOnBalloonOpen: !1
 			});
 			window.mapCeiling.behaviors.disable("scrollZoom"),
 			window.mapCeiling.geoObjects.add(placemark),
