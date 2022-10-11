@@ -1,0 +1,37 @@
+doctype xml
+rss(version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/")
+	channel
+		title
+			|[*longtitle*]
+		link
+			|[(site_url)]
+		description
+			|[*introtext*]
+		language
+			|ru
+		copyright
+			|[*longtitle*] © 2009 - [[$_SERVER['REQUEST_TIME']:dateFormat('Y')]]
+		ttl
+			|120
+		image
+			url
+				|[(site_url)]
+			title
+				|[*longtitle*]
+			link
+				|[(site_url)][*imageSoc*]
+		|
+		|[[DocLister?
+		|	&parents=`2`
+		|	&display=`20`
+		|	&tvPrefix=``
+		|	&tvList=`imageSoc,news_date,news_person,titl`
+		|	&orderBy=``
+		|	&sortBy=`news_date`
+		|	&sortDir=`DESC`
+		|	&tvSortType=`TVDATETIME`
+		|	&dateSource=`news_date`
+		|	&dateFormat=`D, d M Y H:i:s +0400`
+		|	&urlScheme=`full`
+		|	&tpl=`rss_tpl`
+		|]]

@@ -346,7 +346,7 @@ gulp.task(
 		//'copyJs',
 		'html',
 		'htmlTpl',
-		'ftp'
+		//'ftp'
 	)
 );
 
@@ -356,14 +356,14 @@ gulp.task('watch', function(){
 		[
 			'src/fonts/*.ttf'
 		],
-		gulp.series('woff', 'woff2', /*'webfont',*/ 'copyttf', 'htmlTpl', 'ftpFonts')
+		gulp.series('woff', 'woff2', /*'webfont',*/ 'copyttf', 'htmlTpl', /*'ftpFonts'*/)
 	);
 	// WebFont
 	gulp.watch(
 		[
 			'src/glyph/*.svg'
 		],
-		gulp.series(/*'webfont',*/ 'htmlTpl', 'ftpFonts')
+		gulp.series(/*'webfont',*/ 'htmlTpl', /*'ftpFonts'*/)
 	);
 	// JavaScript
 	gulp.watch(
@@ -371,7 +371,7 @@ gulp.task('watch', function(){
 			'src/js/*.js',
 			'src/js/**/*.js'
 		],
-		gulp.series('jsApp', 'jsMain', 'htmlTpl', /*'copyJs',*/ 'ftpJs')
+		gulp.series('jsApp', 'jsMain', 'htmlTpl', /*'copyJs', 'ftpJs'*/)
 	);
 	// CSS
 	gulp.watch(
@@ -379,7 +379,7 @@ gulp.task('watch', function(){
 			'src/less/*.less',
 			'src/less/**/*.less'
 		],
-		gulp.series('less', 'htmlTpl', 'ftpCss')
+		gulp.series('less', 'htmlTpl'/*, 'ftpCss'*/)
 	);
 	// IMAGES
 	gulp.watch(
@@ -387,7 +387,7 @@ gulp.task('watch', function(){
 			'src/images/*.*',
 			'src/images/**/*.*'
 		],
-		gulp.series('imgmin', 'htmlTpl', 'ftpImg')
+		gulp.series('imgmin', 'htmlTpl'/*, 'ftpImg'*/)
 	);
 	// HTML
 	gulp.watch(
@@ -395,7 +395,7 @@ gulp.task('watch', function(){
 			'src/pug/*.pug',
 			'src/pug/**/*.pug'
 		],
-		gulp.series('html', 'htmlTpl', 'ftpHtml')
+		gulp.series('html', 'htmlTpl'/*, 'ftpHtml'*/)
 	);
 
 })
