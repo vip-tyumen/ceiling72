@@ -334,9 +334,9 @@ gulp.task('ftpFonts', function(){
 gulp.task(
 	'default',
 	gulp.series(
+		'webfont',
 		'woff',
 		'woff2',
-		//'webfont',
 		'copyttf',
 		'less',
 		'imgmin',
@@ -356,14 +356,14 @@ gulp.task('watch', function(){
 		[
 			'src/fonts/*.ttf'
 		],
-		gulp.series('woff', 'woff2', /*'webfont',*/ 'copyttf', 'htmlTpl', /*'ftpFonts'*/)
+		gulp.series('webfont', 'woff', 'woff2', 'webfont', 'copyttf', 'htmlTpl', /*'ftpFonts'*/)
 	);
 	// WebFont
 	gulp.watch(
 		[
 			'src/glyph/*.svg'
 		],
-		gulp.series(/*'webfont',*/ 'htmlTpl', /*'ftpFonts'*/)
+		gulp.series('webfont', 'htmlTpl', /*'ftpFonts'*/)
 	);
 	// JavaScript
 	gulp.watch(
