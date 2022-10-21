@@ -71,5 +71,11 @@ return [
 			'note'  => 'Email почта Организации',
 			'default_text' => '',
 		],
+		'cfgTelegram' => [
+			'caption' => 'QR-код Telegram',
+			'type'  => 'image',
+			'note'  => 'QR-код Telegram (200x200)',
+			'default_text' => '',
+		]
 	],
 ];
