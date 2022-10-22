@@ -25,7 +25,7 @@ $this->set('toolbar2', 'bold italic underline strikethrough subscript superscrip
 // Третья строка тулбара
 $this->set('toolbar3', 'image media | link unlink | table | charmap emoticons', 'string');
 // Четвёртая строка тулбара (отключаем)
-$this->set('toolbar4', ' ', 'string');
+$this->set('toolbar4', 'custom_format', 'string');
 // Основное меню (отключаем)
 $this->set('menubar', false, 'bool');
 // Выставляем свой формат выравнивания текста
@@ -45,6 +45,18 @@ $this->set('formats', '{
 			alignjustify: {
 				selector: "p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time",
 				classes: "text-justify"
+			},
+			bold: {
+				inline : "strong"
+			},
+			italic: {
+				inline : "em"
+			},
+			underline: {
+				inline : "u"
+			},
+			strikethrough: {
+				inline : "del"
 			}
 		}', 'json');
 // Думаю, что ещё не всё...
