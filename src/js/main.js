@@ -8,6 +8,13 @@
 		price_zagl = Number(config.zagl) >= 0 ? Number(config.zagl) : 0,
 		price_proc = Number(config.proc) >= 0 ? Number(config.proc) : 0;
 	/**
+	 * Отправка заявки с формы
+	 * Цель Yandex
+	 **/
+	function ymSend(e){
+		try {ym(90439554,'reachGoal','feedback');console.log('Send Reach Goal feedback')} catch (e) {}
+	}
+	/**
 	 * Калькулятор
 	 **/
 	function formatMoney(num) {
@@ -266,6 +273,10 @@
 					form = c.html();
 				wrapp.html(form).append(btnClose);
 				$('[name=phone]', wrapp).mask("+7(999)999-99-99");
+				if(!$('form', wrapp).length){
+					// Удачная отправка
+					ymSend(e);
+				}
 				wrapp.removeClass('loading');
 			},
 			error: function(a, b, c){
@@ -316,6 +327,8 @@
 								$('.calculator').empty().append(form)
 							} else {
 								wrapp.append(form);
+								// Удачная отправка
+								ymSend(e);
 							}
 							$('[name=phone]', form_calc).mask("+7(999)999-99-99");
 						} else {
@@ -391,6 +404,10 @@
 			window.location.hash = "";
 		}, 200);
 		return !1;
+	})
+	.on('click', '[type=submit]', function(e){
+		console.log(e);
+		console.log('submit');
 	});
 	/**
 	 * Set scroll position

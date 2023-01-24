@@ -334,7 +334,7 @@ gulp.task('ftpFonts', function(){
 gulp.task(
 	'default',
 	gulp.series(
-		//'webfont',
+		'webfont',
 		'woff',
 		'woff2',
 		'copyttf',
@@ -346,7 +346,7 @@ gulp.task(
 		//'copyJs',
 		'html',
 		'htmlTpl',
-		//'ftp'
+		'ftp'
 	)
 );
 
