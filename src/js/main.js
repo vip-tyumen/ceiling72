@@ -12,7 +12,12 @@
 	 * Цель Yandex
 	 **/
 	function ymSend(e){
-		try {ym(90439554,'reachGoal','feedback');console.log('Send Reach Goal feedback')} catch (e) {}
+		try {
+			ym(90439554,'reachGoal','feedback');
+			console.log('Send Reach Goal feedback');
+		} catch (e) {
+			console.log('Error Reach Goal feedback');
+		}
 	}
 	/**
 	 * Калькулятор
