@@ -1,62 +1,47 @@
 <?php
 /*
-  * Конфиг-параметры TinyMCE4 для сайта https://потолок72.рф/
-  * https://www.tinymce.com/docs/configure/
-  *
-  * Приведенная ниже настройка конфигурации по умолчанию гарантирует, что все параметры редактора имеют резервное значение, а тип для каждого ключа известен.
-  * $this->set($editorParam, $value, $type, $emptyAllowed=false)
-  *
-  * $editorParam = параметр для установки
-  * $value = значение для установки
-  * $type = строка, число, логическое значение, json (массив или строка)
-  * $emptyAllowed = true, false (разрешает параметр: '' вместо возврата к значениям по умолчанию)
-  * Если $editorParam пуст, а $emptyAllowed равен true, $defaultValue будет игнорироваться
-  *
-  * $this->modxParams содержит массив фактических настроек Modx/user-settings
-  *
-  * */
+ * All available config-params of TinyMCE4
+ * https://www.tinymce.com/docs/configure/
+ *
+ * Belows default configuration setup assures all editor-params have a fallback-value, and type per key is known
+ * $this->set( $editorParam, $value, $type, $emptyAllowed=false )
+ *
+ * $editorParam     = param to set
+ * $value           = value to set
+ * $type            = string, number, bool, json (array or string)
+ * $emptyAllowed    = true, false (allows param:'' instead of falling back to default)
+ * If $editorParam is empty and $emptyAllowed is true, $defaultValue will be ignored
+ *
+ * $this->modxParams holds an array of actual Modx- / user-settings
+ *
+ * */
 
-// Используемые плагины
-$this->set('plugins', 'autolink lists layer table modxlink image emoticons media contextmenu paste fullscreen visualchars nonbreaking visualblocks charmap wordcount code', 'string');
-// Первая строка тулбара
-$this->set('toolbar1', 'undo redo | cut copy paste pastetext | visualchars | visualblocks | code | fullscreen', 'string');
-// Вторая строка тулбара
-$this->set('toolbar2', 'bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | blockquote', 'string');
-// Третья строка тулбара
-$this->set('toolbar3', 'image media | link unlink | table | charmap emoticons', 'string');
-// Четвёртая строка тулбара (отключаем)
-$this->set('toolbar4', 'custom_format', 'string');
-// Основное меню (отключаем)
-$this->set('menubar', false, 'bool');
-// Выставляем свой формат выравнивания текста
-$this->set('formats', '{
-			alignleft: {
-				selector: "p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time",
-				classes: "text-left"
-			},
-			aligncenter: {
-				selector: "p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time",
-				classes: "text-center"
-			},
-			alignright: {
-				selector: "p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time",
-				classes: "text-right"
-			},
-			alignjustify: {
-				selector: "p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time",
-				classes: "text-justify"
-			},
-			bold: {
-				inline : "strong"
-			},
-			italic: {
-				inline : "em"
-			},
-			underline: {
-				inline : "u"
-			},
-			strikethrough: {
-				inline : "del"
-			}
-		}', 'json');
-// Думаю, что ещё не всё...
+// @todo: make "styleprops"-button work with "compat3x-plugin"?
+// http://archive.tinymce.com/forum/viewtopic.php?pid=115507#p115507
+
+// @todo: Is this list complete for a "ceiling72"-theme?
+$this->set('plugins', 'anchor autolink lists spellchecker pagebreak layer table save hr modxlink image imagetools emoticons insertdatetime preview media searchreplace print code contextmenu paste directionality fullscreen noneditable visualchars textcolor nonbreaking template youtube autosave advlist visualblocks charmap wordcount codesample colorpicker', 'string');
+$this->set('toolbar1', 'save print newdocument | undo redo | searchreplace | cut copy paste pastetext | visualchars spellchecker | visualblocks code | preview fullscreen', 'string');
+$this->set('toolbar2', 'styleselect formatselect fontselect fontsizeselect | forecolor backcolor', 'string');
+$this->set('toolbar3', 'bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | ltr rtl', 'string');
+$this->set('toolbar4', 'image youtube media | link unlink anchor | table | pagebreak hr | template codesample nonbreaking insertdatetime | charmap emoticons', 'string');
+
+$this->set('formats', ',
+formats: {
+	alignleft: {
+		selector: \'p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time\',
+		classes: \'text-left\'
+	},
+	aligncenter: {
+		selector: \'p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time\',
+		classes: \'text-center\'
+	},
+	alignright: {
+		selector: \'p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time\',
+		classes: \'text-right\'
+	},
+	alignjustify: {
+		selector: \'p,h1,h2,h3,h4,h5,h6,table,td,th,div,ul,ol,li,dl,dt,dd,a,span,strong,i,em,b,time\',
+		classes: \'text-justify\'
+	}
+}', 'raw');
