@@ -7,6 +7,10 @@ html(lang="ru")
 		main.container-full.article
 			.row
 				|{{@FILE assets/templates/projectsoft/html/tpl/actions_slider.html}}
+				|<@IF:[*content:isnotempty*]>
+				// КОНТЕНТ
+				|[*content*]
+				|<@ENDIF>
 				// КАЛЬКУЛЯТОР
 				section#calculation.container.article--body.hyphenation
 					header.article--header
