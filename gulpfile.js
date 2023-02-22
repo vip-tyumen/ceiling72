@@ -266,10 +266,21 @@ gulp.task('ftp', function(){
 	var conn = ftp.create(data);
 
 	return gulp.src([
-			'assets/templates/**'
+			'site/assets/templates/**'
 		], { buffer: false })
 		.pipe(debug())
 		.pipe(conn.dest( data.domain + '/assets/templates' ));
+});
+// COMON
+gulp.task('ftpComon', function(){
+	data.log = gutil.log;
+	var conn = ftp.create(data);
+
+	return gulp.src([
+			'site/comon/**'
+		], { buffer: false })
+		.pipe(debug())
+		.pipe(conn.dest( data.domain + '/comon' ));
 });
 // CSS
 gulp.task('ftpCss', function(){
@@ -277,7 +288,7 @@ gulp.task('ftpCss', function(){
 	var conn = ftp.create(data);
 
 	return gulp.src([
-			'assets/templates/projectsoft/css/**'
+			'site/assets/templates/projectsoft/css/**'
 		], { buffer: false })
 		.pipe(debug())
 		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/css' ));
@@ -288,7 +299,7 @@ gulp.task('ftpHtml', function(){
 	var conn = ftp.create(data);
 
 	return gulp.src([
-			'assets/templates/projectsoft/html/**'
+			'site/assets/templates/projectsoft/html/**'
 		], { buffer: false })
 		.pipe(debug())
 		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/html' ));
@@ -299,7 +310,7 @@ gulp.task('ftpJs', function(){
 	var conn = ftp.create(data);
 
 	return gulp.src([
-			'assets/templates/projectsoft/js/**'
+			'site/assets/templates/projectsoft/js/**'
 		], { buffer: false })
 		.pipe(debug())
 		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/js' ));
@@ -310,7 +321,7 @@ gulp.task('ftpImg', function(){
 	var conn = ftp.create(data);
 
 	return gulp.src([
-			'assets/templates/projectsoft/images/**'
+			'site/assets/templates/projectsoft/images/**'
 		], { buffer: false })
 		.pipe(debug())
 		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/images' ));
@@ -321,7 +332,7 @@ gulp.task('ftpFonts', function(){
 	var conn = ftp.create(data);
 
 	return gulp.src([
-			'assets/templates/projectsoft/fonts/**'
+			'site/assets/templates/projectsoft/fonts/**'
 		], { buffer: false })
 		.pipe(debug())
 		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/fonts' ));
@@ -346,7 +357,8 @@ gulp.task(
 		//'copyJs',
 		'html',
 		'htmlTpl',
-		//'ftp'
+		'ftp',
+		'ftpComon'
 	)
 );
 
