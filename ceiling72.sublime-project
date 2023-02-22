@@ -4,44 +4,24 @@
 		{
 			"path": ".",
 			"name": "Ваш идеальный потолок",
-			"folder_exclude_patterns": [
-				".github",
-				"node_modules",
-				"manager",
-				"assets/.thumbs",
-				"assets/backup",
-				"assets/cache",
-				"assets/docs",
-				"assets/export",
-				"assets/files",
-				"assets/images",
-				"assets/import",
-				"assets/js",
-				"assets/lib",
-				"assets/site",
-				"src/bin",
-				"src/favicon",
-				"bower_components"
-			],
-			"file_exclude_patterns": [
-				"assets/templates/index.html",
-				"assets/tvs/index.html",
-				"README.md",
-				"index.php",
-				"robots.txt",
-				"LICENSE*",
-				"*.sublime-worcspace",
-				"android*.png",
-				"apple*.png",
-				"favicon-*.png",
-				"safari*.svg",
-				"*.ico",
-				"mstile*.png",
-				"browser*.xml",
-				"site.webmanifest",
-				"*.lock"
-			],
 			"default_line_ending": "LF"
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "Build Project",
+			"working_dir": "$project_path",
+			"shell_cmd": "echo ====== *** Start Build Project *** ====== && gulp && cls && echo ====== *** Finish Build Project *** ======",
+			"file_patterns": [
+				"*.less",
+				"*.js",
+				"*.pug",
+				"*.json",
+				"*.svg",
+				"*.template",
+				"*.sublime-project"
+			]
 		}
 	]
 }

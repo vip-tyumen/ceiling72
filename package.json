@@ -40,5 +40,6 @@
 		"md5": "latest",
 		"time-grunt": "latest",
 		"vinyl-ftp": "^0.6.1"
-	}
+	},
+	"dependencies": {}
 }

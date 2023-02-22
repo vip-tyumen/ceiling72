@@ -19,7 +19,7 @@ const gulp = require('gulp'),
 	ftp = require('vinyl-ftp'),
 	exec = require('child_process').exec;
 
-const out = `assets/templates/projectsoft/`,
+const out = `site/assets/templates/projectsoft/`,
 	uniqid = function () {
 		var md5 = require('md5');
 		return md5((new Date()).getTime()).toString().replace(/\s/g, '');
@@ -249,7 +249,7 @@ gulp.task('copyfavicon', function(){
 			'src/favicon/*.*'
 		])
 		.pipe(debug())
-		.pipe(copy(__dirname, { prefix: 2 }));
+		.pipe(copy(__dirname + "/site", { prefix: 2 }));
 });
 /**
  * MINIFY IMAGES
@@ -346,7 +346,7 @@ gulp.task(
 		//'copyJs',
 		'html',
 		'htmlTpl',
-		'ftp'
+		//'ftp'
 	)
 );
 

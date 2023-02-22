@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		webfont: {
 			icons: {
 				src: 'src/glyph/*.svg',
-				dest: 'assets/templates/projectsoft/fonts',
+				dest: 'site/assets/templates/projectsoft/fonts',
 				options: {
 					hashes: true,
 					relativeFontPath: '@{fontpath}',
@@ -16,7 +16,8 @@ module.exports = function(grunt) {
 					fontFamilyName: 'ceiling72',
 					stylesheets: ['less'],
 					syntax: 'bootstrap',
-					execMaxBuffer: 1024 * 50000,
+					engine: 'node',
+					//execMaxBuffer: 1024 * 50000,
 					htmlDemo: false,
 					version: "1.0.0",
 					normalize: true,
