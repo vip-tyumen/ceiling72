@@ -43,7 +43,7 @@ const out = `site/assets/templates/projectsoft/`,
 		"domain": "/testsite.vip"
 	}
 	**/
-	data = JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`})),
+	data = JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`})) || {},
 	well = "Wellcom";
 
 /**
