@@ -1,0 +1,7 @@
+{
+	"host":		"host",
+	"user":     "ftp_user",
+	"password": "ftp_password",
+	"parallel": 5,
+	"domain":	"ftp_path"
+}
