@@ -26,7 +26,7 @@ const out = `site/assets/templates/projectsoft/`,
 	},
 	uni = function(str) {
 		let md5 = require('blueimp-md5');
-		return md5((new Date()).getTime().toString());
+		return md5((new Date()).getTime().toString()).toString().replace(/\s/g, '');
 	},
 	webfont_config = {
 		types:'woff2,woff,ttf,svg',
@@ -52,6 +52,7 @@ const out = `site/assets/templates/projectsoft/`,
 **/
 gulp.task('less', function () {
 	let md = uni();//uniqid().replace(/\s/g, '');
+	console.log(md);
 	return gulp.src([
 			'src/less/main.less',
 			'src/less/editor.less',
@@ -105,17 +106,7 @@ gulp.task('jsApp', function(){
 		.pipe(uglify())
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(out + `js`));
-});
-/*
-gulp.task('copyJs', function(){
-	return gulp.src([
-			'src/Hyphenopoly/*.*',
-			'src/Hyphenopoly/*'
-		])
-		.pipe(debug())
-		.pipe(copy(out + 'js/Hyphenopoly', { prefix: 2 }));
-});
-*/		
+});		
 /*.*
 */
 /**
@@ -204,18 +195,6 @@ gulp.task('woff2', function(){
 		.pipe(woff2())
 		.pipe(gulp.dest(out + `fonts`));
 });
-
-gulp.task('webfont', function (cb) {
-		exec(
-			'grunt webfont -v',
-			function (err, stdout, stderr) {
-				console.log(stdout);
-				console.log(stderr);
-				cb(err);
-			}
-		);
-	}
-);
 
 gulp.task('copyttf', function(){
 	return gulp.src([
@@ -345,7 +324,6 @@ gulp.task('ftpFonts', function(){
 gulp.task(
 	'default',
 	gulp.series(
-		'webfont',
 		'woff',
 		'woff2',
 		'copyttf',
@@ -354,7 +332,6 @@ gulp.task(
 		'copyfavicon',
 		'jsMain',
 		'jsApp',
-		//'copyJs',
 		'html',
 		'htmlTpl',
 		'ftp',

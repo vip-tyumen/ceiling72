@@ -4,7 +4,8 @@
 	"description": "Сайт VIP потолок г. Тюмень",
 	"main": "gulpfile.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "npm i",
+		"build": "gulp"
 	},
 	"repository": {
 		"type": "git",
@@ -16,30 +17,26 @@
 		"url": "https://github.com/vip-tyumen/ceiling72/issues"
 	},
 	"homepage": "https://github.com/vip-tyumen/ceiling72#readme",
-	"devDependencies": {
-		"blueimp-md5": "^2.19.0",
-		"grunt": "latest",
-		"grunt-webfont": "latest",
-		"gulp": "latest",
-		"gulp-autoprefixer": "latest",
+	"dependencies": {
+		"blueimp-md5": "2.19.0",
+		"gulp": "^4.0.2",
+		"gulp-autoprefixer": "^8.0.0",
 		"gulp-clean": "latest",
 		"gulp-clean-css": "latest",
 		"gulp-concat": "latest",
 		"gulp-copy": "latest",
-		"gulp-debug": "latest",
+		"gulp-debug": "^4.0.0",
 		"gulp-group-css-media-queries": "latest",
-		"gulp-imagemin": "^7.0.0",
+		"gulp-imagemin": "7.0.0",
 		"gulp-less": "latest",
 		"gulp-pug": "latest",
 		"gulp-rename": "latest",
-		"gulp-ttf2woff": "https://github.com/nfroidure/gulp-ttf2woff/archive/refs/heads/master.tar.gz",
-		"gulp-ttf2woff2": "latest",
+		"gulp-ttf2woff": "^1.1.1",
+		"gulp-ttf2woff2": "^3.0.0",
 		"gulp-uglify": "latest",
-		"gulp-util": "^3.0.8",
+		"gulp-util": "3.0.8",
 		"imagemin": "latest",
 		"md5": "latest",
-		"time-grunt": "latest",
-		"vinyl-ftp": "^0.6.1"
-	},
-	"dependencies": {}
+		"vinyl-ftp": "0.6.1"
+	}
 }
