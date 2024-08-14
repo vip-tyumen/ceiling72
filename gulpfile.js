@@ -261,61 +261,6 @@ gulp.task('ftpComon', function(){
 		.pipe(debug())
 		.pipe(conn.dest( data.domain + '/comon' ));
 });
-// CSS
-gulp.task('ftpCss', function(){
-	data.log = gutil.log;
-	var conn = ftp.create(data);
-
-	return gulp.src([
-			'site/assets/templates/projectsoft/css/**'
-		], { buffer: false })
-		.pipe(debug())
-		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/css' ));
-});
-// HTML
-gulp.task('ftpHtml', function(){
-	data.log = gutil.log;
-	var conn = ftp.create(data);
-
-	return gulp.src([
-			'site/assets/templates/projectsoft/html/**'
-		], { buffer: false })
-		.pipe(debug())
-		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/html' ));
-});
-// JS
-gulp.task('ftpJs', function(){
-	data.log = gutil.log;
-	var conn = ftp.create(data);
-
-	return gulp.src([
-			'site/assets/templates/projectsoft/js/**'
-		], { buffer: false })
-		.pipe(debug())
-		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/js' ));
-});
-// IMAGES
-gulp.task('ftpImg', function(){
-	data.log = gutil.log;
-	var conn = ftp.create(data);
-
-	return gulp.src([
-			'site/assets/templates/projectsoft/images/**'
-		], { buffer: false })
-		.pipe(debug())
-		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/images' ));
-});
-// FONTS
-gulp.task('ftpFonts', function(){
-	data.log = gutil.log;
-	var conn = ftp.create(data);
-
-	return gulp.src([
-			'site/assets/templates/projectsoft/fonts/**'
-		], { buffer: false })
-		.pipe(debug())
-		.pipe(conn.dest( data.domain + '/assets/templates/projectsoft/fonts' ));
-});
 /**
  * FTP
  * ==END==
@@ -333,97 +278,24 @@ gulp.task(
 		'jsMain',
 		'jsApp',
 		'html',
+		'htmlTpl'
+	)
+);
+
+gulp.task(
+	'release',
+	gulp.series(
+		'woff',
+		'woff2',
+		'copyttf',
+		'less',
+		'imgmin',
+		'copyfavicon',
+		'jsMain',
+		'jsApp',
+		'html',
 		'htmlTpl',
 		'ftp',
 		'ftpComon'
 	)
 );
-
-gulp.task(
-	'CssHtml',
-	gulp.series(
-		'less',
-		'html',
-		'htmlTpl',
-	)
-);
-
-gulp.task('watch', function(){
-	// Font
-	gulp.watch(
-		[
-			'src/fonts/*.ttf'
-		],
-		gulp.series(
-			//'webfont',
-			'woff',
-			'woff2',
-			//'webfont',
-			'copyttf',
-			'htmlTpl',
-			//'ftpFonts'
-		)
-	);
-	// WebFont
-	gulp.watch(
-		[
-			'src/glyph/*.svg'
-		],
-		gulp.series(
-			//'webfont',
-			'htmlTpl',
-			//'ftpFonts'
-		)
-	);
-	// JavaScript
-	gulp.watch(
-		[
-			'src/js/*.js',
-			'src/js/**/*.js'
-		],
-		gulp.series(
-			'jsApp',
-			'jsMain',
-			'htmlTpl',
-			//'copyJs',
-			//'ftpJs'
-		)
-	);
-	// CSS
-	gulp.watch(
-		[
-			'src/less/*.less',
-			'src/less/**/*.less'
-		],
-		gulp.series(
-			'less',
-			'htmlTpl',
-			//'ftpCss'
-		)
-	);
-	// IMAGES
-	gulp.watch(
-		[
-			'src/images/*.*',
-			'src/images/**/*.*'
-		],
-		gulp.series(
-			'imgmin',
-			'htmlTpl',
-			//'ftpImg'
-		)
-	);
-	// HTML
-	gulp.watch(
-		[
-			'src/pug/*.pug',
-			'src/pug/**/*.pug'
-		],
-		gulp.series(
-			'html',
-			'htmlTpl',
-			//'ftpHtml'
-		)
-	);
-
-})

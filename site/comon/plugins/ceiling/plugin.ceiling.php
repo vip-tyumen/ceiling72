@@ -8,6 +8,12 @@ use ProjectSoft\PluginEvolution;
 $e =& $modx->event;
 $params = $e->params;
 switch ($e->name) {
+	// Отключаем тёмную тему браузера
+	case "OnManagerTopPrerender":
+	case "OnManagerMainFrameHeaderHTMLBlock":
+		$out = '<meta name="color-scheme" content="only light">';
+		$modx->event->output($out);
+		break;
 	// Создание дирректории по id документа c учётом родителей
 	case "OnDocFormSave":
 	case "OnDocDuplicate":
