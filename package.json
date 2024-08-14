@@ -4,7 +4,8 @@
 	"description": "Сайт VIP потолок г. Тюмень",
 	"main": "gulpfile.js",
 	"scripts": {
-		"test": "npm i",
+		"preinstall": "npm i -g bower less pug-cli bower",
+		"inst": "npm i && bower install",
 		"build": "gulp"
 	},
 	"repository": {
