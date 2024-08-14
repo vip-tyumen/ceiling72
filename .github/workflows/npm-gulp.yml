@@ -5,6 +5,14 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  schedule:
+    - cron: "0 1 * * 1"
+  workflow_dispatch:
+    inputs:
+      Name:
+        description: Main Deploy to Hosting
+        required: true
+        default: 'Main Deploy to Hosting'
 
 jobs:
   build:
