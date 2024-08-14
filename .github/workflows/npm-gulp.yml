@@ -49,6 +49,6 @@ jobs:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        remoteFiles: ".status.json"
+        remoteFiles: ".status.json;assets/cache/docid_*.php"
         workingDir: ${{ secrets.DIRECTORY }}
         ignoreSSL: 1
