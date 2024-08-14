@@ -26,7 +26,7 @@ const out = `site/assets/templates/projectsoft/`,
 	},
 	uni = function(str) {
 		let md5 = require('blueimp-md5');
-		return md5((new Date()).getTime().toString()).toString().replace(/\s/g, '');
+		return md5((new Date()).getTime().toString()).toString().replace(/\s+/g, '');
 	},
 	webfont_config = {
 		types:'woff2,woff,ttf,svg',
@@ -43,15 +43,25 @@ const out = `site/assets/templates/projectsoft/`,
 		"domain": "/testsite.vip"
 	}
 	**/
-	data = {}, //JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`})) || {},
+	//JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`})) || {},
 	well = "Wellcom";
+let data = {};
 
+fs.stat('ftp.json', function(err, stat) {
+	if (err == null) {
+		data = JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`}));
+	} else if (err.code === 'ENOENT') {
+		data = {};
+	} else {
+		data = {};
+	}
+});
 /**
  * CSS
  * == START ==
 **/
 gulp.task('less', function () {
-	let md = uni();//uniqid().replace(/\s/g, '');
+	let md = uni();
 	console.log(md);
 	return gulp.src([
 			'src/less/main.less',
@@ -240,7 +250,12 @@ gulp.task('copyfavicon', function(){
  * FTP
  * ==START==
 **/
-gulp.task('ftp', function(){
+
+gulp.task('ftp', function(cd){
+	console.log(data.host);
+	if(!data.host) {
+		return cd();
+	}
 	data.log = gutil.log;
 	var conn = ftp.create(data);
 
@@ -251,7 +266,11 @@ gulp.task('ftp', function(){
 		.pipe(conn.dest( data.domain + '/assets/templates' ));
 });
 // COMON
-gulp.task('ftpComon', function(){
+gulp.task('ftpComon', function(cd){
+	console.log(data.host);
+	if(!data.host) {
+		return cd();
+	}
 	data.log = gutil.log;
 	var conn = ftp.create(data);
 
