@@ -97,6 +97,5 @@ site/assets/plugins/tinymce4/tpl
 
 !site/assets/plugins/tinymce4/theme/theme.tinymce4.ceiling72.inc.php
 
-!site/assets/tvs/multitv/configs/cause.config.inc.php
-!site/assets/tvs/multitv/configs/gallery.config.inc.php
+!site/assets/tvs/multitv/configs/*.config.inc.php
 !site/assets/modules/clientsettings/config/*.php

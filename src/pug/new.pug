@@ -7,7 +7,7 @@ html(lang="ru")
 		main.container-full.article
 			.row
 				|{{@FILE assets/templates/projectsoft/html/tpl/actions_slider.html}}
-				article.container.article--body.hyphenation
+				article.container.article--body
 					header.article--header
 						.article--header--title
 							h1
@@ -17,19 +17,24 @@ html(lang="ru")
 							time.icon-icon18(datetime="[*news_date*]")
 								|&nbsp;[[aDate? &date=`[*news_date*]`]] года
 					|<@IF:[*content:isNotEmpty*]>
-					.article--body--text.hyphenation.text-justify
+					.article--body--text.text-justify
 						|[*content*]
+					|<@ENDIF>
+					|[[PageBuilder]]
+					.article--body--text
 						p
 							|&nbsp;
 						p.text-center
-							|Остались вопросы? Наш тeлефон: ☎️ 8(345)274-30-43, звoните.
+							|Остались вопросы? Наш тeлефон: [[GetPhonesContent]]
+							br
+							|Звоните.
 						p.text-center
 							|Замер по городу по-прежнему бесплатный.
-					|<@ENDIF>
-					p.content-buttons
-						button.callme-btn.btn.btn-default(type="button") Заказать звонок
-						button.zamer-btn.btn.btn-default(type="button") Вызвать замерщика
-					|[[PageBuilder]]
+						p
+							|&nbsp;
+						p.content-buttons
+							button.callme-btn.btn.btn-default(type="button") Заказать звонок
+							button.zamer-btn.btn.btn-default(type="button") Вызвать замерщика
 					p.article--body--person
 						strong
 							em

@@ -65,6 +65,12 @@ return [
 			'note'  => 'Телефоны Организации',
 			'default_text' => '',
 		],
+		'phones' => [
+			'caption' => 'Телефоны Организации',
+			'type'  => 'custom_tv:multitv',
+			'note'  => 'Телефоны Организации',
+			'default_text' => '',
+		],
 		'orgEmail' => [
 			'caption' => 'Email почта Организации',
 			'type'  => 'text',

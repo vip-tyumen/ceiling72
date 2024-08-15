@@ -284,7 +284,6 @@ gulp.task('copyfavicon', function(){
 **/
 
 gulp.task('ftp', function(cd){
-	console.log(data.host);
 	if(!data.host) {
 		return cd();
 	}
@@ -292,14 +291,13 @@ gulp.task('ftp', function(cd){
 	var conn = ftp.create(data);
 
 	return gulp.src([
-			'site/assets/templates/**'
+			'site/assets/**'
 		], { buffer: false })
 		.pipe(debug())
-		.pipe(conn.dest( data.domain + '/assets/templates' ));
+		.pipe(conn.dest( data.domain + '/assets' ));
 });
 // COMON
 gulp.task('ftpComon', function(cd){
-	console.log(data.host);
 	if(!data.host) {
 		return cd();
 	}
