@@ -20,42 +20,66 @@ const gulp = require('gulp'),
 	exec = require('child_process').exec;
 
 const out = `site/assets/templates/projectsoft/`,
-	uniqid = function () {
-		var md5 = require('md5');
-		return md5((new Date()).getTime()).toString().replace(/\s/g, '');
-	},
 	uni = function(str) {
 		let md5 = require('blueimp-md5');
 		return md5((new Date()).getTime().toString()).toString().replace(/\s+/g, '');
 	},
-	webfont_config = {
-		types:'woff2,woff,ttf,svg',
-		ligatures: true,
-		font: 'Ceiling72'
-	},
 	base64 = fs.readFileSync(path.join(__dirname, 'src/images/mini100.png')).toString('base64'),
-	/**
-	{
-		"host": "localhost",
-		"user": "ftp",
-		"password": "ftp",
-		"parallel": 1,
-		"domain": "/testsite.vip"
-	}
-	**/
-	//JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`})) || {},
 	well = "Wellcom";
+
+
+/**
+ * 
+ * Подготовка данных для соединения по FTP с сервером
+ * 
+ * Содержание файла ftp.json
+ * Для работы из дома.
+ * 
+ * Таск для работы: gulp from_home
+ * 
+
+{
+	"host": "localhost",
+	"user": "ftp_user",
+	"password": "ftp_password",
+	"parallel": 1,
+	"domain": "/path_domain/"
+}
+
+ *
+ * 
+ * При пуше на github отработает действие файла .github/workflows/npm-gulp.yml
+ * Репозиторий настроен для работы данного действия.
+ * 
+ * Настроенные данные в ${{ secrets.***** }} никто не увидит
+ * Вы их сами не сможете прочитать. Для этого нужны более глубокие знания.
+ * Но изменить их вы можете сами.
+ * 
+ **/
+
 let data = {};
+
+/**
+ * Если файл ftp.json существует
+ * Читаем файл и преобразуем в объект
+ * 
+ * Если нет, то отдаём пустой объект
+ **/
 
 fs.stat('ftp.json', function(err, stat) {
 	if (err == null) {
-		data = JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`}));
+		try{
+			data = JSON.parse(fs.readFileSync('ftp.json', {encoding: `utf8`}));
+		}catch(err){
+			data = {};
+		}
 	} else if (err.code === 'ENOENT') {
 		data = {};
 	} else {
 		data = {};
 	}
 });
+
 /**
  * CSS
  * == START ==
@@ -104,7 +128,15 @@ gulp.task('jsApp', function(){
 	// jQuery and plugins
 	return gulp.src([
 			'bower_components/jquery/dist/jquery.js',
-			'bower_components/fancybox/dist/jquery.fancybox.js',
+			//'bower_components/fancybox/dist/jquery.fancybox.js',
+			"bower_components/fancybox/src/js/core.js",
+			"src/js/fancybox.media.js",
+			"bower_components/fancybox/src/js/guestures.js",
+			"bower_components/fancybox/src/js/slideshow.js",
+			"bower_components/fancybox/src/js/fullscreen.js",
+			"bower_components/fancybox/src/js/thumbs.js",
+			"bower_components/fancybox/src/js/hash.js",
+			"bower_components/fancybox/src/js/wheel.js",
 			'bower_components/jquery.countdown/dist/jquery.countdown.js',
 			'bower_components/jquery.maskedinput/dist/jquery.maskedinput.js',
 			'bower_components/slick-carousel/slick/slick.js',
@@ -129,7 +161,7 @@ gulp.task('jsApp', function(){
  * == START ==
 **/
 gulp.task('html', function(){
-	let md = uni();//uniqid().replace(/\s/g, '');
+	let md = uni();
 	return gulp.src([
 			'src/pug/*.pug'
 		])
@@ -155,7 +187,7 @@ gulp.task('html', function(){
 });
 
 gulp.task('htmlTpl', function(){
-	let md = uni();//uniqid().replace(/\s/g, '');
+	let md = uni();
 	return gulp.src([
 			'src/pug/tpl/*.pug'
 		])
@@ -302,7 +334,7 @@ gulp.task(
 );
 
 gulp.task(
-	'release',
+	'from_home',
 	gulp.series(
 		'woff',
 		'woff2',
