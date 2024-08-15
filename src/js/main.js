@@ -606,8 +606,11 @@
 			html.hasClass('scrup') && (html.removeClass('scrup'),
 			$('.navigation .navigation--wrapper nav ul li a[href*="#"], .navigation .navigation--wrapper nav ul li a[href^="#"]').removeClass('active'));
 		}
-		if(window.pageYOffset < 20) {
-			(window.location.hash.length > 2) && (window.location.hash = "");
+		if(window.pageYOffset < header.height()) {
+			(window.location.hash.length > 2) && (
+				window.location.hash = "",
+				window.history.replaceState(null, document.title, window.location.pathname)
+			);
 		}
 	};
 
@@ -625,6 +628,7 @@
 			$('.navigation .navigation--wrapper nav ul li a[href*="#"], .navigation .navigation--wrapper nav ul li a[href^="#"]').removeClass('active');
 			setTimeout(function(){
 				window.location.hash = "";
+				window.history.replaceState(null, document.title, window.location.pathname);
 			}, 500);
 		});
 		scrollWin();
