@@ -633,4 +633,8 @@
 		});
 		scrollWin();
 	}, 1000);
+	$(document).on('load', 'img', function(e){
+		//.load
+		console.log(e);
+	})
 })(jQuery, _);

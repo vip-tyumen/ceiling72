@@ -61,7 +61,7 @@ return [
 		],
 		'orgPhones' => [
 			'caption' => 'Телефоны Организации',
-			'type'  => 'richtext',
+			'type'  => 'textarea',
 			'note'  => 'Телефоны Организации',
 			'default_text' => '',
 		],
