@@ -4,22 +4,25 @@ ul, ol {
 		::marker {
 			font-size: 1.5em;
 		}
+		li {
+			padding-left: .5em;
+		}
 		// Жест "хорошо" (большой палец поднят)
 		&.u-1f44d {
 			li {
-				list-style-image: data-uri('base64/signal.svg');
+				list-style-type: "👍";
 			}
 		}
 		// Канцелярская кнопка прикрепление
 		&.u-1f4cc {
 			li {
-				list-style-image: data-uri('base64/piper-pin.svg');
+				list-style-type: "📌";
 			}
 		}
 		// Заострённая четырёхконечная незакрашенная звезда
 		&.u-2727 {
 			li {
-				list-style-image: data-uri('base64/star4.svg');
+				list-style-type: "✧";
 			}
 		}
 	}
