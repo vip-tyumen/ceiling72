@@ -1,5 +1,6 @@
 ;(function($, SCOPE) {
-	var currentSrc = new URL((document.currentScript  || document.scripts[document.scripts.length - 1]).src);
+	let currentSrc = new URL((document.currentScript  || document.scripts[document.scripts.length - 1]).src);
+	const pathname = currentSrc.pathname.replace(/\/js\/.+$/, "/");
 	const config = typeof window.config == 'function' ? window.config() : {},
 		price_mini = Number(config.mini) >= 0 ? Number(config.mini) : 0,
 		price_area = Number(config.area) >= 0 ? Number(config.area) : 0,
@@ -638,5 +639,5 @@
 		//.load
 		console.log(e);
 	});
-	console.log(currentSrc.pathname);
+	console.log(pathname);
 })(jQuery, _);
