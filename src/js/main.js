@@ -1,5 +1,5 @@
 ;(function($, SCOPE) {
-	var currentSrc = (document.currentScript  || document.scripts[document.scripts.length - 1]).src;
+	var currentSrc = new URL((document.currentScript  || document.scripts[document.scripts.length - 1]).src);
 	const config = typeof window.config == 'function' ? window.config() : {},
 		price_mini = Number(config.mini) >= 0 ? Number(config.mini) : 0,
 		price_area = Number(config.area) >= 0 ? Number(config.area) : 0,
@@ -638,5 +638,5 @@
 		//.load
 		console.log(e);
 	});
-	console.log(currentSrc);
+	console.log(currentSrc.pathname);
 })(jQuery, _);
