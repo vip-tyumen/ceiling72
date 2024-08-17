@@ -474,7 +474,7 @@
 			var placemark = new ymaps.Placemark(point_map, {
 				balloonContent: `<div class="ballon text-left" oncontextmenu="return !1;">` +
 	`<div class="ballon__close" onclick="window.mapCeiling.balloon.close();"></div>` +
-	`<p>` + addre_map + `<br>` +
+	`<p><span class="ballon__entry">` + addre_map + `</span><br>` +
 		`<a class="entry" href="https://yandex.ru/maps/?rtext=~` + point_map + `&z=16" target="_blank">Как доехать</a>` +
 	`</p>` +
 	`<p class="text-right map__phones">` + phone_map + `</p>` +
