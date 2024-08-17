@@ -82,7 +82,7 @@ fs.stat('ftp.json', function(err, stat) {
 
 const package = JSON.parse(fs.readFileSync('package.json', {encoding: `utf8`}));
 const deb = {
-	title: package.debtitle,
+	title: `«${package.debtitle}»`,
 	minimal: true,
 	verbose: false,
 	showFiles: true,
