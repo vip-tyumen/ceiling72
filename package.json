@@ -2,6 +2,7 @@
 	"name": "ceiling72",
 	"version": "1.0.0",
 	"description": "Сайт VIP потолок г. Тюмень",
+	"debtitle": "Ваш Идеальный Потолок",
 	"main": "gulpfile.js",
 	"scripts": {
 		"preinstall": "npm i -g bower less pug-cli bower",

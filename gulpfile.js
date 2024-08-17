@@ -80,26 +80,49 @@ fs.stat('ftp.json', function(err, stat) {
 	}
 });
 
+const package = JSON.parse(fs.readFileSync('package.json', {encoding: `utf8`}));
+const deb = {
+	title: package.debtitle,
+	minimal: true,
+	verbose: false,
+	showFiles: true,
+	showCount: false,
+};
+
 /**
  * CSS
  * == START ==
 **/
 gulp.task('less', function () {
 	let md = uni();
-	return gulp.src([
-			'src/less/main.less',
-			'src/less/editor.less',
-			'src/less/ceiling72.less'
-		])
-		.pipe(debug())
-		.pipe(less({modifyVars:{'@hash': md}}))
+	return gulp.src(
+			[
+				'src/less/main.less',
+				'src/less/editor.less',
+				'src/less/ceiling72.less'
+			]
+		)
+		.pipe(debug(deb))
+		.pipe(less(
+			{
+				modifyVars: {
+					'@hash': md
+				}
+			}
+		))
 		.pipe(autoprefixer({
-			overrideBrowserslist: ['last 20 versions']
+			overrideBrowserslist: [
+				'last 20 versions'
+			]
 		}))
 		.pipe(mediaQuery())
 		.pipe(gulp.dest(out + `css`))
 		.pipe(cleanCSS())
-		.pipe(rename({suffix: '.min' }))
+		.pipe(rename(
+			{
+				suffix: '.min'
+			}
+		))
 		.pipe(gulp.dest(out + `css`));
 });
 /**
@@ -112,40 +135,52 @@ gulp.task('less', function () {
  * == START ==
 **/
 gulp.task('jsMain', function(){
-	return gulp.src([
-			'src/js/main.js'
-		])
-		.pipe(debug())
+	return gulp.src(
+			[
+				'src/js/main.js'
+			]
+		)
+		.pipe(debug(deb))
 		.pipe(concat('main.js'))
 		.pipe(gulp.dest(out + `js`))
 		.pipe(uglify())
-		.pipe(rename({suffix: '.min'}))
+		.pipe(rename(
+			{
+				suffix: '.min'
+			}
+		))
 		.pipe(gulp.dest(out + `js`));
 });
 
 gulp.task('jsApp', function(){
 	// jQuery and plugins
-	return gulp.src([
-			'bower_components/jquery/dist/jquery.js',
-			//'bower_components/fancybox/dist/jquery.fancybox.js',
-			"bower_components/fancybox/src/js/core.js",
-			"src/js/fancybox.media.js",
-			"bower_components/fancybox/src/js/guestures.js",
-			"bower_components/fancybox/src/js/slideshow.js",
-			"bower_components/fancybox/src/js/fullscreen.js",
-			"bower_components/fancybox/src/js/thumbs.js",
-			"bower_components/fancybox/src/js/hash.js",
-			"bower_components/fancybox/src/js/wheel.js",
-			'bower_components/jquery.countdown/dist/jquery.countdown.js',
-			'bower_components/jquery.maskedinput/dist/jquery.maskedinput.js',
-			'bower_components/slick-carousel/slick/slick.js',
-			'bower_components/underscore/underscore.js'
-		])
-		.pipe(debug())
+	return gulp.src(
+			[
+				'bower_components/jquery/dist/jquery.js',
+				//'bower_components/fancybox/dist/jquery.fancybox.js',
+				"bower_components/fancybox/src/js/core.js",
+				"src/js/fancybox.media.js",
+				"bower_components/fancybox/src/js/guestures.js",
+				"bower_components/fancybox/src/js/slideshow.js",
+				"bower_components/fancybox/src/js/fullscreen.js",
+				"bower_components/fancybox/src/js/thumbs.js",
+				"bower_components/fancybox/src/js/hash.js",
+				"bower_components/fancybox/src/js/wheel.js",
+				'bower_components/jquery.countdown/dist/jquery.countdown.js',
+				'bower_components/jquery.maskedinput/dist/jquery.maskedinput.js',
+				'bower_components/slick-carousel/slick/slick.js',
+				'bower_components/underscore/underscore.js'
+			]
+		)
+		.pipe(debug(deb))
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest(out + `js`))
 		.pipe(uglify())
-		.pipe(rename({suffix: '.min'}))
+		.pipe(rename(
+			{
+				suffix: '.min'
+			}
+		))
 		.pipe(gulp.dest(out + `js`));
 });		
 /*.*
@@ -161,10 +196,12 @@ gulp.task('jsApp', function(){
 **/
 gulp.task('html', function(){
 	let md = uni();
-	return gulp.src([
-			'src/pug/*.pug'
-		])
-		.pipe(debug())
+	return gulp.src(
+			[
+				'src/pug/*.pug'
+			]
+		)
+		.pipe(debug(deb))
 		.pipe(
 			pug({
 				client: false,
@@ -187,10 +224,12 @@ gulp.task('html', function(){
 
 gulp.task('htmlTpl', function(){
 	let md = uni();
-	return gulp.src([
-			'src/pug/tpl/*.pug'
-		])
-		.pipe(debug())
+	return gulp.src(
+			[
+				'src/pug/tpl/*.pug'
+			]
+		)
+		.pipe(debug(deb))
 		.pipe(
 			pug({
 				client: false,
@@ -220,29 +259,37 @@ gulp.task('htmlTpl', function(){
  * == START ==
 **/
 gulp.task('woff', function(){
-	return gulp.src([
-			'src/fonts/*.ttf'
-		])
-		.pipe(debug())
+	return gulp.src(
+			[
+				'src/fonts/*.ttf'
+			]
+		)
+		.pipe(debug(deb))
 		.pipe(woff())
 		.pipe(gulp.dest(out + `fonts`));
 });
 
 gulp.task('woff2', function(){
-	return gulp.src([
-			'src/fonts/*.ttf'
-		])
-		.pipe(debug())
+	return gulp.src(
+			[
+				'src/fonts/*.ttf'
+			]
+		)
+		.pipe(debug(deb))
 		.pipe(woff2())
 		.pipe(gulp.dest(out + `fonts`));
 });
 
 gulp.task('copyttf', function(){
-	return gulp.src([
-			'src/fonts/*.ttf'
-		])
-		.pipe(debug())
-		.pipe(copy(out + 'fonts', { prefix: 2 }));
+	return gulp.src(
+			[
+				'src/fonts/*.ttf'
+			]
+		)
+		.pipe(debug(deb))
+		.pipe(copy(out + 'fonts', {
+			prefix: 2
+		}));
 });
 /**
  * FONTS
@@ -255,21 +302,27 @@ gulp.task('copyttf', function(){
  * == START ==
 **/
 gulp.task('imgmin', function(){
-	return gulp.src([
-			'src/images/*.{gif,jpeg,jpg,png}',
-			'src/images/**/*.{gif,jpeg,jpg,png}'
-		])
-		.pipe(debug())
+	return gulp.src(
+			[
+				'src/images/*.{gif,jpeg,jpg,png}',
+				'src/images/**/*.{gif,jpeg,jpg,png}'
+			]
+		)
+		.pipe(debug(deb))
 		.pipe(imagemin())
 		.pipe(gulp.dest(out + 'images'))
 });
 
 gulp.task('copyfavicon', function(){
-	return gulp.src([
-			'src/favicon/*.*'
-		])
-		.pipe(debug())
-		.pipe(copy(__dirname + "/site", { prefix: 2 }));
+	return gulp.src(
+			[
+				'src/favicon/*.*'
+			]
+		)
+		.pipe(debug(deb))
+		.pipe(copy(__dirname + "/site", {
+			prefix: 2
+		}));
 });
 /**
  * MINIFY IMAGES
@@ -289,10 +342,15 @@ gulp.task('ftp', function(cd){
 	data.log = gutil.log;
 	var conn = ftp.create(data);
 
-	return gulp.src([
-			'site/assets/**'
-		], { buffer: false })
-		.pipe(debug())
+	return gulp.src(
+			[
+				'site/assets/**'
+			],
+			{
+				buffer: false
+			}
+		)
+		.pipe(debug(deb))
 		.pipe(conn.dest( data.domain + '/assets' ));
 });
 // COMON
@@ -303,10 +361,15 @@ gulp.task('ftpComon', function(cd){
 	data.log = gutil.log;
 	var conn = ftp.create(data);
 
-	return gulp.src([
-			'site/comon/**'
-		], { buffer: false })
-		.pipe(debug())
+	return gulp.src(
+			[
+				'site/comon/**'
+			],
+			{
+				buffer: false
+			}
+		)
+		.pipe(debug(deb))
 		.pipe(conn.dest( data.domain + '/comon' ));
 });
 /**
