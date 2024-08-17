@@ -23,10 +23,10 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@latest
+    - uses: actions/checkout@v4
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@latest
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -35,7 +35,7 @@ jobs:
         npm run inst
         npm run build
     - name: Deploy to Hosting
-      uses: SamKirkland/FTP-Deploy-Action@latest
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
@@ -44,7 +44,7 @@ jobs:
         local-dir: ./site/
         state-name: .status.json
     - name: Remove Status
-      uses: StephanThierry/ftp-delete-action@latest
+      uses: StephanThierry/ftp-delete-action@v2.1
       with:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USERNAME }}
