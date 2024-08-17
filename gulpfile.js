@@ -86,7 +86,6 @@ fs.stat('ftp.json', function(err, stat) {
 **/
 gulp.task('less', function () {
 	let md = uni();
-	console.log(md);
 	return gulp.src([
 			'src/less/main.less',
 			'src/less/editor.less',
