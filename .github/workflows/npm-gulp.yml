@@ -20,13 +20,13 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@latest
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@latest
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -35,7 +35,7 @@ jobs:
         npm run inst
         npm run build
     - name: Deploy to Hosting
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      uses: SamKirkland/FTP-Deploy-Action@latest
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
@@ -44,7 +44,7 @@ jobs:
         local-dir: ./site/
         state-name: .status.json
     - name: Remove Status
-      uses: StephanThierry/ftp-delete-action@v2.1
+      uses: StephanThierry/ftp-delete-action@latest
       with:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USERNAME }}
