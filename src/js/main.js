@@ -1,6 +1,6 @@
 ;(function($, SCOPE) {
 	let currentSrc = new URL((document.currentScript  || document.scripts[document.scripts.length - 1]).src);
-	const pathname = currentSrc.pathname.replace(/\/js\/.+$/, "/");
+	const pathname = currentSrc.pathname.replace(/\/js\/.+$/, "");
 	const config = typeof window.config == 'function' ? window.config() : {},
 		price_mini = Number(config.mini) >= 0 ? Number(config.mini) : 0,
 		price_area = Number(config.area) >= 0 ? Number(config.area) : 0,
@@ -490,11 +490,11 @@
 `</div>`
 			},{
 				iconLayout: "default#image",
-				iconImageHref: "/assets/templates/projectsoft/images/placemark.png?_=v0.0",
+				iconImageHref: `${pathname}/images/placemark.png?_=v0.0`,
 				iconImageSize: [36, 52],
 				iconImageOffset: [-18, -50],
 				balloonLayout: "default#imageWithContent",
-				balloonImageHref: "/assets/templates/projectsoft/images/placemark.png?_=v0.0",
+				balloonImageHref: `${pathname}/images/placemark.png?_=v0.0`,
 				balloonImageOffset: [-18, -50],
 				balloonImageSize: [36, 52],
 				balloonShadow: !0,
@@ -635,9 +635,6 @@
 		});
 		scrollWin();
 	}, 1000);
-	$(document).on('load', 'img', function(e){
-		//.load
-		console.log(e);
-	});
-	console.log(pathname);
+	
+	//console.log(pathname);
 })(jQuery, _);
