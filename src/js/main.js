@@ -1,6 +1,5 @@
 ;(function($, SCOPE) {
-	let currentSrc = new URL((document.currentScript  || document.scripts[document.scripts.length - 1]).src);
-	const pathname = currentSrc.pathname.replace(/\/js\/.+$/, "");
+	let pathname = new URL((document.currentScript  || document.scripts[document.scripts.length - 1]).src).pathname.replace(/^(.+\/.+)(\/.+\/.+)$/, `$1`);
 	const config = typeof window.config == 'function' ? window.config() : {},
 		price_mini = Number(config.mini) >= 0 ? Number(config.mini) : 0,
 		price_area = Number(config.area) >= 0 ? Number(config.area) : 0,
