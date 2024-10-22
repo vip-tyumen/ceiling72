@@ -8,8 +8,10 @@ html(lang="ru")
 			.row
 				|{{@FILE assets/templates/projectsoft/html/tpl/actions_slider.html}}
 				|<@IF:[*content:isnotempty*]>
-				// КОНТЕНТ
-				|[*content*]
+				//- КОНТЕНТ
+				section#content.container.article--body.hyphenation
+					.article--body--text.hyphenation.text-justify
+						|[*content*]
 				|<@ENDIF>
 				// КАЛЬКУЛЯТОР
 				section#calculation.container.article--body.hyphenation
@@ -38,7 +40,7 @@ html(lang="ru")
 				section#reviews.container.article--body.hyphenation
 					|[[DocLister?
 					|	&parents=`22`
-					|	&display=`4`
+					|	&display=`0`
 					|	&tvPrefix=``
 					|	&tvList=`imageSoc, news_date`
 					|	&tvPrefix=``
