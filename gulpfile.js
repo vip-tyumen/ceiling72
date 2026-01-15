@@ -17,6 +17,7 @@ const gulp = require('gulp'),
 	woff2 = require('gulp-ttf2woff2'),
 	imagemin = require('gulp-imagemin'),
 	ftp = require('vinyl-ftp'),
+	zip = require('gulp-zip'),
 	exec = require('child_process').exec;
 
 const out = `site/assets/templates/projectsoft/`,
@@ -88,6 +89,18 @@ const deb = {
 	showFiles: true,
 	showCount: false,
 };
+/**
+ * CLEAN
+ **/
+gulp.task('cleanzip', function () {
+	return gulp.src(
+			[
+				'site/assets/templates/projectsoft/*.zip'
+			]
+		)
+		.pipe(debug(deb))
+		.pipe(clean());
+});
 
 /**
  * CSS
@@ -283,7 +296,7 @@ gulp.task('woff2', function(){
 gulp.task('copyttf', function(){
 	return gulp.src(
 			[
-				'src/fonts/*.ttf'
+				'src/fonts/*.ttf',
 			]
 		)
 		.pipe(debug(deb))
@@ -291,6 +304,19 @@ gulp.task('copyttf', function(){
 			prefix: 2
 		}));
 });
+
+gulp.task('copywoff2', function(){
+	return gulp.src(
+			[
+				'node_modules/noto-color-emoji/src/fonts/*.woff2'
+			]
+		)
+		.pipe(debug(deb))
+		.pipe(copy(out + 'fonts', {
+			prefix: 4
+		}));
+});
+
 /**
  * FONTS
  * == END ==
@@ -331,10 +357,30 @@ gulp.task('copyfavicon', function(){
 **/
 
 /**
+ * Zip template
+ * == START ==
+ **/
+gulp.task('ziptemplates', function(){
+	return gulp.src(
+			[
+				'site/assets/templates/projectsoft/**'
+			]
+		)
+		.pipe(debug(deb))
+		.pipe(zip('projectsoft.zip', {
+			prefix: 4
+		}))
+		.pipe(gulp.dest('site/assets/templates/projectsoft'))
+});
+/**
+ * Zip template
+ * == END ==
+**/
+
+/**
  * FTP
  * ==START==
 **/
-
 gulp.task('ftp', function(cd){
 	if(!data.host) {
 		return cd();
@@ -380,25 +426,11 @@ gulp.task('ftpComon', function(cd){
 gulp.task(
 	'default',
 	gulp.series(
+		'cleanzip',
 		'woff',
 		'woff2',
 		'copyttf',
-		'less',
-		'imgmin',
-		'copyfavicon',
-		'jsMain',
-		'jsApp',
-		'html',
-		'htmlTpl'
-	)
-);
-
-gulp.task(
-	'from_home',
-	gulp.series(
-		'woff',
-		'woff2',
-		'copyttf',
+		'copywoff2',
 		'less',
 		'imgmin',
 		'copyfavicon',
@@ -406,7 +438,27 @@ gulp.task(
 		'jsApp',
 		'html',
 		'htmlTpl',
+		'ziptemplates',
+	)
+);
+
+gulp.task(
+	'from_home',
+	gulp.series(
+		'cleanzip',
+		'woff',
+		'woff2',
+		'copyttf',
+		'copywoff2',
+		'less',
+		'imgmin',
+		'copyfavicon',
+		'jsMain',
+		'jsApp',
+		'html',
+		'htmlTpl',
+		'ziptemplates',
 		'ftp',
-		'ftpComon'
+		'ftpComon',
 	)
 );

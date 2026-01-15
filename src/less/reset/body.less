@@ -3,7 +3,7 @@ html {
 }
 body {
 	font-size: 1em;
-	font-family: "OS", sans-serif;
+	font-family: @fontfamily;
 	color: #333;
 }
 h1 {
@@ -79,6 +79,13 @@ dl {
 			flex:  ~'calc(100% - 46px)';
 			max-width:  ~'calc(100% - 46px)';
 		}
+	}
+}
+time {
+	display: inline-flex;
+	gap: 0.3em;
+	&::before {
+		font-size: 1.3em;
 	}
 }
 .red {

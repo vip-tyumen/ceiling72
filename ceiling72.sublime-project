@@ -12,7 +12,12 @@
 		{
 			"name": "Build Project",
 			"working_dir": "$project_path",
-			"shell_cmd": "echo ====== *** Start Build Project *** ====== && gulp && cls && echo ====== *** Finish Build Project *** ======",
+			"cmd": [
+				"start",
+				"/wait",
+				"gulp"
+			],
+			"shell": true,
 			"file_patterns": [
 				"*.less",
 				"*.js",
