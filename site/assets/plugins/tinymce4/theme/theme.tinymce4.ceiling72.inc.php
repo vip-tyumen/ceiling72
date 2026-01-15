@@ -16,7 +16,7 @@
   *
   * */
 // Используемые шрифты
-$this->set('font_formats', 'Open Sans=Open Sans', 'string');
+$this->set('font_formats', 'OS=OS', 'string');
 
 // Используемые плагины
 $this->set('plugins', 'autolink lists layer table modxlink image emoticons media contextmenu paste visualchars nonbreaking visualblocks charmap wordcount code autoresize template', 'string');
