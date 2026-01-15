@@ -479,7 +479,7 @@
 		`<a class="entry" href="https://yandex.ru/maps/?rtext=~` + point_map + `&z=16" target="_blank">Как доехать</a>` +
 	`</p>` +
 	`<p class="text-right map__phones">` + phone_map + `</p>` +
-	`<div class="text-center">` +
+	`<div class="text-center">📧&nbsp;` +
 		`<a href="mailto:` + email_map + `" >` + email_map + `</a>` +
 	`</div>` +
 	(window.pages ? '' : `<div class="ballon__buttons text-center">` +
