@@ -15,17 +15,19 @@
   * $this->modxParams содержит массив фактических настроек Modx/user-settings
   *
   * */
+// Используемые шрифты
+$this->set('font_formats', 'Open Sans=Open Sans', 'string');
 
 // Используемые плагины
-$this->set('plugins', 'autolink lists layer table modxlink image emoticons media contextmenu paste fullscreen visualchars nonbreaking visualblocks charmap wordcount code', 'string');
+$this->set('plugins', 'autolink lists layer table modxlink image emoticons media contextmenu paste visualchars nonbreaking visualblocks charmap wordcount code autoresize template', 'string');
 // Первая строка тулбара
-$this->set('toolbar1', 'undo redo | cut copy paste pastetext | visualchars | visualblocks | code | fullscreen', 'string');
+$this->set('toolbar1', 'formatselect | fontselect | undo redo | cut copy paste pastetext | visualchars | visualblocks | code', 'string');
 // Вторая строка тулбара
 $this->set('toolbar2', 'bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | blockquote', 'string');
 // Третья строка тулбара
 $this->set('toolbar3', 'image media | link unlink | table | charmap emoticons', 'string');
 // Четвёртая строка тулбара (отключаем)
-$this->set('toolbar4', 'custom_format', 'string');
+$this->set('toolbar4', 'template | emotic', 'string');
 // Основное меню (отключаем)
 $this->set('menubar', false, 'bool');
 // Выставляем свой формат выравнивания текста
@@ -60,3 +62,59 @@ $this->set('formats', '{
 			}
 		}', 'json');
 // Думаю, что ещё не всё...
+// Классы для таблицы
+$this->set('table_class_list', '[
+		{title: "None", value: "table"},
+		{title: "Table Hover", value: "table-hover"},
+		{title: "Table Bordered", value: "table-bordered"},
+		{title: "Table Bordered Hover", value: "table-bordered-hover"},
+		{title: "Table Bordered Striped", value: "table-bordered-striped"},
+		{title: "Table Bordered Striped Hover", value: "table-bordered-striped-hover"},
+		{title: "Table Striped", value: "table-striped"},
+		{title: "Table Striped Hover", value: "table-striped-hover"}
+	]', 'json');
+
+// Удаляем все ненужные стили в таблице и изображениях
+$this->set('invalid_styles', '{
+		"table": "width height border border-width border-style border-collapse",
+		"tr" : "width height border border-width border-style border-collapse",
+		"th" : "width height border border-width border-style border-collapse",
+		"td" : "width height border border-width border-style border-collapse",
+		"img" : "width height border border-width border-style float",
+		"iframe" : "width height border border-width border-style float"
+	}', 'json');
+$this->set('table_default_attributes', '{
+		"class": "table-bordered"
+	}', 'json');
+$this->set('table_style_by_css', false, 'bool');
+// Бордюр Table
+// Убираем дополнительные стили таблицы (бордерб бакграунд, ...)
+$this->set('table_advtab', false, 'bool');
+$this->set('table_cell_advtab', false, 'bool');
+$this->set('table_row_advtab', false, 'bool');
+$this->set('table_appearance_options', false, 'bool');
+// Ресайзер Table
+$this->set('object_resizing', false, 'bool');
+$this->set('table_resize_bars', false, 'bool');
+// ???
+$this->set('table_header_type', 'thead', 'string');
+$this->set('visualblocks_default_state', true, 'bool');
+// rel="noopener" disabled
+$this->set('allow_unsafe_link_target', true, 'bool');
+
+$this->set('image_dimensions', false, 'bool');
+$this->set('image_description', false, 'bool');
+
+// Старт и сохранение
+$this->set('setup', 'function(ed) { ed.on("change", function(e) { documentDirty=true; }); }',  'object');
+$this->set('save_onsavecallback', 'function () { documentDirty=false; document.getElementById("stay").value = 2; document.mutate.save.click(); }',  'object');
+
+try {
+	$hash = "1.0.0";
+	$css = $this->themeConfig["content_css"]["value"][0];
+	if(is_file(MODX_BASE_PATH . $css)){
+		$hash = filemtime(MODX_BASE_PATH . $css);
+		$css .= '?hash=hash' . $hash;
+		$this->themeConfig["content_css"]["value"][0] = $css;
+	}
+} catch (Exception $e) {}
