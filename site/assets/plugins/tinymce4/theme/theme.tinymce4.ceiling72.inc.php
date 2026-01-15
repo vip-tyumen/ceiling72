@@ -19,15 +19,15 @@
 $this->set('font_formats', 'OS=OS', 'string');
 
 // Используемые плагины
-$this->set('plugins', 'autolink lists layer table modxlink image emoticons media contextmenu paste visualchars nonbreaking visualblocks charmap wordcount code autoresize template', 'string');
+$this->set('plugins', 'autolink lists layer table modxlink image emoticons media contextmenu paste visualchars nonbreaking visualblocks charmap wordcount code autoresize template spellchecker', 'string');
 // Первая строка тулбара
-$this->set('toolbar1', 'formatselect | fontselect | undo redo | cut copy paste pastetext | visualchars | visualblocks | code', 'string');
+$this->set('toolbar1', 'formatselect | undo redo | cut copy paste pastetext | visualchars | visualblocks | code', 'string');
 // Вторая строка тулбара
 $this->set('toolbar2', 'bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | blockquote', 'string');
 // Третья строка тулбара
 $this->set('toolbar3', 'image media | link unlink | table | charmap emoticons', 'string');
 // Четвёртая строка тулбара (отключаем)
-$this->set('toolbar4', 'template | emotic', 'string');
+$this->set('toolbar4', 'spellchecker', 'string');
 // Основное меню (отключаем)
 $this->set('menubar', false, 'bool');
 // Выставляем свой формат выравнивания текста
@@ -108,6 +108,10 @@ $this->set('image_description', false, 'bool');
 // Старт и сохранение
 $this->set('setup', 'function(ed) { ed.on("change", function(e) { documentDirty=true; }); }',  'object');
 $this->set('save_onsavecallback', 'function () { documentDirty=false; document.getElementById("stay").value = 2; document.mutate.save.click(); }',  'object');
+
+$this->set('spellchecker_languages', 'Russian=ru,English=en', 'string');
+$this->set('spellchecker_language', 'ru', 'string');
+$this->set('spellchecker_rpc_url', '//speller.yandex.net/services/tinyspell', 'string');
 
 try {
 	$hash = "1.0.0";

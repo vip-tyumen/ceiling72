@@ -93,10 +93,15 @@ site/assets/plugins/tinymce4/g*
 site/assets/plugins/tinymce4/l*
 site/assets/plugins/tinymce4/s*
 site/assets/plugins/tinymce4/theme/*.*
-site/assets/plugins/tinymce4/tiny*
+site/assets/plugins/tinymce4/tinymce/*
+site/assets/plugins/tinymce4/tinymce/plugins/*
 site/assets/plugins/tinymce4/tpl
 
 !site/assets/plugins/tinymce4/theme/theme.tinymce4.ceiling72.inc.php
+!site/assets/plugins/tinymce4/tinymce
+!site/assets/plugins/tinymce4/tinymce/plugins
+!site/assets/plugins/tinymce4/tinymce/plugins/modxlink
+!site/assets/plugins/tinymce4/tinymce/plugins/notocoloremoji
 
 !site/assets/tvs/multitv/configs/*.config.inc.php
 !site/assets/modules/clientsettings/config/*.php
