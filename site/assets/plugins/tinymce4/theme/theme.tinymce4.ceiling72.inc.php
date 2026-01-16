@@ -16,18 +16,18 @@
   *
   * */
 // Используемые шрифты
-$this->set('font_formats', 'OS=OS', 'string');
+//$this->set('font_formats', 'OS=OS', 'string');
 
 // Используемые плагины
-$this->set('plugins', 'autolink lists layer table modxlink image emoticons media contextmenu paste visualchars nonbreaking visualblocks charmap wordcount code autoresize template spellchecker', 'string');
+$this->set('plugins', 'autolink lists layer table modxlink image emoticons media contextmenu paste visualchars nonbreaking visualblocks charmap wordcount code autoresize template spellchecker notocoloremoji', 'string');
 // Первая строка тулбара
 $this->set('toolbar1', 'formatselect | undo redo | cut copy paste pastetext | visualchars | visualblocks | code', 'string');
 // Вторая строка тулбара
 $this->set('toolbar2', 'bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | blockquote', 'string');
 // Третья строка тулбара
-$this->set('toolbar3', 'image media | link unlink | table | charmap emoticons', 'string');
+$this->set('toolbar3', 'image media | link unlink | table | charmap emoticons notocoloremoji| spellchecker', 'string');
 // Четвёртая строка тулбара (отключаем)
-$this->set('toolbar4', 'spellchecker', 'string');
+$this->set('toolbar4', '', 'string');
 // Основное меню (отключаем)
 $this->set('menubar', false, 'bool');
 // Выставляем свой формат выравнивания текста
