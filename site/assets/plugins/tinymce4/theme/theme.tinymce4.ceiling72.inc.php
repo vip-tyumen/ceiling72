@@ -25,7 +25,7 @@ $this->set('toolbar1', 'formatselect | undo redo | cut copy paste pastetext | vi
 // Вторая строка тулбара
 $this->set('toolbar2', 'bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | blockquote', 'string');
 // Третья строка тулбара
-$this->set('toolbar3', 'image media | link unlink | table | charmap emoticons notocoloremoji| spellchecker', 'string');
+$this->set('toolbar3', 'image media | link unlink | table | charmap emoticons notocoloremoji | spellchecker', 'string');
 // Четвёртая строка тулбара (отключаем)
 $this->set('toolbar4', '', 'string');
 // Основное меню (отключаем)

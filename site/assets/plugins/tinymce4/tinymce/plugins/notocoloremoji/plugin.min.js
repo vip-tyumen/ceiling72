@@ -39,6 +39,7 @@
             var e = i(t);
             a.addButton("notocoloremoji", {
                 type: "panelbutton",
+                icon: "user",
                 panel: {
                     role: "application",
                     autohide: !0,
