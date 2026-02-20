@@ -113,6 +113,36 @@ $this->set('spellchecker_languages', 'Russian=ru,English=en', 'string');
 $this->set('spellchecker_language', 'ru', 'string');
 $this->set('spellchecker_rpc_url', '//speller.yandex.net/services/tinyspell', 'string');
 
+$this->set('codemirror', '{
+    indentOnInit: true,
+    fullscreen: false,
+    path: "codemirror",
+    iframe: "source.php",
+    config: {
+        mode: "application/x-httpd-php",
+        lineNumbers: true,
+        indentUnit: 4,
+        tabSize: 4,
+        theme: "mariana"
+    },
+    width: 800,
+    height: 600,
+    saveCursorPosition: true,
+    jsFiles: [
+        "mode/php/php.js",
+        "addon/edit/matchbrackets.js",
+        "mode/xml/xml.js",
+        "mode/javascript/javascript.js",
+        "mode/css/css.js",
+        "mode/htmlmixed/htmlmixed.js",
+        "addon/selection/active-line.js"
+    ],
+    cssFiles: [
+        "lib/codemirror.css",
+        "theme/mariana.css"
+    ]
+}', 'object');
+
 try {
 	$hash = "1.0.0";
 	$css = $this->themeConfig["content_css"]["value"][0];
