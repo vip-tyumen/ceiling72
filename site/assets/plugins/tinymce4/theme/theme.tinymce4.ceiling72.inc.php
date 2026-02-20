@@ -19,9 +19,9 @@
 //$this->set('font_formats', 'OS=OS', 'string');
 
 // Используемые плагины
-$this->set('plugins', 'autolink lists layer table modxlink image media contextmenu paste visualchars nonbreaking visualblocks charmap wordcount code autoresize template spellchecker notocoloremoji', 'string');
+$this->set('plugins', 'codemirror autolink lists layer table modxlink image media contextmenu paste visualchars nonbreaking visualblocks charmap wordcount code autoresize template spellchecker notocoloremoji', 'string');
 // Первая строка тулбара
-$this->set('toolbar1', 'formatselect | undo redo | cut copy paste pastetext | visualchars | visualblocks | code', 'string');
+$this->set('toolbar1', 'formatselect | undo redo | cut copy paste pastetext | visualchars | visualblocks | code | codemirror', 'string');
 // Вторая строка тулбара
 $this->set('toolbar2', 'bold italic underline strikethrough subscript superscript removeformat | alignleft aligncenter alignright alignjustify | bullist numlist | blockquote', 'string');
 // Третья строка тулбара
